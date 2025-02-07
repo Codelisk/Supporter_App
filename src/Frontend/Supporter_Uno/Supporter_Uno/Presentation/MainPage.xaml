@@ -18,12 +18,8 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Spacing="16">
-        <TextBox Text="{Binding Name, Mode=TwoWay}"
-            PlaceholderText="Enter your name:" />
-        <Button Content="Go to Second Page"
-            AutomationProperties.AutomationId="SecondPageButton"
-            Command="{Binding GoToSecond}" />
-      </StackPanel>
+                <WebView2 x:Name="MyWebView" Source="https://platform.uno/" />
+            </StackPanel>
     </Grid>
   </ScrollViewer>
 </Page>
