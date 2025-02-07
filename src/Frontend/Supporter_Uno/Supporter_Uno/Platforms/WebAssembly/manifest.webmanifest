@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "Supporter_Uno",
+  "display": "standalone",
+  "name": "Supporter_Uno",
+  "short_name": "Supporter_Uno",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}
