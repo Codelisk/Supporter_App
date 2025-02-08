@@ -8,6 +8,7 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.2957.106" />
+    <PackageVersion Include="Markdig" Version="0.40.0" />
+    <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.2950-prerelease" />
   </ItemGroup>
 </Project>

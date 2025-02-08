@@ -1,3 +1,5 @@
+using Supporter_Uno.Presentation.Chats;
+
 namespace Supporter_Uno.Presentation;
 
 public partial class MainViewModel : ObservableObject
@@ -10,21 +12,15 @@ public partial class MainViewModel : ObservableObject
     public MainViewModel(
         IStringLocalizer localizer,
         IOptions<AppConfig> appInfo,
-        INavigator navigator)
+        INavigator navigator
+    )
     {
         _navigator = navigator;
         Title = "Main";
         Title += $" - {localizer["ApplicationName"]}";
         Title += $" - {appInfo?.Value?.Environment}";
-        GoToSecond = new AsyncRelayCommand(GoToSecondView);
+        _navigator.NavigateViewModelAsync<ChatPageViewModel>(this);
     }
+
     public string? Title { get; }
-
-    public ICommand GoToSecond { get; }
-
-    private async Task GoToSecondView()
-    {
-        await _navigator.NavigateViewModelAsync<SecondViewModel>(this, data: new Entity(Name!));
-    }
-
 }

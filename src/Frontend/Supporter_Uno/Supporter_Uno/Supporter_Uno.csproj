@@ -1,4 +1,4 @@
-<Project Sdk="Uno.Sdk">
+﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net9.0-android;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
 
@@ -35,9 +35,27 @@
       ThemeService;
     </UnoFeatures>
   </PropertyGroup>
-    <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-desktop'">
+  <ItemGroup>
+    <PackageReference Include="Markdig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Presentation\Chats\ChatPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Presentation\Chats\ChatAIView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Common\Presentation\BasePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+    <!--<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-desktop'">
         <PackageReference Include="Microsoft.Web.WebView2" Aliases="WpfWebView" />
-    </ItemGroup>
+    </ItemGroup>-->
 
 
 </Project>
