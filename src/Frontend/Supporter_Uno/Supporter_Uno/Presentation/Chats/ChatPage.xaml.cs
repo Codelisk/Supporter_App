@@ -1,9 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Markdig;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -17,22 +16,13 @@ using Windows.Foundation.Collections;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Supporter_Uno.Presentation.Chats;
-
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class ChatPage
+public sealed partial class ChatPage : Page
 {
     public ChatPage()
     {
         this.InitializeComponent();
-    }
-
-    protected override async void OnNavigatedTo(NavigationEventArgs e)
-    {
-        base.OnNavigatedTo(e);
-        //string markdown = "# Hallo Welt\nDas ist **fetter** Text!";
-        //string html = Markdown.ToHtml(markdown);
-        //ChatWebView.NavigateToString(html);
     }
 }

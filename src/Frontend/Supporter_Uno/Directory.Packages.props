@@ -9,8 +9,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Markdig" Version="0.40.0" />
-    <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.2950-prerelease" />
-    <PackageVersion Include="ReactiveUI" Version="20.1.63" />
-    <PackageVersion Include="Uno.CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.204" />
   </ItemGroup>
 </Project>
