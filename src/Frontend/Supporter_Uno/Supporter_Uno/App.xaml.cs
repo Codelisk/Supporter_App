@@ -1,4 +1,8 @@
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Supporter_Uno.Common.Providers;
+using Supporter_Uno.Presentation.Authentication;
 using Supporter_Uno.Presentation.Chats;
+using Supporter_Uno.Presentation.Startup;
 using Uno.Resizetizer;
 
 namespace Supporter_Uno;
@@ -86,7 +90,9 @@ public partial class App : Application
                                 .AddRefitClient<IApiClient>(context)
                     )
                     .ConfigureServices(
-                        (context, services) => {
+                        (context, services) =>
+                        {
+                            RegisterServices(context, services);
                             // TODO: Register your services
                             //services.AddSingleton<IMyService, MyService>();
                         }
@@ -103,13 +109,18 @@ public partial class App : Application
         Host = await builder.NavigateAsync<Shell>();
     }
 
+    private static void RegisterServices(HostBuilderContext context, IServiceCollection services)
+    {
+        services.TryAddScoped<BasePageProvider>();
+    }
+
     private static void RegisterRoutes(IViewRegistry views, IRouteRegistry routes)
     {
         views.Register(
             new ViewMap(ViewModel: typeof(ShellViewModel)),
-            new ViewMap<MainPage, MainViewModel>(),
-            new ViewMap<ChatPage, ChatPageViewModel>(),
-            new DataViewMap<SecondPage, SecondViewModel, Entity>()
+            new ViewMap<StartupPage, StartupPageViewModel>(),
+            new ViewMap<LoginPage, LoginViewModel>(),
+            new ViewMap<ChatPage, ChatPageViewModel>()
         );
 
         routes.Register(
@@ -118,9 +129,9 @@ public partial class App : Application
                 View: views.FindByViewModel<ShellViewModel>(),
                 Nested:
                 [
-                    new("Main", View: views.FindByViewModel<MainViewModel>(), IsDefault: true),
-                    new("Second", View: views.FindByViewModel<SecondViewModel>()),
-                    new("Chat", View: views.FindByViewModel<ChatPageViewModel>()),
+                    new("Startup", View: views.FindByView<StartupPage>(), IsDefault: true),
+                    new("Login", View: views.FindByView<LoginPage>()),
+                    new("Chat", View: views.FindByView<ChatPage>()),
                 ]
             )
         );

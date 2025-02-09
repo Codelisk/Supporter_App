@@ -8,16 +8,20 @@
       xmlns:uen="using:Uno.Extensions.Navigation.UI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+
     xmlns:utu="using:Uno.Toolkit.UI"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid
-      utu:SafeArea.Insets="Top,Bottom" utu:SafeArea.Mode="Padding">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <WebView2 x:Name="ChatWebView" />
+        <!--<WebView x:Name="ChatWebView" />-->
+        <controls:MarkdownTextBlock Background="Red"
+    Text="**Dies ist *Markdown*!****Dies ist *Markdown*!****Dies ist *Markdown*!****Dies ist *Markdown*!****Dies ist *Markdown*!**"
+    Margin="6" />
         <Grid Grid.Row="1">
             <TextBox Text="Test" utu:SafeArea.Insets="Bottom"/>
         </Grid>

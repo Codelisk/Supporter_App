@@ -1,6 +1,6 @@
-﻿<Project Sdk="Uno.Sdk">
+<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0-android;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
+    <TargetFrameworks>net9.0-android;net9.0-browserwasm;net9.0-desktop;net9.0-windows10.0.26100</TargetFrameworks>
 
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
@@ -37,6 +37,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" />
+    <PackageReference Include="ReactiveUI" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Markdown" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Presentation\Chats\ChatPage.xaml">
@@ -50,6 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Common\Presentation\BasePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Presentation\Startup\StartupPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Presentation\Authentication\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

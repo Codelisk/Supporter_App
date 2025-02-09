@@ -26,4 +26,13 @@ public partial class BasePage : Page
     {
         this.InitializeComponent();
     }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+        if (this.DataContext is BasePageViewModel viewModel)
+        {
+            viewModel.OnNavigatedTo(e);
+        }
+    }
 }
