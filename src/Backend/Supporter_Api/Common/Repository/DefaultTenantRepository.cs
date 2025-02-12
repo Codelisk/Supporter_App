@@ -5,9 +5,8 @@ using Supporter_Api.Database;
 namespace Supporter_Api.Common.Repository
 {
     [DefaultRepository(TenantConstants.User)]
-    public class DefaultTenantRepository<TEntity, TKey> : BaseRepository<TEntity, TKey>
-        where TEntity : BaseBaseDto<TKey>, IUserBaseDto<TKey>
-        where TKey : struct
+    public class DefaultTenantRepository<TEntity> : BaseRepository<TEntity, Guid>
+        where TEntity : class, ITenantBaseDto<Guid>
     {
         public DefaultTenantRepository(MyDbContext myDbContext)
             : base(myDbContext) { }

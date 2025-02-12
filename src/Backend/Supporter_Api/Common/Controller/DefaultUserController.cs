@@ -2,12 +2,11 @@
 
 namespace Supporter_Api.Common.Controller
 {
-    public class DefaultUserController<TDto, TKey, TEntity> : BaseController<TDto, TKey, TEntity>
-        where TDto : UserBaseDto<TKey>
-        where TEntity : class, IUserBaseDto<TKey>
-        where TKey : struct, IComparable
+    public class DefaultUserController<TDto, TEntity> : BaseController<TDto, Guid, TEntity>
+        where TDto : UserBaseDto<Guid>
+        where TEntity : class, IUserBaseDto<Guid>
     {
-        public DefaultUserController(IBaseManager<TDto, TKey, TEntity> manager)
+        public DefaultUserController(DefaultUserManager<TDto, TEntity> manager)
             : base(manager) { }
     }
 }

@@ -5,35 +5,14 @@ using Supporter_Api.Common.Repository;
 namespace Supporter_Api.Common.Manager
 {
     [DefaultManager(TenantConstants.Tenant)]
-    public class DefaultTenantManager<TDto, TKey, TEntity> : BaseManager<TDto, TKey, TEntity>
-        where TDto : BaseBaseDto<TKey>, IBaseBaseDto<TKey>
-        where TEntity : class, IBaseBaseDto<TKey>
-        where TKey : struct
+    public abstract class DefaultTenantManager<TDto, TEntity> : BaseManager<TDto, Guid, TEntity>
+        where TDto : TenantBaseDto<Guid>
+        where TEntity : class, ITenantBaseDto<Guid>
     {
         public DefaultTenantManager(
-            IBaseRepository<TEntity, TKey> repo,
+            DefaultTenantRepository<TEntity> repo,
             BaseManagerProvider defaultManagerProvider
         )
             : base(repo, defaultManagerProvider) { }
-
-        public override TDto ToDto(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override List<TDto> ToDtos(List<TEntity> entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override List<TEntity> ToEntities(List<TDto> dtos)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override TEntity ToEntity(TDto entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

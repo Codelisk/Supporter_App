@@ -1,17 +1,22 @@
-﻿using Supporter_Api.Database;
+﻿using Supporter_Api.Common.Repository.Providers;
+using Supporter_Api.Database;
 
 namespace Supporter_Api.Common.Repository
 {
-    public class DefaultUserRepository<TEntity, TKey> : BaseRepository<TEntity, TKey>
-        where TEntity : BaseBaseDto<TKey>, IUserBaseDto<TKey>
-        where TKey : struct
+    public class DefaultUserRepository<TEntity> : BaseRepository<TEntity, Guid>
+        where TEntity : class, IUserBaseDto<Guid>
     {
-        public DefaultUserRepository(MyDbContext myDbContext)
-            : base(myDbContext) { }
+        private readonly IHttpContextAccessor _contextAccessor;
+
+        public DefaultUserRepository(BaseUserRepositoryProvider baseUserRepositoryProvider)
+            : base(baseUserRepositoryProvider.DbContext)
+        {
+            _contextAccessor = baseUserRepositoryProvider.HttpContextAccessor;
+        }
 
         public override void DoBeforeAddOrSave(TEntity t)
         {
-            throw new NotImplementedException();
+            t.SetUserId(Guid.Parse(_contextAccessor.HttpContext.User.Identity.Name));
         }
 
         public override List<TEntity> FilterBeforeReturn(List<TEntity> entities)
