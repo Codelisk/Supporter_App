@@ -17,4 +17,6 @@
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="3.2.2" />
   </ItemGroup>
 
+  <Import Project="..\..\Shared\Supporter_Dtos\Supporter_Dtos.projitems" Label="Shared" />
+
 </Project>

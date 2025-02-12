@@ -9,6 +9,11 @@
     <Import_RootNamespace>Supporter_Dtos</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Dtos\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Dtos\Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\common\BaseBaseDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\common\IBaseBaseDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\common\ICreatedAt.cs" />
   </ItemGroup>
 </Project>
