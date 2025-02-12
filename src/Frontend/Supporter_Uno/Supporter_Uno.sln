@@ -20,6 +20,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EBECD646
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supporter_AI_Tests", "..\..\Tests\Supporter_AI_Tests\Supporter_AI_Tests.csproj", "{01797518-63A2-455A-B717-9109F2C10ECC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{C497E864-9D2F-4C80-8FCF-ED2BD55E0398}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Supporter_Dtos", "..\..\Shared\Supporter_Dtos\Supporter_Dtos.shproj", "{93D7809C-C358-435B-84A6-81A4EC051672}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supporter_Api", "..\..\Backend\Supporter_Api\Supporter_Api.csproj", "{9736295C-153C-4EBF-B4F1-8020C6F8DB52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,11 +62,23 @@ Global
 		{01797518-63A2-455A-B717-9109F2C10ECC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{01797518-63A2-455A-B717-9109F2C10ECC}.Release|x64.ActiveCfg = Release|Any CPU
 		{01797518-63A2-455A-B717-9109F2C10ECC}.Release|x64.Build.0 = Release|Any CPU
+		{9736295C-153C-4EBF-B4F1-8020C6F8DB52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9736295C-153C-4EBF-B4F1-8020C6F8DB52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9736295C-153C-4EBF-B4F1-8020C6F8DB52}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9736295C-153C-4EBF-B4F1-8020C6F8DB52}.Debug|x64.Build.0 = Debug|Any CPU
+		{9736295C-153C-4EBF-B4F1-8020C6F8DB52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9736295C-153C-4EBF-B4F1-8020C6F8DB52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9736295C-153C-4EBF-B4F1-8020C6F8DB52}.Release|x64.ActiveCfg = Release|Any CPU
+		{9736295C-153C-4EBF-B4F1-8020C6F8DB52}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{01797518-63A2-455A-B717-9109F2C10ECC} = {EBECD646-1D7E-4E78-B5AC-81304E85B11D}
+		{93D7809C-C358-435B-84A6-81A4EC051672} = {C497E864-9D2F-4C80-8FCF-ED2BD55E0398}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\..\Shared\Supporter_Dtos\Supporter_Dtos.projitems*{93d7809c-c358-435b-84a6-81a4ec051672}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
