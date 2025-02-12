@@ -4,33 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+string[] graphScopes = builder.Configuration.GetValue<string>("MicrosoftGraph:Scopes").Split(' ');
 
 // Add services to the container.
 builder
     .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(
-        options =>
-        {
-            builder.Configuration.Bind("AzureAd", options);
-            options.Authority = "https://login.microsoftonline.com/common/v2.0"; // Akzeptiert alle Tenants
-            options.TokenValidationParameters.ValidIssuers = new[] // Erlaubt mehrere Issuer
-            {
-                "https://login.microsoftonline.com/common/v2.0",
-                "https://login.microsoftonline.com/{tenant_id}/v2.0", // Falls ein bestimmter Tenant weiterhin erlaubt sein soll
-            };
-        },
-        options =>
-        {
-            builder.Configuration.Bind("AzureAd", options);
-            options.Authority = "https://login.microsoftonline.com/common/v2.0"; // Akzeptiert alle Tenants
-            options.TokenValidationParameters.ValidIssuers = new[] // Erlaubt mehrere Issuer
-            {
-                "https://login.microsoftonline.com/common/v2.0",
-                "https://login.microsoftonline.com/{tenant_id}/v2.0", // Falls ein bestimmter Tenant weiterhin erlaubt sein soll
-            };
-        }
-    )
-    .EnableTokenAcquisitionToCallDownstreamApi(options => { })
+    .AddMicrosoftIdentityWebApi(builder.Configuration)
+    .EnableTokenAcquisitionToCallDownstreamApi()
     .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
     .AddInMemoryTokenCaches();
 

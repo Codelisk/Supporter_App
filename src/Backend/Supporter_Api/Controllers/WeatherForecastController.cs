@@ -11,7 +11,6 @@ namespace Supporter_Api.Controllers
     [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly GraphServiceClient _graphServiceClient;
         private static readonly string[] Summaries = new[]
         {
             "Freezing",
@@ -27,15 +26,23 @@ namespace Supporter_Api.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly GraphServiceClient graphServiceClient;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(
+            ILogger<WeatherForecastController> logger,
+            GraphServiceClient graphServiceClient
+        )
         {
             _logger = logger;
+            this.graphServiceClient = graphServiceClient;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
+            var test = await graphServiceClient.Me.Request().GetAsync();
+            var xyz = Guid.Parse(test.Id);
+            var user = this.User;
             return Enumerable
                 .Range(1, 5)
                 .Select(index => new WeatherForecast
