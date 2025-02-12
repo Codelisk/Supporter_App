@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Web;
-using Supporter_Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
