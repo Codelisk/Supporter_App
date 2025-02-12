@@ -20,17 +20,28 @@ namespace Supporter_Api.Common.Repository
 
         public override void DoBeforeAddOrSave(TEntity t)
         {
-            t.SetUserId(Guid.Parse(_contextAccessor.HttpContext.User.Identity.Name));
+            t.SetUserId(GetUserObjectId());
         }
 
         public override List<TEntity> FilterBeforeReturn(List<TEntity> entities)
         {
-            throw new NotImplementedException();
+            var userId = GetUserObjectId();
+            return entities.Where(x => x.IsUser(userId)).ToList();
         }
 
         public override Task<TEntity?> GetLastOrDefault()
         {
             throw new NotImplementedException();
+        }
+
+        public Guid GetUserObjectId()
+        {
+            var user = _contextAccessor.HttpContext?.User;
+            return Guid.Parse(
+                user?.FindFirst(
+                    "http://schemas.microsoft.com/identity/claims/objectidentifier"
+                ).Value
+            );
         }
     }
 }

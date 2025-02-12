@@ -42,6 +42,11 @@ namespace Supporter_Api.Controllers
         {
             var test = await graphServiceClient.Me.Request().GetAsync();
             var xyz = Guid.Parse(test.Id);
+            var dsf = GetUserObjectId();
+            var tenantId = User.FindFirst(
+                "http://schemas.microsoft.com/identity/claims/tenantid"
+            )?.Value;
+
             var user = this.User;
             return Enumerable
                 .Range(1, 5)
@@ -52,6 +57,16 @@ namespace Supporter_Api.Controllers
                     Summary = Summaries[Random.Shared.Next(Summaries.Length)],
                 })
                 .ToArray();
+        }
+
+        public Guid GetUserObjectId()
+        {
+            var user = HttpContext?.User;
+            return Guid.Parse(
+                user?.FindFirst(
+                    "http://schemas.microsoft.com/identity/claims/objectidentifier"
+                ).Value
+            );
         }
     }
 }

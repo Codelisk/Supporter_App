@@ -10,22 +10,36 @@ namespace Supporter_Api.Common.Repository
             IDefaultTenantRepository<TEntity>
         where TEntity : class, ITenantBaseDto<Guid>
     {
-        public DefaultTenantRepository(MyDbContext myDbContext)
-            : base(myDbContext) { }
+        private readonly IHttpContextAccessor _contextAccessor;
+
+        public DefaultTenantRepository(BaseUserRepositoryProvider baseUserRepositoryProvider)
+            : base(baseUserRepositoryProvider.DbContext)
+        {
+            _contextAccessor = baseUserRepositoryProvider.HttpContextAccessor;
+        }
 
         public override void DoBeforeAddOrSave(TEntity t)
         {
-            throw new NotImplementedException();
+            t.SetTenantId(GetTenantObjectId());
         }
 
         public override List<TEntity> FilterBeforeReturn(List<TEntity> entities)
         {
-            throw new NotImplementedException();
+            var tenantId = GetTenantObjectId();
+            return entities.Where(x => x.IsTenant(tenantId)).ToList();
         }
 
         public override Task<TEntity?> GetLastOrDefault()
         {
             throw new NotImplementedException();
+        }
+
+        public Guid GetTenantObjectId()
+        {
+            var user = _contextAccessor.HttpContext?.User;
+            return Guid.Parse(
+                user?.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value
+            );
         }
     }
 }
