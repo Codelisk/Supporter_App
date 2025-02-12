@@ -9,18 +9,20 @@
     <Import_RootNamespace>Supporter_Dtos</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Dtos\Common\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Common\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)common\ITenantBaseDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)common\TenantBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TenantConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\AIFolderDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\conversation\AITopicDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)dtos\common\BaseBaseDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)dtos\common\IBaseBaseDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)dtos\common\ICreatedAt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)dtos\common\INameDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)dtos\common\IUserBaseDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)dtos\common\UserBaseDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\BaseBaseDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\IBaseBaseDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ICreatedAt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\INameDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\IUserBaseDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\UserBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Usings.cs" />
   </ItemGroup>
 </Project>

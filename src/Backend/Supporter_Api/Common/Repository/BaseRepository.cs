@@ -68,29 +68,7 @@ namespace Supporter_Api.Common.Repository
         }
 
         [GetLast]
-        public virtual async Task<TEntity?> GetLastOrDefault()
-        {
-            try
-            {
-                var result = await _context
-                    .Set<TEntity>()
-                    .AsNoTracking()
-                    .OrderBy(x => x.CreatedAt)
-                    .ToListAsync();
-                if (result is null)
-                {
-                    return null;
-                }
-                return FilterBeforeReturn(result).LastOrDefault();
-            }
-            catch (System.InvalidOperationException ex)
-            {
-                throw new InvalidOperationException(
-                    $"Most likely {typeof(TEntity).FullName} does not inherit {typeof(ICreatedAt).FullName}.",
-                    ex
-                );
-            }
-        }
+        public abstract Task<TEntity?> GetLastOrDefault();
 
         [GetAll]
         public virtual async Task<List<TEntity>> GetAll()

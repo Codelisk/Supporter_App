@@ -3,7 +3,7 @@
 namespace Supporter_Api.Common.Repository
 {
     public interface IBaseRepository<TEntity, TKey>
-        where TEntity : IBaseBaseDto<TKey>
+        where TEntity : class, IBaseBaseDto<TKey>
         where TKey : struct
     {
         [Delete]
