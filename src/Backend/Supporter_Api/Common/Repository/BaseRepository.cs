@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Codelisk.GeneratorAttributes.WebAttributes.HttpMethod;
+using Codelisk.GeneratorAttributes.WebAttributes.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.IdentityModel.Tokens;
@@ -8,6 +9,7 @@ using Supporter_Api.Helpers;
 
 namespace Supporter_Api.Common.Repository
 {
+    [DefaultRepository]
     public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey>
         where TEntity : class, IBaseBaseDto<TKey>
         where TKey : struct

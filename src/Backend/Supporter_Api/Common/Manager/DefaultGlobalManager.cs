@@ -6,7 +6,8 @@ namespace Supporter_Api.Common.Manager
 {
     [DefaultManager]
     public abstract class DefaultGlobalManager<TDto, TKey, TEntity>
-        : BaseManager<TDto, TKey, TEntity>
+        : BaseManager<TDto, TKey, TEntity>,
+            IDefaultGlobalManager<TDto, TKey, TEntity>
         where TDto : BaseBaseDto<TKey>, IBaseBaseDto<TKey>
         where TEntity : class, IBaseBaseDto<TKey>
         where TKey : struct

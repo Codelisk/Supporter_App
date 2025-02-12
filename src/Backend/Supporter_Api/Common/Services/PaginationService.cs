@@ -45,12 +45,21 @@ namespace Supporter_Api.Common.Services
             return (users, totalRecords);
         }
 
-        private IQueryable<T> ApplySearch<T>(IQueryable<T> query, string searchField, string searchValue)
+        private IQueryable<T> ApplySearch<T>(
+            IQueryable<T> query,
+            string searchField,
+            string searchValue
+        )
         {
-            var property = typeof(T).GetProperty(searchField, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+            var property = typeof(T).GetProperty(
+                searchField,
+                BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance
+            );
 
             if (property == null)
-                throw new ArgumentException($"Property '{searchField}' not found on type '{typeof(T).Name}'");
+                throw new ArgumentException(
+                    $"Property '{searchField}' not found on type '{typeof(T).Name}'"
+                );
 
             // Erstellen eines Lambda-Ausdrucks für dynamische Filterung
             var parameter = Expression.Parameter(typeof(T), "x");
@@ -78,7 +87,9 @@ namespace Supporter_Api.Common.Services
             }
             else
             {
-                throw new NotSupportedException($"Search is not supported for type '{property.PropertyType.Name}'");
+                throw new NotSupportedException(
+                    $"Search is not supported for type '{property.PropertyType.Name}'"
+                );
             }
 
             var lambda = Expression.Lambda<Func<T, bool>>(containsExpression, parameter);
@@ -88,7 +99,10 @@ namespace Supporter_Api.Common.Services
 
         private IQueryable<T> ApplySorting<T>(IQueryable<T> query, string sortBy, string sortOrder)
         {
-            var property = typeof(T).GetProperty(sortBy, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+            var property = typeof(T).GetProperty(
+                sortBy,
+                BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance
+            );
 
             if (property == null)
                 throw new ArgumentException($"Property '{sortBy}' not found on type '{nameof(T)}'");
@@ -103,3 +117,4 @@ namespace Supporter_Api.Common.Services
             }
         }
     }
+}

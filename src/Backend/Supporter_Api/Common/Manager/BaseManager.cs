@@ -1,10 +1,12 @@
 ﻿using Codelisk.GeneratorAttributes.WebAttributes.HttpMethod;
+using Codelisk.GeneratorAttributes.WebAttributes.Manager;
 using Supporter_Api.Common.Manager.Providers;
 using Supporter_Api.Common.Repository;
 using Supporter_Api.Common.Services;
 
 namespace Supporter_Api.Common.Manager
 {
+    [DefaultManager]
     public abstract class BaseManager<TDto, TKey, TEntity> : IBaseManager<TDto, TKey, TEntity>
         where TDto : BaseBaseDto<TKey>
         where TEntity : class, IBaseBaseDto<TKey>

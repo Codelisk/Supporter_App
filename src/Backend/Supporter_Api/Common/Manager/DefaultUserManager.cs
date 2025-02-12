@@ -5,12 +5,14 @@ using Supporter_Api.Common.Repository;
 namespace Supporter_Api.Common.Manager
 {
     [DefaultManager(TenantConstants.User)]
-    public abstract class DefaultUserManager<TDto, TEntity> : BaseManager<TDto, Guid, TEntity>
+    public abstract class DefaultUserManager<TDto, TEntity>
+        : BaseManager<TDto, Guid, TEntity>,
+            IDefaultUserManager<TDto, TEntity>
         where TDto : UserBaseDto<Guid>, IUserBaseDto<Guid>
         where TEntity : class, IUserBaseDto<Guid>
     {
         public DefaultUserManager(
-            DefaultUserRepository<TEntity> repo,
+            IDefaultUserRepository<TEntity> repo,
             BaseManagerProvider defaultManagerProvider
         )
             : base(repo, defaultManagerProvider) { }

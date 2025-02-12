@@ -1,10 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-Supporter_Api-d0d921a9-e235-47ed-b4aa-c090d3375fff</UserSecretsId>
+
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)obj/generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +22,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\submodules\CodeGen\src\Common\Codelisk.GeneratorAttributes\Codelisk.GeneratorAttributes.csproj" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\Common\Codelisk.GeneratorAttributes\Codelisk.GeneratorAttributes.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\Common\Codelisk.GeneratorShared\Codelisk.GeneratorShared.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\GeneratorHelper\Foundation.Crawler\Foundation.Crawler.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\GeneratorHelper\Generators.Base\Generators.Base.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\Generators\Foundation\Codelisk.Foundation.Generator\Codelisk.Foundation.Generator.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\Generators\Web\WebDbContext.Generator\WebDbContext.Generator.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\Generators\Web\WebGenerator.Base\WebGenerator.Base.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\Generators\Web\WebManager.Contract.Generator\WebManager.Contract.Generator.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\Generators\Web\WebManager.Generator\WebManager.Generator.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\Generators\Web\WebRepositories.Contract.Generator\WebRepositories.Contract.Generator.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\submodules\CodeGen\src\Generators\Web\WebRepositories.Generator\WebRepositories.Generator.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
   </ItemGroup>
 
   <Import Project="..\..\Shared\Supporter_Dtos\Supporter_Dtos.projitems" Label="Shared" />

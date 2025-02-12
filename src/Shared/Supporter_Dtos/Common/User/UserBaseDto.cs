@@ -3,9 +3,9 @@ public abstract record UserBaseDto<TKey> : BaseBaseDto<TKey>, IUserBaseDto<TKey>
     where TKey : struct
 {
     [Id]
-    public required TKey Id { get; set; }
+    public TKey Id { get; set; }
 
-    public required TKey UserId { get; set; }
+    public TKey UserId { get; set; }
 
     public override TKey GetId()
     {

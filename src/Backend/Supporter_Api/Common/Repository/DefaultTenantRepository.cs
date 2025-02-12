@@ -4,8 +4,10 @@ using Supporter_Api.Database;
 
 namespace Supporter_Api.Common.Repository
 {
-    [DefaultRepository(TenantConstants.User)]
-    public class DefaultTenantRepository<TEntity> : BaseRepository<TEntity, Guid>
+    [DefaultRepository(TenantConstants.Tenant)]
+    public class DefaultTenantRepository<TEntity>
+        : BaseRepository<TEntity, Guid>,
+            IDefaultTenantRepository<TEntity>
         where TEntity : class, ITenantBaseDto<Guid>
     {
         public DefaultTenantRepository(MyDbContext myDbContext)

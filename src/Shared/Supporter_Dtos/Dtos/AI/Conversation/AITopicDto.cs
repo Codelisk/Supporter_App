@@ -1,5 +1,8 @@
-[TenantDto(TenantConstants.User)]
-public partial record AITopicDto : UserBaseDto<Guid>, INameDto
+namespace Supporter_Dtos
 {
-    public required string Name { get; set; }
+    [TenantDto(TenantConstants.User)]
+    public partial record AITopicDto : UserBaseDto<Guid>, INameDto
+    {
+        public string Name { get; set; }
+    }
 }

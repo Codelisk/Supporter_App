@@ -2,5 +2,8 @@
 
 namespace Supporter_Api.Common.Repository.Providers
 {
-    public record BaseUserRepositoryProvider(MyDbContext DbContext, IHttpContextAccessor HttpContextAccessor)
+    public record BaseUserRepositoryProvider(
+        MyDbContext DbContext,
+        IHttpContextAccessor HttpContextAccessor
+    );
 }

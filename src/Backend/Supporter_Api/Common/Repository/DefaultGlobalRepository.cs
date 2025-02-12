@@ -1,8 +1,12 @@
-﻿using Supporter_Api.Database;
+﻿using Codelisk.GeneratorAttributes.WebAttributes.Repository;
+using Supporter_Api.Database;
 
 namespace Supporter_Api.Common.Repository
 {
-    public class DefaultGlobalRepository<TEntity, TKey> : BaseRepository<TEntity, TKey>
+    [DefaultRepository]
+    public class DefaultGlobalRepository<TEntity, TKey>
+        : BaseRepository<TEntity, TKey>,
+            IDefaultGlobalRepository<TEntity, TKey>
         where TEntity : BaseBaseDto<TKey>, IUserBaseDto<TKey>
         where TKey : struct
     {
