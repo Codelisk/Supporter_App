@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageVersion Include="Markdig" Version="0.40.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.3.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
     <PackageVersion Include="Microsoft.OpenApi" Version="1.6.17" />
     <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.3065.39" />
   </ItemGroup>

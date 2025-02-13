@@ -1,3 +1,4 @@
+[PrimaryKey(nameof(Id))]
 [DtoBase]
 public abstract record TenantBaseDto<TKey> : BaseBaseDto<TKey>, ITenantBaseDto<TKey>
     where TKey : struct

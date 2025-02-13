@@ -1,4 +1,5 @@
 [DtoBase]
+[PrimaryKey(nameof(Id))]
 public abstract record UserBaseDto<TKey> : BaseBaseDto<TKey>, IUserBaseDto<TKey>
     where TKey : struct
 {

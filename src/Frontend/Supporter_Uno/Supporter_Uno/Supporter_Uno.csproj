@@ -1,4 +1,4 @@
-<Project Sdk="Uno.Sdk">
+﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-windows10.0.26100;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
 
@@ -53,6 +53,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.26100'">
         <PackageReference Include="Microsoft.Web.WebView2" Aliases="WpfWebView" />
