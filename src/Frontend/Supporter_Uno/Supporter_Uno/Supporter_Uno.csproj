@@ -51,5 +51,10 @@
   <ItemGroup>
     <PackageReference Include="Markdig" />
   </ItemGroup>
+  <ItemGroup>
+    <Page Update="Presentation\Auth\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
 
 </Project>

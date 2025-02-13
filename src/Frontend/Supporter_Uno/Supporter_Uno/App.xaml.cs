@@ -1,3 +1,4 @@
+using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats;
 using Uno.Resizetizer;
 
@@ -102,7 +103,24 @@ public partial class App : Application
 #endif
         MainWindow.SetWindowIcon();
 
-        Host = await builder.NavigateAsync<Shell>();
+        Host = await builder.NavigateAsync<Shell>(
+            initialNavigate: async (services, navigator) =>
+            {
+                var auth = services.GetRequiredService<IAuthenticationService>();
+                var authenticated = await auth.RefreshAsync();
+                if (authenticated)
+                {
+                    await navigator.NavigateViewAsync<MainPage>(this, qualifier: Qualifiers.Nested);
+                }
+                else
+                {
+                    await navigator.NavigateViewAsync<LoginPage>(
+                        this,
+                        qualifier: Qualifiers.Nested
+                    );
+                }
+            }
+        );
     }
 
     private static void RegisterRoutes(IViewRegistry views, IRouteRegistry routes)
@@ -110,6 +128,7 @@ public partial class App : Application
         views.Register(
             new ViewMap(ViewModel: typeof(ShellViewModel)),
             new ViewMap<MainPage, MainViewModel>(),
+            new ViewMap<LoginPage, LoginPageViewModel>(),
             new ViewMap<ChatPage, ChatPageViewModel>()
         );
 
@@ -119,7 +138,8 @@ public partial class App : Application
                 View: views.FindByViewModel<ShellViewModel>(),
                 Nested:
                 [
-                    new("Main", View: views.FindByViewModel<MainViewModel>(), IsDefault: true),
+                    new("Main", View: views.FindByView<MainPage>(), IsDefault: true),
+                    new("Login", View: views.FindByView<LoginPage>()),
                     new("Chat", View: views.FindByView<ChatPage>()),
                 ]
             )
