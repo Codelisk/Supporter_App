@@ -1,52 +1,25 @@
 using System.Net;
 
 namespace Supporter_Uno.Services.Caching;
+
 public sealed class WeatherCache : IWeatherCache
 {
-    private readonly IApiClient _api;
     private readonly ISerializer _serializer;
     private readonly ILogger _logger;
 
-    public WeatherCache(IApiClient api, ISerializer serializer, ILogger<WeatherCache> logger)
+    public WeatherCache(ISerializer serializer, ILogger<WeatherCache> logger)
     {
-        _api = api;
         _serializer = serializer;
         _logger = logger;
     }
 
-    private bool IsConnected => NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
+    private bool IsConnected =>
+        NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel()
+        == NetworkConnectivityLevel.InternetAccess;
 
     public async ValueTask<IImmutableList<WeatherForecast>> GetForecast(CancellationToken token)
     {
-        var weatherText = await GetCachedWeather(token);
-        if (!string.IsNullOrWhiteSpace(weatherText))
-        {
-            return _serializer.FromString<ImmutableArray<WeatherForecast>>(weatherText);
-        }
-
-        if (!IsConnected)
-        {
-            _logger.LogWarning("App is offline and cannot connect to the API.");
-            throw new WebException("No internet connection", WebExceptionStatus.ConnectFailure);
-        }
-
-        var response = await _api.GetWeather(token);
-
-        if (response.IsSuccessStatusCode && response.Content is not null)
-        {
-            var weather = response.Content;
-            await Save(weather, token);
-            return weather;
-        }
-        else if (response.Error is not null)
-        {
-            _logger.LogError(response.Error, "An error occurred while retrieving the latest Forecast.");
-            throw response.Error;
-        }
-        else
-        {
-            return ImmutableArray<WeatherForecast>.Empty;
-        }
+        return ImmutableArray<WeatherForecast>.Empty;
     }
 
     private static async ValueTask<StorageFile> GetFile(CreationCollisionOption option) =>
@@ -59,7 +32,11 @@ public sealed class WeatherCache : IWeatherCache
 
         // Reuse latest cache file if offline
         // or if the file is less than 5 minutes old
-        if (IsConnected || DateTimeOffset.Now.AddMinutes(-5) > properties.DateModified || token.IsCancellationRequested)
+        if (
+            IsConnected
+            || DateTimeOffset.Now.AddMinutes(-5) > properties.DateModified
+            || token.IsCancellationRequested
+        )
         {
             return null;
         }

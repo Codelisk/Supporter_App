@@ -113,6 +113,7 @@ public partial class App : Application
             {
                 var auth = services.GetRequiredService<IAuthenticationService>();
                 var authenticated = await auth.RefreshAsync();
+
                 if (authenticated)
                 {
                     await navigator.NavigateViewAsync<MainPage>(this, qualifier: Qualifiers.Nested);

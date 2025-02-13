@@ -5,11 +5,11 @@ namespace Supporter_Uno.Services.Endpoints;
 internal class DebugHttpHandler : DelegatingHandler
 {
     private readonly ILogger _logger;
-    private readonly IAuthenticationTokenProvider authenticationTokenProvider;
+    private readonly ITokenCache authenticationTokenProvider;
 
     public DebugHttpHandler(
         ILogger<DebugHttpHandler> logger,
-        IAuthenticationTokenProvider authenticationTokenProvider,
+        ITokenCache authenticationTokenProvider,
         HttpMessageHandler? innerHandler = null
     )
         : base(innerHandler ?? new HttpClientHandler())
@@ -22,7 +22,7 @@ internal class DebugHttpHandler : DelegatingHandler
         CancellationToken cancellationToken
     )
     {
-        var token = await this.authenticationTokenProvider.GetAccessToken();
+        string token = await authenticationTokenProvider.AccessTokenAsync();
         return new AuthenticationHeaderValue("Bearer", token);
     }
 
@@ -32,6 +32,7 @@ internal class DebugHttpHandler : DelegatingHandler
     )
     {
         request.Headers.Authorization = await GetTokenAsync(cancellationToken);
+        Console.WriteLine($"Authorization-Header: {request.Headers.Authorization}");
         var response = await base.SendAsync(request, cancellationToken);
 #if DEBUG
         if (!response.IsSuccessStatusCode)
