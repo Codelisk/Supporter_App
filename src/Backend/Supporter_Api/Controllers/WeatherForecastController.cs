@@ -59,7 +59,7 @@ namespace Supporter_Api.Controllers
                 .ToArray();
         }
 
-        public Guid GetUserObjectId()
+        private Guid GetUserObjectId()
         {
             var user = HttpContext?.User;
             return Guid.Parse(
