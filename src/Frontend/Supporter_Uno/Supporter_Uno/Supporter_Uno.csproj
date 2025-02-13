@@ -6,9 +6,9 @@
     <UnoSingleProject>true</UnoSingleProject>
 
     <!-- Display name -->
-    <ApplicationTitle>Supporter_Uno</ApplicationTitle>
+    <ApplicationTitle>SupporterUno</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.Supporter_Uno</ApplicationId>
+    <ApplicationId>com.companyname.SupporterUno</ApplicationId>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
@@ -46,15 +46,13 @@
         ThemeService;
         AuthenticationMsal
     </UnoFeatures>
-      <Platforms>AnyCPU;x64</Platforms>
+      <!--<Platforms>AnyCPU;x64</Platforms>-->
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" />
   </ItemGroup>
-  <ItemGroup>
-    <Page Update="Presentation\Auth\LoginPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.26100'">
+        <PackageReference Include="Microsoft.Web.WebView2" Aliases="WpfWebView" />
+    </ItemGroup>
 
 </Project>
