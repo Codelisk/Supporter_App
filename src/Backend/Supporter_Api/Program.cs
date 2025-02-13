@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph.ExternalConnectors;
 using Microsoft.Identity.Web;
+using Supporter_Api.Helpers.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 string[] graphScopes = builder.Configuration.GetValue<string>("MicrosoftGraph:Scopes").Split(' ');
@@ -23,7 +24,10 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 );
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(options =>
+{
+    options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
+});
 
 var app = builder.Build();
 
