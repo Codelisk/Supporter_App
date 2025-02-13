@@ -2,6 +2,9 @@
   <PropertyGroup>
     <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-windows10.0.26100;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
 
+      <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+      <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)/generated</CompilerGeneratedFilesOutputPath>
+
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
 
@@ -46,12 +49,19 @@
         ThemeService;
         AuthenticationMsal
     </UnoFeatures>
+      <NoWarn>KE0001</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" />
   </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.26100'">
         <PackageReference Include="Microsoft.Web.WebView2" Aliases="WpfWebView" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="ApiClient\" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\submodules\CodeGen\src\Common\Codelisk.GeneratorAttributes\Codelisk.GeneratorAttributes.csproj" />
     </ItemGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.26100'">
 
@@ -60,5 +70,6 @@
         <PlatformTarget Condition=" '$(PlatformTarget)' == '' AND $(Platform) == 'AnyCPU' AND '$(NETCoreSdkRuntimeIdentifier)' == 'win-x64'">x64</PlatformTarget>
         <PlatformTarget Condition=" '$(PlatformTarget)' == '' AND $(Platform) == 'AnyCPU' AND '$(NETCoreSdkRuntimeIdentifier)' == 'win-arm64'">arm64</PlatformTarget>
     </PropertyGroup>
+    <Import Project="..\..\..\Shared\Supporter_Dtos\Supporter_Dtos.projitems" Label="Shared" />
 
 </Project>

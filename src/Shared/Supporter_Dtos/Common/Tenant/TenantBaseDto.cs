@@ -3,9 +3,9 @@ public abstract record TenantBaseDto<TKey> : BaseBaseDto<TKey>, ITenantBaseDto<T
     where TKey : struct
 {
     [Id]
-    public required TKey Id { get; set; }
+    public TKey Id { get; set; }
 
-    public required TKey TenantId { get; set; }
+    public TKey TenantId { get; set; }
 
     public override TKey GetId()
     {

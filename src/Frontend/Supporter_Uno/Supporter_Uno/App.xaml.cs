@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Supporter_Dtos;
 using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats;
 using Uno.Resizetizer;
@@ -85,7 +87,10 @@ public partial class App : Application
                                 .AddTransient<DelegatingHandler, DebugHttpHandler>()
 #endif
                                 .AddSingleton<IWeatherCache, WeatherCache>()
-                                .AddRefitClient<IApiClient>(context)
+                                .AddRefitClient<ISupporter_Apiv1>(
+                                    context,
+                                    new EndpointOptions { Url = "https://localhost:7209/" }
+                                )
                     )
                     .UseAuthentication(auth => auth.AddMsal(builder.Window))
                     .ConfigureServices(

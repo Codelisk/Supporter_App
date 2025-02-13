@@ -268,6 +268,7 @@ Global
 		{5A622617-1450-403A-B217-89E0CC53961D} = {C4AFC285-BF3F-4BDA-9EE0-212E717875F8}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\..\Shared\Supporter_Dtos\Supporter_Dtos.projitems*{1ec1c3f5-5289-4c8e-b3fe-16be84727494}*SharedItemsImports = 5
 		..\..\Shared\Supporter_Dtos\Supporter_Dtos.projitems*{93d7809c-c358-435b-84a6-81a4ec051672}*SharedItemsImports = 13
 		..\..\Shared\Supporter_Dtos\Supporter_Dtos.projitems*{9736295c-153c-4ebf-b4f1-8020c6f8db52}*SharedItemsImports = 5
 	EndGlobalSection
