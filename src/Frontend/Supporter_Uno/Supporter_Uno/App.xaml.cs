@@ -1,7 +1,11 @@
+using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Refit;
 using Supporter_Dtos;
 using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats;
+using Supporter_Uno.Presentation.Folders;
+using Supporter_Uno.Presentation.Topics;
 using Uno.Resizetizer;
 
 namespace Supporter_Uno;
@@ -89,8 +93,16 @@ public partial class App : Application
                                 .AddTransient<DelegatingHandler, DebugHttpHandler>()
 #endif
                                 .AddSingleton<IWeatherCache, WeatherCache>()
-                                .AddRefitClient<IAIFolderApi>(context, endpointOptions)
-                                .AddRefitClient<IAITopicApi>(context, endpointOptions)
+                                .AddRefitClient<IAIFolderApi>(
+                                    context,
+                                    endpointOptions,
+                                    settingsBuilder: ConfigureRefitSettings
+                                )
+                                .AddRefitClient<IAITopicApi>(
+                                    context,
+                                    endpointOptions,
+                                    settingsBuilder: ConfigureRefitSettings
+                                )
                     )
                     .UseAuthentication(auth => auth.AddMsal(builder.Window))
                     .ConfigureServices(
@@ -114,9 +126,12 @@ public partial class App : Application
                 var auth = services.GetRequiredService<IAuthenticationService>();
                 var authenticated = await auth.RefreshAsync();
 
-                if (authenticated)
+                if (authenticated && false)
                 {
-                    await navigator.NavigateViewAsync<MainPage>(this, qualifier: Qualifiers.Nested);
+                    await navigator.NavigateViewAsync<FolderOverviewPage>(
+                        this,
+                        qualifier: Qualifiers.Nested
+                    );
                 }
                 else
                 {
@@ -129,12 +144,21 @@ public partial class App : Application
         );
     }
 
+    private static void ConfigureRefitSettings(IServiceProvider x, RefitSettings y)
+    {
+        y.ContentSerializer = new SystemTextJsonContentSerializer(
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
+    }
+
     private static void RegisterRoutes(IViewRegistry views, IRouteRegistry routes)
     {
         views.Register(
             new ViewMap(ViewModel: typeof(ShellViewModel)),
             new ViewMap<MainPage, MainViewModel>(),
             new ViewMap<LoginPage, LoginPageViewModel>(),
+            new ViewMap<FolderOverviewPage, FolderOverviewPageViewModel>(),
+            new ViewMap<TopicOverviewPage, TopicOverviewPageViewModel>(),
             new ViewMap<ChatPage, ChatPageViewModel>()
         );
 
@@ -146,6 +170,8 @@ public partial class App : Application
                 [
                     new("Main", View: views.FindByView<MainPage>(), IsDefault: true),
                     new("Login", View: views.FindByView<LoginPage>()),
+                    new("Folders", View: views.FindByView<FolderOverviewPage>()),
+                    new("Topics", View: views.FindByView<TopicOverviewPage>()),
                     new("Chat", View: views.FindByView<ChatPage>()),
                 ]
             )

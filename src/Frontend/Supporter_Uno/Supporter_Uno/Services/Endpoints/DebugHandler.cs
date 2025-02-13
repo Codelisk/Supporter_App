@@ -6,16 +6,17 @@ internal class DebugHttpHandler : DelegatingHandler
 {
     private readonly ILogger _logger;
     private readonly ITokenCache authenticationTokenProvider;
+    private readonly IDispatcher dispatcher;
 
     public DebugHttpHandler(
         ILogger<DebugHttpHandler> logger,
-        ITokenCache authenticationTokenProvider,
+        ITokenCache tokenCache,
         HttpMessageHandler? innerHandler = null
     )
         : base(innerHandler ?? new HttpClientHandler())
     {
         _logger = logger;
-        this.authenticationTokenProvider = authenticationTokenProvider;
+        this.authenticationTokenProvider = tokenCache;
     }
 
     private async Task<AuthenticationHeaderValue?> GetTokenAsync(
@@ -23,6 +24,10 @@ internal class DebugHttpHandler : DelegatingHandler
     )
     {
         string token = await authenticationTokenProvider.AccessTokenAsync();
+        if (string.IsNullOrEmpty(token))
+        {
+            token = await authenticationTokenProvider.AccessTokenAsync();
+        }
         return new AuthenticationHeaderValue("Bearer", token);
     }
 

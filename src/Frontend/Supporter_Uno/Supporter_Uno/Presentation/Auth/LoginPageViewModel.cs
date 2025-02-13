@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Supporter_Dtos;
+using Supporter_Uno.Presentation.Folders;
 
 namespace Supporter_Uno.Presentation.Auth;
 
@@ -32,11 +33,9 @@ public partial class LoginPageViewModel : ObservableObject
     private async Task DoLogin()
     {
         var success = await _authentication.LoginAsync(_dispatcher);
-        var test = await _supporter_Apiv1.GetAll();
-        await _authentication.LogoutAsync(_dispatcher);
         if (success)
         {
-            await _navigator.NavigateViewModelAsync<MainViewModel>(
+            await _navigator.NavigateViewAsync<FolderOverviewPage>(
                 this,
                 qualifier: Qualifiers.ClearBackStack
             );
