@@ -33,17 +33,18 @@
       https://aka.platform.uno/singleproject-features
     -->
     <UnoFeatures>
-      Lottie;
-      Hosting;
-      Toolkit;
-      Logging;
-      Mvvm;
-      Configuration;
-      Http;
-      Serialization;
-      Localization;
-      Navigation;
-      ThemeService;
+        Lottie;
+        Hosting;
+        Toolkit;
+        Logging;
+        Mvvm;
+        Configuration;
+        Http;
+        Serialization;
+        Localization;
+        Navigation;
+        ThemeService;
+        AuthenticationMsal
     </UnoFeatures>
       <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>

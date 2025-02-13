@@ -19,8 +19,9 @@ public partial class App : Application
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
-        var builder = this.CreateBuilder(args)
-            // Add navigation support for toolkit controls such as TabBar and NavigationView
+        var builder = this.CreateBuilder(args);
+        // Add navigation support for toolkit controls such as TabBar and NavigationView
+        builder
             .UseToolkitNavigation()
             .Configure(host =>
                 host
@@ -85,6 +86,7 @@ public partial class App : Application
                                 .AddSingleton<IWeatherCache, WeatherCache>()
                                 .AddRefitClient<IApiClient>(context)
                     )
+                    .UseAuthentication(auth => auth.AddMsal(builder.Window))
                     .ConfigureServices(
                         (context, services) => {
                             // TODO: Register your services
