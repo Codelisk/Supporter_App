@@ -46,10 +46,6 @@
         ThemeService;
         AuthenticationMsal
     </UnoFeatures>
-      <!-- Workaround for https://github.com/unoplatform/uno/issues/18552 -->
-      <PlatformTarget Condition=" '$(PlatformTarget)' == '' AND $(Platform) == 'AnyCPU' AND '$(NETCoreSdkRuntimeIdentifier)' == 'win-x86'">x86</PlatformTarget>
-      <PlatformTarget Condition=" '$(PlatformTarget)' == '' AND $(Platform) == 'AnyCPU' AND '$(NETCoreSdkRuntimeIdentifier)' == 'win-x64'">x64</PlatformTarget>
-      <PlatformTarget Condition=" '$(PlatformTarget)' == '' AND $(Platform) == 'AnyCPU' AND '$(NETCoreSdkRuntimeIdentifier)' == 'win-arm64'">arm64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" />
@@ -57,5 +53,12 @@
     <ItemGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.26100'">
         <PackageReference Include="Microsoft.Web.WebView2" Aliases="WpfWebView" />
     </ItemGroup>
+    <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.26100'">
+
+        <!-- Workaround for https://github.com/unoplatform/uno/issues/18552 -->
+        <PlatformTarget Condition=" '$(PlatformTarget)' == '' AND $(Platform) == 'AnyCPU' AND '$(NETCoreSdkRuntimeIdentifier)' == 'win-x86'">x86</PlatformTarget>
+        <PlatformTarget Condition=" '$(PlatformTarget)' == '' AND $(Platform) == 'AnyCPU' AND '$(NETCoreSdkRuntimeIdentifier)' == 'win-x64'">x64</PlatformTarget>
+        <PlatformTarget Condition=" '$(PlatformTarget)' == '' AND $(Platform) == 'AnyCPU' AND '$(NETCoreSdkRuntimeIdentifier)' == 'win-arm64'">arm64</PlatformTarget>
+    </PropertyGroup>
 
 </Project>
