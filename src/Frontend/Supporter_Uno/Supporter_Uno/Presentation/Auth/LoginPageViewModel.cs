@@ -12,13 +12,13 @@ public partial class LoginPageViewModel : ObservableObject
     private IAuthenticationService _authentication;
 
     private INavigator _navigator;
-    private readonly ISupporter_Apiv1 _supporter_Apiv1;
+    private readonly IAIFolderApi _supporter_Apiv1;
     private IDispatcher _dispatcher;
 
     public LoginPageViewModel(
         IDispatcher dispatcher,
         INavigator navigator,
-        ISupporter_Apiv1 supporter_Apiv1,
+        IAIFolderApi supporter_Apiv1,
         IAuthenticationService authentication
     )
     {

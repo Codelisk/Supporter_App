@@ -1,3 +1,3 @@
-refitter https://localhost:7209/openapi/v1.json --interface-only --namespace "Supporter_Dtos"
+refitter https://localhost:7209/openapi/v1.json --interface-only --namespace "Supporter_Dtos" --multiple-interfaces ByTag
 pause
 exit

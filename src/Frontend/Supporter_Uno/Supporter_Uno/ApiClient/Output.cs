@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Supporter_Dtos
 {
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
-    public partial interface ISupporter_Apiv1
+    public partial interface IAIFolderApi
     {
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -86,7 +86,11 @@ namespace Supporter_Dtos
         [Headers("Accept: application/json")]
         [Post("/api/AIFolder/Save")]
         Task<AIFolderDto> Save([Body] AIFolderDto body);
+    }
 
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IAITopicApi
+    {
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
@@ -158,14 +162,17 @@ namespace Supporter_Dtos
         [Headers("Accept: application/json")]
         [Post("/api/AITopic/Save")]
         Task<AITopicDto> Save2([Body] AITopicDto body);
+    }
 
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IWeatherForecastApi
+    {
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/WeatherForecast")]
         Task<ICollection<WeatherForecast>> GetWeatherForecast();
-
-
     }
+
 
 }

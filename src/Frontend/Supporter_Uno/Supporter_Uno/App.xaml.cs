@@ -22,6 +22,8 @@ public partial class App : Application
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
+        var endpointOptions = new EndpointOptions { Url = "https://localhost:7209/" };
+
         var builder = this.CreateBuilder(args);
         // Add navigation support for toolkit controls such as TabBar and NavigationView
         builder
@@ -87,10 +89,8 @@ public partial class App : Application
                                 .AddTransient<DelegatingHandler, DebugHttpHandler>()
 #endif
                                 .AddSingleton<IWeatherCache, WeatherCache>()
-                                .AddRefitClient<ISupporter_Apiv1>(
-                                    context,
-                                    new EndpointOptions { Url = "https://localhost:7209/" }
-                                )
+                                .AddRefitClient<IAIFolderApi>(context, endpointOptions)
+                                .AddRefitClient<IAITopicApi>(context, endpointOptions)
                     )
                     .UseAuthentication(auth => auth.AddMsal(builder.Window))
                     .ConfigureServices(
