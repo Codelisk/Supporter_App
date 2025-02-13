@@ -1,0 +1,691 @@
+openapi: 3.0.1
+info:
+  title: Supporter_Api | v1
+  version: 1.0.0
+servers:
+- url: https://localhost:7209
+- url: http://localhost:5074
+tags:
+- name: AIFolder
+- name: AITopic
+- name: WeatherForecast
+paths:
+  /api/AIFolder/GetPaginated:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: searchField
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: perPage
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sortOrder
+        required: false
+        schema:
+          default: asc
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: filterBy
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/DeleteAll:
+    delete:
+      parameters:
+      - explode: true
+        in: query
+        name: areYouSure
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/DeleteAllByRange:
+    delete:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                format: uuid
+                type: string
+              type: array
+          text/json:
+            schema:
+              items:
+                format: uuid
+                type: string
+              type: array
+          application/*+json:
+            schema:
+              items:
+                format: uuid
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/GetRange:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AIFolderDto'
+                type: array
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/Count:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/GetAll:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AIFolderDto'
+                type: array
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/Get:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIFolderDto'
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/Delete:
+    delete:
+      parameters:
+      - explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/AddRange:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AIFolderDto'
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AIFolderDto'
+              type: array
+          application/*+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AIFolderDto'
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/Add:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIFolderDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AIFolderDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AIFolderDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIFolderDto'
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/GetLastOrDefault:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIFolderDto'
+          description: OK
+      tags:
+      - AIFolder
+  /api/AIFolder/Save:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIFolderDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AIFolderDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AIFolderDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIFolderDto'
+          description: OK
+      tags:
+      - AIFolder
+  /api/AITopic/GetPaginated:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: searchField
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: perPage
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sortOrder
+        required: false
+        schema:
+          default: asc
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: filterBy
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/DeleteAll:
+    delete:
+      parameters:
+      - explode: true
+        in: query
+        name: areYouSure
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/DeleteAllByRange:
+    delete:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                format: uuid
+                type: string
+              type: array
+          text/json:
+            schema:
+              items:
+                format: uuid
+                type: string
+              type: array
+          application/*+json:
+            schema:
+              items:
+                format: uuid
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/GetRange:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AITopicDto'
+                type: array
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/Count:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/GetAll:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AITopicDto'
+                type: array
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/Get:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AITopicDto'
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/Delete:
+    delete:
+      parameters:
+      - explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/AddRange:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AITopicDto'
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AITopicDto'
+              type: array
+          application/*+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AITopicDto'
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/Add:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AITopicDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AITopicDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AITopicDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AITopicDto'
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/GetLastOrDefault:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AITopicDto'
+          description: OK
+      tags:
+      - AITopic
+  /api/AITopic/Save:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AITopicDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AITopicDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AITopicDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AITopicDto'
+          description: OK
+      tags:
+      - AITopic
+  /WeatherForecast:
+    get:
+      operationId: GetWeatherForecast
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WeatherForecast'
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WeatherForecast'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WeatherForecast'
+                type: array
+          description: OK
+      tags:
+      - WeatherForecast
+components:
+  schemas:
+    AIFolderDto:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        name:
+          type: string
+        id:
+          format: uuid
+          type: string
+        userId:
+          format: uuid
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    AITopicDto:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        name:
+          type: string
+        id:
+          format: uuid
+          type: string
+        userId:
+          format: uuid
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    WeatherForecast:
+      example:
+        date: 2000-01-23
+        summary: summary
+        temperatureC: 0
+        temperatureF: 6
+      properties:
+        date:
+          format: date
+          type: string
+        temperatureC:
+          format: int32
+          type: integer
+        temperatureF:
+          format: int32
+          type: integer
+        summary:
+          nullable: true
+          type: string
+      type: object
+

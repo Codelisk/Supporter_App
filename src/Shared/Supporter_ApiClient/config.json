@@ -1,0 +1,5 @@
+{
+  "generatorName": "csharp",
+  "inputSpec": "openapi.json",
+  "outputDir": "./Supporter_ApiClient"
+}
