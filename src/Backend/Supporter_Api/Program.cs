@@ -8,7 +8,6 @@ using Supporter_Api;
 using Supporter_Api.Helpers.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
-string[] graphScopes = builder.Configuration.GetValue<string>("MicrosoftGraph:Scopes").Split(' ');
 
 // Add services to the container.
 builder
