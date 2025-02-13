@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph.ExternalConnectors;
 using Microsoft.Identity.Web;
+using Supporter_Api;
 using Supporter_Api.Helpers.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,8 @@ builder.Services.AddOpenApi(options =>
 {
     options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
 });
+
+new ModuleInitializer().Configure(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 

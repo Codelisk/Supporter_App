@@ -1,5 +1,7 @@
 ﻿using Codelisk.GeneratorAttributes.GeneralAttributes.ModuleInitializers;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Supporter_Api.Common.Services;
 
 namespace Supporter_Api
 {
@@ -24,6 +26,9 @@ namespace Supporter_Api
             IConfigurationManager configurationManager
         )
         {
+            services.TryAddScoped<IPaginationService, PaginationService>();
+            services.TryAddScoped<BaseUserRepositoryProvider>();
+            services.TryAddScoped<BaseManagerProvider>();
             AddServices(services);
             AddManagerServices(services);
             AddRepositoryServices(services);
