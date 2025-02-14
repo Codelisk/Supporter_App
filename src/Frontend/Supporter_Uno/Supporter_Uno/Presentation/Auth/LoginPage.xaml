@@ -1,9 +1,10 @@
-﻿<Page
+﻿<common:BasePage
     x:Class="Supporter_Uno.Presentation.Auth.LoginPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Supporter_Uno.Presentation.Auth"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:common="using:Supporter_Uno.Common"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
       xmlns:uen="using:Uno.Extensions.Navigation.UI"
@@ -27,4 +28,4 @@
         HorizontalAlignment="Stretch" />
         </StackPanel>
     </Grid>
-</Page>
+</common:BasePage>
