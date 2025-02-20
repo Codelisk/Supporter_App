@@ -26,9 +26,13 @@ public partial class App : Application
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
-        var endpointOptions = new EndpointOptions { Url = "https://localhost:7209/" };
-
         var builder = this.CreateBuilder(args);
+
+        var endpointOptions = new EndpointOptions
+        {
+            Url = "https://orderlyzesupporter-a4gyd0chgjh9aah6.canadacentral-01.azurewebsites.net",
+        };
+
         // Add navigation support for toolkit controls such as TabBar and NavigationView
         builder
             .UseToolkitNavigation()
@@ -111,7 +115,7 @@ public partial class App : Application
                             //services.AddSingleton<IMyService, MyService>();
                         }
                     )
-                    .UseNavigation(RegisterRoutes)
+                    .UseNavigation(Routes.RegisterRoutes)
             );
         MainWindow = builder.Window;
 
@@ -148,33 +152,6 @@ public partial class App : Application
     {
         y.ContentSerializer = new SystemTextJsonContentSerializer(
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-        );
-    }
-
-    private static void RegisterRoutes(IViewRegistry views, IRouteRegistry routes)
-    {
-        views.Register(
-            new ViewMap(ViewModel: typeof(ShellViewModel)),
-            new ViewMap<MainPage, MainViewModel>(),
-            new ViewMap<LoginPage, LoginPageViewModel>(),
-            new ViewMap<FolderOverviewPage, FolderOverviewPageViewModel>(),
-            new ViewMap<TopicOverviewPage, TopicOverviewPageViewModel>(),
-            new ViewMap<ChatPage, ChatPageViewModel>()
-        );
-
-        routes.Register(
-            new RouteMap(
-                "",
-                View: views.FindByViewModel<ShellViewModel>(),
-                Nested:
-                [
-                    new("Main", View: views.FindByView<MainPage>(), IsDefault: true),
-                    new("Login", View: views.FindByView<LoginPage>()),
-                    new("Folders", View: views.FindByView<FolderOverviewPage>()),
-                    new("Topics", View: views.FindByView<TopicOverviewPage>()),
-                    new("Chat", View: views.FindByView<ChatPage>()),
-                ]
-            )
         );
     }
 }

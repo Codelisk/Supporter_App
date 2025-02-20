@@ -8,12 +8,9 @@ using ReactiveUI;
 
 namespace Supporter_Uno.Common;
 
-internal partial class BasePageViewModel : ReactiveObject
+public partial class BasePageViewModel : ReactiveObject
 {
-    public BasePageViewModel()
-    {
-        OnNavigatedTo(default);
-    }
+    public BasePageViewModel() { }
 
     public virtual void OnNavigatedTo(NavigationEventArgs e) { }
 }

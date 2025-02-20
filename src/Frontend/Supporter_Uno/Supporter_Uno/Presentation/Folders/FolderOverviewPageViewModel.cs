@@ -40,7 +40,6 @@ internal partial class FolderOverviewPageViewModel : BasePageViewModel
     {
         base.OnNavigatedTo(e);
 
-        await Task.Delay(500);
         Folders = (await this.aIFolderApi.GetAll()).ToList();
         dispatcher.TryEnqueue(() =>
         {

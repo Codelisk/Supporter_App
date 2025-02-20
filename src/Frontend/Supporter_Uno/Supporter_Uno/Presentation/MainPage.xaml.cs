@@ -1,6 +1,6 @@
 ﻿namespace Supporter_Uno.Presentation;
 
-public sealed partial class MainPage : Page
+public sealed partial class MainPage
 {
     public MainPage()
     {

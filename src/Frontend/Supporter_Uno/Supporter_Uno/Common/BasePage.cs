@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReactiveUI;
+using ReactiveUI.Uno;
 
 namespace Supporter_Uno.Common;
 
-internal partial class BasePage : Page
-{
-    protected override void OnNavigatedTo(NavigationEventArgs e)
-    {
-        base.OnNavigatedTo(e);
-    }
-}
+public partial class BasePage : Page { }
