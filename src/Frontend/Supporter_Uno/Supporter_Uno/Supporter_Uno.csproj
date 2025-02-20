@@ -74,15 +74,5 @@
         <PlatformTarget Condition=" '$(PlatformTarget)' == '' AND $(Platform) == 'AnyCPU' AND '$(NETCoreSdkRuntimeIdentifier)' == 'win-arm64'">arm64</PlatformTarget>
     </PropertyGroup>
     <Import Project="..\..\..\Shared\Supporter_Dtos\Supporter_Dtos.projitems" Label="Shared" />
-    <ItemGroup>
-      <Page Update="Presentation\Folders\FolderOverviewPage.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-    </ItemGroup>
-    <ItemGroup>
-      <Page Update="Presentation\Topics\TopicOverviewPage.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-    </ItemGroup>
 
 </Project>
