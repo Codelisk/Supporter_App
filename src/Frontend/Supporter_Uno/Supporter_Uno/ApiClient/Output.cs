@@ -91,23 +91,23 @@ namespace Supporter_Dtos
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IAITopicApi
     {
-        /// <returns>OK</returns>
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetAllFull")]
-        Task<ICollection<AITopicFull>> GetAllFull();
+        Task GetAllFull();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetByFolderId")]
-        Task<ICollection<AITopicDto2>> GetByFolderId([Query] System.Guid? id);
+        Task<ICollection<AITopicDto>> GetByFolderId([Query] System.Guid? id);
 
-        /// <returns>OK</returns>
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetFull")]
-        Task<AITopicFull> GetFull([Query] System.Guid? id);
+        Task GetFull([Query] System.Guid? id);
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -131,7 +131,7 @@ namespace Supporter_Dtos
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetRange")]
-        Task<ICollection<AITopicDto2>> GetRange2([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+        Task<ICollection<AITopicDto>> GetRange2([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -143,13 +143,13 @@ namespace Supporter_Dtos
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetAll")]
-        Task<ICollection<AITopicDto2>> GetAll2();
+        Task<ICollection<AITopicDto>> GetAll2();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/Get")]
-        Task<AITopicDto2> Get2([Query] System.Guid? id);
+        Task<AITopicDto> Get2([Query] System.Guid? id);
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -161,25 +161,25 @@ namespace Supporter_Dtos
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Post("/api/AITopic/AddRange")]
-        Task AddRange2([Body] IEnumerable<AITopicDto2> body);
+        Task AddRange2([Body] IEnumerable<AITopicDto> body);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Post("/api/AITopic/Add")]
-        Task<AITopicDto2> Add2([Body] AITopicDto2 body);
+        Task<AITopicDto> Add2([Body] AITopicDto body);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetLastOrDefault")]
-        Task<AITopicDto2> GetLastOrDefault2();
+        Task<AITopicDto> GetLastOrDefault2();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Post("/api/AITopic/Save")]
-        Task<AITopicDto2> Save2([Body] AITopicDto2 body);
+        Task<AITopicDto> Save2([Body] AITopicDto body);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
