@@ -15,7 +15,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <controls:WidgetWebView />
-        <TextBox Grid.Row="1" Text="Test" />
+        <controls:WidgetWebView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <TextBox Grid.Row="1" Text="Test" PlaceholderText="Frage" />
     </Grid>
 </common:BasePage>
