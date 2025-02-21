@@ -1,4 +1,4 @@
-<Project Sdk="Uno.Sdk">
+﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net9.0-android;net9.0-windows10.0.26100</TargetFrameworks>
 
@@ -50,6 +50,7 @@
         AuthenticationMsal
     </UnoFeatures>
       <NoWarn>KE0001</NoWarn>
+    <UserSecretsId>063cce4b-0fd4-4ca9-9cb1-2ecced2df4a7</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" />
