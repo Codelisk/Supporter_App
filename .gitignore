@@ -398,3 +398,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/Frontend/Supporter_Uno/Supporter_Uno/appsettings.development.json
