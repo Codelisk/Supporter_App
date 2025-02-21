@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReactiveUI;
 using Supporter_Dtos;
+using Supporter_Uno.Common;
 using Supporter_Uno.Presentation.Folders;
 
 namespace Supporter_Uno.Presentation.Auth;
 
-public partial class LoginPageViewModel : ObservableObject
+public partial class LoginPageViewModel : BasePageViewModel
 {
     private IAuthenticationService _authentication;
 
