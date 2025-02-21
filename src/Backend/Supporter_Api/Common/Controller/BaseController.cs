@@ -23,7 +23,7 @@ namespace Supporter_Api.Common.Controller
             _manager = manager;
         }
 
-        [HttpGet(Name = "GetPaginated")]
+        [HttpGet("GetPaginated")]
         public async Task<IActionResult> GetPaginatedAsync(
             string search = null,
             string searchField = null,
@@ -52,67 +52,67 @@ namespace Supporter_Api.Common.Controller
             return Ok(new PaginateResult<TDto>(result.objects, result.totalRecords));
         }
 
-        [HttpDelete(Name = "DeleteAll")]
+        [HttpDelete("DeleteAll")]
         public Task<int> DeleteAllAsync([FromQuery] bool areYouSure)
         {
             return _manager.DeleteAllAsync(areYouSure);
         }
 
-        [HttpDelete(Name = "DeleteAllByRange")]
+        [HttpDelete("DeleteAllByRange")]
         public Task<int> DeleteAllByRangeAsync(List<TKey> ids)
         {
             return _manager.DeleteAllByRangeAsync(ids);
         }
 
-        [HttpGet(Name = "GetRange")]
+        [HttpGet("GetRange")]
         public Task<List<TDto>> GetRangeAsync([FromQuery] List<TKey> ids)
         {
             return _manager.GetRangeAsync(ids);
         }
 
-        [HttpGet(Name = "Count")]
+        [HttpGet("Count")]
         public Task<int> CountAsync()
         {
             return _manager.CountAsync();
         }
 
-        [HttpGet(Name = "GetAll")]
+        [HttpGet("GetAll")]
         public Task<List<TDto>> GetAll()
         {
             return _manager.GetAll();
         }
 
-        [HttpGet(Name = "Get")]
+        [HttpGet("Get")]
         public Task<TDto> Get(TKey id)
         {
             return _manager.Get(id);
         }
 
-        [HttpDelete(Name = "Delete")]
+        [HttpDelete("Delete")]
         public Task Delete(TKey id)
         {
             return _manager.Delete(id);
         }
 
-        [HttpPost(Name = "AddRange")]
+        [HttpPost("AddRange")]
         public Task AddRange(List<TDto> addressDtoList)
         {
             return _manager.AddRange(addressDtoList);
         }
 
-        [HttpPost(Name = "Add")]
+        [HttpPost("Add")]
         public Task<TDto> Add(TDto addressDto)
         {
             return _manager.Add(addressDto);
         }
 
-        [HttpGet(Name = "GetLastOrDefault")]
+        [HttpGet("GetLastOrDefault")]
         public Task<TDto?> GetLastOrDefault()
         {
             return _manager.GetLastOrDefault();
         }
 
-        [HttpPost(Name = "Save")]
+        [HttpPost("Save")]
         public Task<TDto> Save([FromBody] TDto addressDto)
         {
             return _manager.Save(addressDto);
