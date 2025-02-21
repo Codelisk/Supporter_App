@@ -17,7 +17,7 @@ public partial class BasePageViewModel : ReactiveObject
         HandleActivation();
     }
 
-    public virtual void OnNavigatedTo(NavigationEventArgs e) { }
+    public virtual void Initialize(NavigationEventArgs e) { }
 
     protected virtual void HandleActivation() { }
 

@@ -36,9 +36,9 @@ internal partial class FolderOverviewPageViewModel : BasePageViewModel
         await navigator.NavigateViewAsync<TopicOverviewPage>(this);
     }
 
-    public override async void OnNavigatedTo(NavigationEventArgs e)
+    public override async void Initialize(NavigationEventArgs e)
     {
-        base.OnNavigatedTo(e);
+        base.Initialize(e);
 
         Folders = (await this.aIFolderApi.GetAll()).ToList();
         dispatcher.TryEnqueue(() =>

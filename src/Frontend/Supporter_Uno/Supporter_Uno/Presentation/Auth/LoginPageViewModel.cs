@@ -15,19 +15,16 @@ public partial class LoginPageViewModel : BasePageViewModel
     private IAuthenticationService _authentication;
 
     private INavigator _navigator;
-    private readonly IAIFolderApi _supporter_Apiv1;
     private IDispatcher _dispatcher;
 
     public LoginPageViewModel(
         IDispatcher dispatcher,
         INavigator navigator,
-        IAIFolderApi supporter_Apiv1,
         IAuthenticationService authentication
     )
     {
         _dispatcher = dispatcher;
         _navigator = navigator;
-        this._supporter_Apiv1 = supporter_Apiv1;
         _authentication = authentication;
         Login = new AsyncRelayCommand(DoLogin);
     }

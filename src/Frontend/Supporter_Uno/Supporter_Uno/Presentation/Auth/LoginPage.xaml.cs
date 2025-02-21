@@ -26,12 +26,4 @@ public sealed partial class LoginPage
     {
         this.InitializeComponent();
     }
-
-    protected override void OnNavigatedTo(NavigationEventArgs e)
-    {
-        var dataContext = this.DataContext;
-        //DataContext here is ShellViewModel and not LoginPageViewModel
-        //Here I would like to access my LoginPageViewModel OnNavigatedTo
-        base.OnNavigatedTo(e);
-    }
 }
