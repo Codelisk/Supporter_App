@@ -23,7 +23,7 @@ public partial class TopicOverviewPageViewModel : BasePageViewModel
         this.aITopicApi = aITopicApi;
     }
 
-    ICollection<AITopicDto> Topics { get; set; }
+    public ICollection<AITopicDto> Topics { get; set; }
     private AIFolderDto Folder;
 
     public override async void Initialize(NavigationEventArgs e)

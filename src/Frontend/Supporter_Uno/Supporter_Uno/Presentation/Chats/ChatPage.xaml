@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:Supporter_Uno.Presentation.Chats"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=local:ChatPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
@@ -14,8 +15,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <controls:WidgetWebView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-        <TextBox Grid.Row="1" Text="Test" PlaceholderText="Frage" />
+        <controls:WidgetWebView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="WebView" />
+        <TextBox Grid.Row="1" Text="{Binding Question, Mode=TwoWay}" PlaceholderText="Frage"  />
+        <Button Click="Ask" Grid.Row="2" Content="Fragen"/>
     </Grid>
 </common:BasePage>

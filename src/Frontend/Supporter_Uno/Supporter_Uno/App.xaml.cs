@@ -77,7 +77,7 @@ public partial class App : Application
                         enableUnoLogging: true
                     )
                     .UseConfiguration(configure: configBuilder =>
-                        configBuilder.EmbeddedSource<App>().Section<AppConfig>()
+                        configBuilder.EmbeddedSource<App>()
                     )
                     // Enable localization (see appsettings.json for supported languages)
                     .UseLocalization()

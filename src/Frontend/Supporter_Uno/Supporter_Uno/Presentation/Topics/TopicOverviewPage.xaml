@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Name="root"
     xmlns:common="using:Supporter_Uno.Common"
     d:DataContext="{d:DesignInstance Type=local:TopicOverviewPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -16,10 +17,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ListView ItemsSource="{Binding Folders}" SelectionMode="None">
+        <ListView ItemsSource="{Binding Topics}" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding Name}" Command="{Binding DataContext.MyCommand, ElementName=root}" CommandParameter="{Binding Name}"/>
+                    <Button Content="{Binding Name}" Command="{Binding DataContext.TopicCommand, ElementName=root}" CommandParameter="{Binding}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

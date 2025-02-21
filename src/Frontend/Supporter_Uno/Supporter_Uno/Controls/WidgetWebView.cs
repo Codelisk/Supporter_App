@@ -30,6 +30,7 @@ public partial class WidgetWebView : WebView2
 
     public async void SetContent(string content)
     {
+        content = Markdown.ToHtml(content);
 #if BROWSERWASM
         this.SetHtmlAttribute("srcdoc", content);
 #else

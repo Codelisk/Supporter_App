@@ -1,9 +1,11 @@
 using System;
+using System.ClientModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using OpenAI.Assistants;
 using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
@@ -44,7 +46,7 @@ public partial class ChatPageViewModel : BasePageViewModel
         {
             throw new ArgumentNullException(nameof(topic));
         }
-
+        var test = await azureTopicMappingApi.GetAll();
         var azureTopics = await azureTopicMappingApi.GetByTopicId(topic.GetId());
         if (azureTopics.Count == 0)
         {
@@ -61,18 +63,18 @@ public partial class ChatPageViewModel : BasePageViewModel
         }
         else
         {
-            azureTopics.Last();
+            AzureTopicMappingDto = azureTopics.Last();
         }
         //await chatQuestionApi.GetAll();
     }
 
     public string Question { get; set; }
 
-    public ICommand ChatCommand => new AsyncRelayCommand(OnChatAsync);
-
-    private async Task OnChatAsync()
+#pragma warning disable OPENAI001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+    public Task<ClientResult<ThreadRun>> OnChatAsync()
+#pragma warning restore OPENAI001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
     {
-        await azureOpenAIChatService.Chat(
+        return azureOpenAIChatService.Chat(
             Question,
             threadId: AzureTopicMappingDto.ThreadId,
             assistantId: AzureTopicMappingDto.AssistantId,

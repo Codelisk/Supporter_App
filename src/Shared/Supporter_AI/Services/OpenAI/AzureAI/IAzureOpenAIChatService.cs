@@ -48,7 +48,7 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
         /// <param name="assistantId">Die ID des Assistenten, der auf die Nachricht antworten soll.</param>
         /// <param name="temperature">Die Temperatur für die Antwort (optional, beeinflusst die Kreativität der Antwort).</param>
         /// <returns>Ein ClientResult-Objekt, das die Antwort des Assistenten enthält.</returns>
-        Task<ClientResult<ThreadMessage>> Chat(
+        Task<ClientResult<ThreadRun>> Chat(
             string question,
             string threadId,
             string assistantId,

@@ -18,11 +18,13 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
     {
         private readonly AzureOpenAIClient _client;
         private readonly AssistantClient _assistantClient;
+        private readonly ChatClient _chatClient;
 
         public AzureOpenAIChatService(AzureOpenAIClient azureOpenAIClient)
         {
             _client = azureOpenAIClient;
             _assistantClient = _client.GetAssistantClient();
+            _chatClient = _client.GetChatClient(AzureConstants.DefaultModel);
         }
 
         public Task<ClientResult<Assistant>> CreateAssistant(string name, int temperature)
@@ -51,18 +53,22 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
             );
         }
 
-        public Task<ClientResult<ThreadMessage>> Chat(
+        public async Task<ClientResult<ThreadRun>> Chat(
             string question,
             string threadId,
             string assistantId,
             float? temperature
         )
         {
-            return _assistantClient.CreateMessageAsync(
+            var message = await _assistantClient.CreateMessageAsync(
                 threadId,
                 MessageRole.User,
                 new List<MessageContent> { MessageContent.FromText(question) }
             );
+
+            var runResult = await _assistantClient.CreateRunAsync(threadId, assistantId);
+            _assistantClient.Run
+            return runResult;
         }
 
         public async Task<string> Chat(string question)
