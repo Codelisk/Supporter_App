@@ -13,6 +13,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Common\User\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)common\IValueDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Tenant\ITenantBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Tenant\TenantBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TenantConstants.cs" />
@@ -24,6 +25,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\INameDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\User\IUserBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\User\UserBaseDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\conversation\chat\ChatAnswerDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\Chat\ChatQuestionDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\Ai\OwnerEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Usings.cs" />
   </ItemGroup>
 </Project>
