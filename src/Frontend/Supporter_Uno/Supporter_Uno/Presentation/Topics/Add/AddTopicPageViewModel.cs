@@ -32,7 +32,7 @@ public class AddTopicPageViewModel : BasePageViewModel
 
     private async Task OnAddAsync()
     {
-        await aITopicApi.Add2(Topic);
+        await aITopicApi.Add(Topic);
         await Navigator.GoBack(this);
     }
 }

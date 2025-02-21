@@ -34,6 +34,6 @@ public partial class ChatPageViewModel : BasePageViewModel
 
         var topic = (e.Parameter as AITopicDto);
         var azureTopics = await azureTopicMappingApi.GetAll();
-        await chatQuestionApi.GetAll5();
+        await chatQuestionApi.GetAll();
     }
 }
