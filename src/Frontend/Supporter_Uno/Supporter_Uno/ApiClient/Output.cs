@@ -15,11 +15,11 @@ namespace Supporter_Dtos
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IAzureTopicMappingApi
     {
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/AzureTopicMapping/GetAllFull")]
-        Task GetAllFull();
+        Task<object> GetAllFull();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -27,17 +27,17 @@ namespace Supporter_Dtos
         [Get("/api/AzureTopicMapping/GetByTopicId")]
         Task<ICollection<AzureTopicMappingDto>> GetByTopicId([Query] System.Guid? id);
 
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/AzureTopicMapping/GetFull")]
-        Task GetFull([Query] System.Guid? id);
+        Task<object> GetFull([Query] System.Guid? id);
 
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/AzureTopicMapping/GetPaginated")]
-        Task GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+        Task<object> GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -109,11 +109,11 @@ namespace Supporter_Dtos
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IAIFolderApi
     {
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/AIFolder/GetPaginated")]
-        Task GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+        Task<object> GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -185,11 +185,11 @@ namespace Supporter_Dtos
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IAITopicApi
     {
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/AITopic/GetAllFull")]
-        Task GetAllFull();
+        Task<object> GetAllFull();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -197,17 +197,17 @@ namespace Supporter_Dtos
         [Get("/api/AITopic/GetByFolderId")]
         Task<ICollection<AITopicDto>> GetByFolderId([Query] System.Guid? id);
 
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/AITopic/GetFull")]
-        Task GetFull([Query] System.Guid? id);
+        Task<object> GetFull([Query] System.Guid? id);
 
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/AITopic/GetPaginated")]
-        Task GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+        Task<object> GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -279,11 +279,11 @@ namespace Supporter_Dtos
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IChatAnswerApi
     {
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/ChatAnswer/GetAllFull")]
-        Task GetAllFull();
+        Task<object> GetAllFull();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -291,17 +291,17 @@ namespace Supporter_Dtos
         [Get("/api/ChatAnswer/GetByQuestionId")]
         Task<ICollection<ChatAnswerDto>> GetByQuestionId([Query] System.Guid? id);
 
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/ChatAnswer/GetFull")]
-        Task GetFull([Query] System.Guid? id);
+        Task<object> GetFull([Query] System.Guid? id);
 
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/ChatAnswer/GetPaginated")]
-        Task GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+        Task<object> GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -373,11 +373,11 @@ namespace Supporter_Dtos
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IChatQuestionApi
     {
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/ChatQuestion/GetAllFull")]
-        Task GetAllFull();
+        Task<object> GetAllFull();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -385,17 +385,17 @@ namespace Supporter_Dtos
         [Get("/api/ChatQuestion/GetByTopicId")]
         Task<ICollection<ChatQuestionDto>> GetByTopicId([Query] System.Guid? id);
 
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/ChatQuestion/GetFull")]
-        Task GetFull([Query] System.Guid? id);
+        Task<object> GetFull([Query] System.Guid? id);
 
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/ChatQuestion/GetPaginated")]
-        Task GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+        Task<object> GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>

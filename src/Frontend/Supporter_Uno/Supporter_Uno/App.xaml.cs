@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Refit;
+using Supporter_AI;
 using Supporter_Dtos;
 using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats;
@@ -131,6 +132,7 @@ public partial class App : Application
                             // TODO: Register your services
                             //services.AddSingleton<IMyService, MyService>();
                             services.TryAddScoped<BaseVmServices>();
+                            services.AddAIServices(context.Configuration);
                         }
                     )
                     .UseNavigation(Routes.RegisterRoutes)

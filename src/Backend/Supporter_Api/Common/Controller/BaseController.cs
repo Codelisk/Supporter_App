@@ -25,6 +25,7 @@ namespace Supporter_Api.Common.Controller
         }
 
         [HttpGet("GetPaginated")]
+        [Microsoft.AspNetCore.Mvc.Produces(type: typeof(object))]
         public async Task<IActionResult> GetPaginatedAsync(
             string search = null,
             string searchField = null,
