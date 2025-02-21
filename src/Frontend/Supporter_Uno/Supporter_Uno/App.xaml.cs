@@ -108,6 +108,21 @@ public partial class App : Application
                                     endpointOptions,
                                     settingsBuilder: ConfigureRefitSettings
                                 )
+                                .AddRefitClient<IAzureTopicMappingApi>(
+                                    context,
+                                    endpointOptions,
+                                    settingsBuilder: ConfigureRefitSettings
+                                )
+                                .AddRefitClient<IChatQuestionApi>(
+                                    context,
+                                    endpointOptions,
+                                    settingsBuilder: ConfigureRefitSettings
+                                )
+                                .AddRefitClient<IChatAnswerApi>(
+                                    context,
+                                    endpointOptions,
+                                    settingsBuilder: ConfigureRefitSettings
+                                )
                     )
                     .UseAuthentication(auth => auth.AddMsal(builder.Window))
                     .ConfigureServices(

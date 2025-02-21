@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\Tenant\ITenantBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Tenant\TenantBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TenantConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Azure\AzureTopicMappingDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\AIFolderDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\AITopicDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\BaseBaseDto.cs" />

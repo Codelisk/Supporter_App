@@ -13,79 +13,173 @@ using System.Threading.Tasks;
 namespace Supporter_Dtos
 {
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IAzureTopicMappingApi
+    {
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureTopicMapping/GetAllFull")]
+        Task GetAllFull();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureTopicMapping/GetByTopicId")]
+        Task<ICollection<AzureTopicMappingDto>> GetByTopicId([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureTopicMapping/GetFull")]
+        Task GetFull([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureTopicMapping/GetPaginated")]
+        Task GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/AzureTopicMapping/DeleteAll")]
+        Task<int> DeleteAll([Query] bool? areYouSure);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/AzureTopicMapping/DeleteAllByRange")]
+        Task<int> DeleteAllByRange([Body] IEnumerable<System.Guid> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureTopicMapping/GetRange")]
+        Task<ICollection<AzureTopicMappingDto>> GetRange([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureTopicMapping/Count")]
+        Task<int> Count();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureTopicMapping/GetAll")]
+        Task<ICollection<AzureTopicMappingDto>> GetAll();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureTopicMapping/Get")]
+        Task<AzureTopicMappingDto> Get([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/AzureTopicMapping/Delete")]
+        Task Delete([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/AzureTopicMapping/AddRange")]
+        Task AddRange([Body] IEnumerable<AzureTopicMappingDto> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/AzureTopicMapping/Add")]
+        Task<AzureTopicMappingDto> Add([Body] AzureTopicMappingDto body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureTopicMapping/GetLastOrDefault")]
+        Task<AzureTopicMappingDto> GetLastOrDefault();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/AzureTopicMapping/Save")]
+        Task<AzureTopicMappingDto> Save([Body] AzureTopicMappingDto body);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IAIFolderApi
     {
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AIFolder/GetPaginated")]
-        Task GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+        Task GetPaginated2([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Delete("/api/AIFolder/DeleteAll")]
-        Task<int> DeleteAll([Query] bool? areYouSure);
+        Task<int> DeleteAll2([Query] bool? areYouSure);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Delete("/api/AIFolder/DeleteAllByRange")]
-        Task<int> DeleteAllByRange([Body] IEnumerable<System.Guid> body);
+        Task<int> DeleteAllByRange2([Body] IEnumerable<System.Guid> body);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AIFolder/GetRange")]
-        Task<ICollection<AIFolderDto>> GetRange([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+        Task<ICollection<AIFolderDto>> GetRange2([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AIFolder/Count")]
-        Task<int> Count();
+        Task<int> Count2();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AIFolder/GetAll")]
-        Task<ICollection<AIFolderDto>> GetAll();
+        Task<ICollection<AIFolderDto>> GetAll2();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AIFolder/Get")]
-        Task<AIFolderDto> Get([Query] System.Guid? id);
+        Task<AIFolderDto> Get2([Query] System.Guid? id);
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Delete("/api/AIFolder/Delete")]
-        Task Delete([Query] System.Guid? id);
+        Task Delete2([Query] System.Guid? id);
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Post("/api/AIFolder/AddRange")]
-        Task AddRange([Body] IEnumerable<AIFolderDto> body);
+        Task AddRange2([Body] IEnumerable<AIFolderDto> body);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Post("/api/AIFolder/Add")]
-        Task<AIFolderDto> Add([Body] AIFolderDto body);
+        Task<AIFolderDto> Add2([Body] AIFolderDto body);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AIFolder/GetLastOrDefault")]
-        Task<AIFolderDto> GetLastOrDefault();
+        Task<AIFolderDto> GetLastOrDefault2();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Post("/api/AIFolder/Save")]
-        Task<AIFolderDto> Save([Body] AIFolderDto body);
+        Task<AIFolderDto> Save2([Body] AIFolderDto body);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
@@ -95,7 +189,7 @@ namespace Supporter_Dtos
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetAllFull")]
-        Task GetAllFull();
+        Task GetAllFull2();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -107,79 +201,267 @@ namespace Supporter_Dtos
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetFull")]
-        Task GetFull([Query] System.Guid? id);
+        Task GetFull2([Query] System.Guid? id);
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetPaginated")]
-        Task GetPaginated2([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+        Task GetPaginated3([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Delete("/api/AITopic/DeleteAll")]
-        Task<int> DeleteAll2([Query] bool? areYouSure);
+        Task<int> DeleteAll3([Query] bool? areYouSure);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Delete("/api/AITopic/DeleteAllByRange")]
-        Task<int> DeleteAllByRange2([Body] IEnumerable<System.Guid> body);
+        Task<int> DeleteAllByRange3([Body] IEnumerable<System.Guid> body);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetRange")]
-        Task<ICollection<AITopicDto>> GetRange2([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+        Task<ICollection<AITopicDto>> GetRange3([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/Count")]
-        Task<int> Count2();
+        Task<int> Count3();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetAll")]
-        Task<ICollection<AITopicDto>> GetAll2();
+        Task<ICollection<AITopicDto>> GetAll3();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/Get")]
-        Task<AITopicDto> Get2([Query] System.Guid? id);
+        Task<AITopicDto> Get3([Query] System.Guid? id);
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Delete("/api/AITopic/Delete")]
-        Task Delete2([Query] System.Guid? id);
+        Task Delete3([Query] System.Guid? id);
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Post("/api/AITopic/AddRange")]
-        Task AddRange2([Body] IEnumerable<AITopicDto> body);
+        Task AddRange3([Body] IEnumerable<AITopicDto> body);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Post("/api/AITopic/Add")]
-        Task<AITopicDto> Add2([Body] AITopicDto body);
+        Task<AITopicDto> Add3([Body] AITopicDto body);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/api/AITopic/GetLastOrDefault")]
-        Task<AITopicDto> GetLastOrDefault2();
+        Task<AITopicDto> GetLastOrDefault3();
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Post("/api/AITopic/Save")]
-        Task<AITopicDto> Save2([Body] AITopicDto body);
+        Task<AITopicDto> Save3([Body] AITopicDto body);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IChatAnswerApi
+    {
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatAnswer/GetAllFull")]
+        Task GetAllFull3();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatAnswer/GetByQuestionId")]
+        Task<ICollection<ChatAnswerDto>> GetByQuestionId([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatAnswer/GetFull")]
+        Task GetFull3([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatAnswer/GetPaginated")]
+        Task GetPaginated4([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/ChatAnswer/DeleteAll")]
+        Task<int> DeleteAll4([Query] bool? areYouSure);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/ChatAnswer/DeleteAllByRange")]
+        Task<int> DeleteAllByRange4([Body] IEnumerable<System.Guid> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatAnswer/GetRange")]
+        Task<ICollection<ChatAnswerDto>> GetRange4([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatAnswer/Count")]
+        Task<int> Count4();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatAnswer/GetAll")]
+        Task<ICollection<ChatAnswerDto>> GetAll4();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatAnswer/Get")]
+        Task<ChatAnswerDto> Get4([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/ChatAnswer/Delete")]
+        Task Delete4([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/ChatAnswer/AddRange")]
+        Task AddRange4([Body] IEnumerable<ChatAnswerDto> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/ChatAnswer/Add")]
+        Task<ChatAnswerDto> Add4([Body] ChatAnswerDto body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatAnswer/GetLastOrDefault")]
+        Task<ChatAnswerDto> GetLastOrDefault4();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/ChatAnswer/Save")]
+        Task<ChatAnswerDto> Save4([Body] ChatAnswerDto body);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IChatQuestionApi
+    {
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatQuestion/GetAllFull")]
+        Task GetAllFull4();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatQuestion/GetByTopicId")]
+        Task<ICollection<ChatQuestionDto>> GetByTopicId2([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatQuestion/GetFull")]
+        Task GetFull4([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatQuestion/GetPaginated")]
+        Task GetPaginated5([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/ChatQuestion/DeleteAll")]
+        Task<int> DeleteAll5([Query] bool? areYouSure);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/ChatQuestion/DeleteAllByRange")]
+        Task<int> DeleteAllByRange5([Body] IEnumerable<System.Guid> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatQuestion/GetRange")]
+        Task<ICollection<ChatQuestionDto>> GetRange5([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatQuestion/Count")]
+        Task<int> Count5();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatQuestion/GetAll")]
+        Task<ICollection<ChatQuestionDto>> GetAll5();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatQuestion/Get")]
+        Task<ChatQuestionDto> Get5([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/ChatQuestion/Delete")]
+        Task Delete5([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/ChatQuestion/AddRange")]
+        Task AddRange5([Body] IEnumerable<ChatQuestionDto> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/ChatQuestion/Add")]
+        Task<ChatQuestionDto> Add5([Body] ChatQuestionDto body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/ChatQuestion/GetLastOrDefault")]
+        Task<ChatQuestionDto> GetLastOrDefault5();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/ChatQuestion/Save")]
+        Task<ChatQuestionDto> Save5([Body] ChatQuestionDto body);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]

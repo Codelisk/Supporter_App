@@ -11,13 +11,29 @@ namespace Supporter_Uno.Presentation.Chats;
 
 public partial class ChatPageViewModel : BasePageViewModel
 {
-    public ChatPageViewModel(BaseVmServices baseVmServices)
-        : base(baseVmServices) { }
+    private readonly IAzureTopicMappingApi azureTopicMappingApi;
+    private readonly IChatQuestionApi chatQuestionApi;
+    private readonly IChatAnswerApi chatAnswerApi;
 
-    public override void Initialize(NavigationEventArgs e)
+    public ChatPageViewModel(
+        BaseVmServices baseVmServices,
+        IAzureTopicMappingApi azureTopicMappingApi,
+        IChatQuestionApi chatQuestionApi,
+        IChatAnswerApi chatAnswerApi
+    )
+        : base(baseVmServices)
+    {
+        this.azureTopicMappingApi = azureTopicMappingApi;
+        this.chatQuestionApi = chatQuestionApi;
+        this.chatAnswerApi = chatAnswerApi;
+    }
+
+    public override async void Initialize(NavigationEventArgs e)
     {
         base.Initialize(e);
 
         var topic = (e.Parameter as AITopicDto);
+        var azureTopics = await azureTopicMappingApi.GetAll();
+        await chatQuestionApi.GetAll5();
     }
 }
