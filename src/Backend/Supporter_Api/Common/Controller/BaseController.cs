@@ -23,7 +23,7 @@ namespace Supporter_Api.Common.Controller
             _manager = manager;
         }
 
-        [HttpGet("GetPaginated")]
+        [HttpGet(Name = "GetPaginated")]
         public async Task<IActionResult> GetPaginatedAsync(
             string search = null,
             string searchField = null,
@@ -52,67 +52,67 @@ namespace Supporter_Api.Common.Controller
             return Ok(new PaginateResult<TDto>(result.objects, result.totalRecords));
         }
 
-        [HttpDelete("DeleteAll")]
+        [HttpDelete(Name = "DeleteAll")]
         public Task<int> DeleteAllAsync([FromQuery] bool areYouSure)
         {
             return _manager.DeleteAllAsync(areYouSure);
         }
 
-        [HttpDelete("DeleteAllByRange")]
+        [HttpDelete(Name = "DeleteAllByRange")]
         public Task<int> DeleteAllByRangeAsync(List<TKey> ids)
         {
             return _manager.DeleteAllByRangeAsync(ids);
         }
 
-        [HttpGet("GetRange")]
+        [HttpGet(Name = "GetRange")]
         public Task<List<TDto>> GetRangeAsync([FromQuery] List<TKey> ids)
         {
             return _manager.GetRangeAsync(ids);
         }
 
-        [HttpGet("Count")]
+        [HttpGet(Name = "Count")]
         public Task<int> CountAsync()
         {
             return _manager.CountAsync();
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpGet("GetAll")]
+        [HttpGet(Name = "GetAll")]
         public Task<List<TDto>> GetAll()
         {
             return _manager.GetAll();
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpGet("Get")]
+        [HttpGet(Name = "Get")]
         public Task<TDto> Get(TKey id)
         {
             return _manager.Get(id);
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpDelete("Delete")]
+        [HttpDelete(Name = "Delete")]
         public Task Delete(TKey id)
         {
             return _manager.Delete(id);
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpPost("AddRange")]
+        [HttpPost(Name = "AddRange")]
         public Task AddRange(List<TDto> addressDtoList)
         {
             return _manager.AddRange(addressDtoList);
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpPost("Add")]
+        [HttpPost(Name = "Add")]
         public Task<TDto> Add(TDto addressDto)
         {
             return _manager.Add(addressDto);
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpGet("GetLastOrDefault")]
+        [HttpGet(Name = "GetLastOrDefault")]
         public Task<TDto?> GetLastOrDefault()
         {
             return _manager.GetLastOrDefault();
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpPost("Save")]
+        [HttpPost(Name = "Save")]
         public Task<TDto> Save([FromBody] TDto addressDto)
         {
             return _manager.Save(addressDto);
