@@ -7,6 +7,7 @@ using ReactiveUI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Presentation.Folders;
+using Supporter_Uno.Providers;
 
 namespace Supporter_Uno.Presentation.Auth;
 
@@ -14,27 +15,24 @@ public partial class LoginPageViewModel : BasePageViewModel
 {
     private IAuthenticationService _authentication;
 
-    private INavigator _navigator;
-    private IDispatcher _dispatcher;
-
     public LoginPageViewModel(
+        BaseVmServices baseVmServices,
         IDispatcher dispatcher,
         INavigator navigator,
         IAuthenticationService authentication
     )
+        : base(baseVmServices)
     {
-        _dispatcher = dispatcher;
-        _navigator = navigator;
         _authentication = authentication;
         Login = new AsyncRelayCommand(DoLogin);
     }
 
     private async Task DoLogin()
     {
-        var success = await _authentication.LoginAsync(_dispatcher);
+        var success = await _authentication.LoginAsync(Dispatcher);
         if (success)
         {
-            await _navigator.NavigateViewAsync<FolderOverviewPage>(
+            await Navigator.NavigateViewAsync<FolderOverviewPage>(
                 this,
                 qualifier: Qualifiers.ClearBackStack
             );

@@ -6,10 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:rxui="using:ReactiveUI.Uno"
+    xmlns:local="using:Supporter_Uno.Presentation.Folders"
     xmlns:vms="using:Supporter_Uno.Presentation.Folders"
+    d:DataContext="{d:DesignInstance Type=local:FolderOverviewPageViewModel}"
     Name="root"
     mc:Ignorable="d">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         <ListView ItemsSource="{Binding Folders}" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -20,5 +26,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Content="Hinzufügen" Command="{Binding AddCommand}" Grid.Row="1"/>
     </Grid>
 </common:BasePage>

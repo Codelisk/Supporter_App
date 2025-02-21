@@ -7,19 +7,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Web.WebView2.Core;
 using ReactiveUI;
+using Supporter_Uno.Providers;
 
 namespace Supporter_Uno.Common;
 
 public partial class BasePageViewModel : ReactiveObject
 {
-    public BasePageViewModel()
+    protected readonly INavigator Navigator;
+    protected readonly IDispatcher Dispatcher;
+
+    public BasePageViewModel(BaseVmServices baseVmServices)
     {
-        HandleActivation();
+        this.Navigator = baseVmServices.Navigator;
+        this.Dispatcher = baseVmServices.Dispatcher;
     }
 
     public virtual void Initialize(NavigationEventArgs e) { }
-
-    protected virtual void HandleActivation() { }
-
-    protected virtual void HandleDeactivation() { }
 }

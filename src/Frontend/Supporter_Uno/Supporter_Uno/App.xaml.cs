@@ -6,6 +6,7 @@ using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats;
 using Supporter_Uno.Presentation.Folders;
 using Supporter_Uno.Presentation.Topics;
+using Supporter_Uno.Providers;
 using Uno.Resizetizer;
 
 namespace Supporter_Uno;
@@ -110,9 +111,11 @@ public partial class App : Application
                     )
                     .UseAuthentication(auth => auth.AddMsal(builder.Window))
                     .ConfigureServices(
-                        (context, services) => {
+                        (context, services) =>
+                        {
                             // TODO: Register your services
                             //services.AddSingleton<IMyService, MyService>();
+                            services.TryAddScoped<BaseVmServices>();
                         }
                     )
                     .UseNavigation(Routes.RegisterRoutes)
