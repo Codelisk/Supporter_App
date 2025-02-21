@@ -78,7 +78,6 @@ namespace Supporter_Api.Common.Controller
         }
 
         [HttpGet("GetAll")]
-        [SwaggerOperation(OperationId = "GetAll")]
         public Task<List<TDto>> GetAll()
         {
             return _manager.GetAll();
