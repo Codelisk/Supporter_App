@@ -16,5 +16,6 @@
     <PackageVersion Include="ReactiveUI" Version="20.1.63" />
     <PackageVersion Include="ReactiveUI.Uno" Version="20.0.36" />
     <PackageVersion Include="ReactiveUI.Uno.WinUI" Version="20.0.36" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.Annotations" Version="7.2.0" />
   </ItemGroup>
 </Project>
