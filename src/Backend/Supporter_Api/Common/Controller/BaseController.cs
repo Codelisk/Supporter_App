@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Supporter_Api.Common.Manager;
 using Supporter_Api.Extensions;
 using Supporter_Api.Models;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Supporter_Api.Common.Controller
 {
@@ -77,6 +78,7 @@ namespace Supporter_Api.Common.Controller
         }
 
         [HttpGet("GetAll")]
+        [SwaggerOperation(OperationId = "GetAll")]
         public Task<List<TDto>> GetAll()
         {
             return _manager.GetAll();

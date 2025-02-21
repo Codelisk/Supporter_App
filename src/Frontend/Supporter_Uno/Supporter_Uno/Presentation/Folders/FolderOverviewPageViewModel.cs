@@ -29,11 +29,11 @@ internal partial class FolderOverviewPageViewModel : BasePageViewModel
     }
 
     public List<AIFolderDto> Folders { get; set; }
-    public ICommand MyCommand => new AsyncRelayCommand<string>(OnMyAsync);
+    public ICommand FolderCommand => new AsyncRelayCommand<AIFolderDto>(OnFolderAsync);
 
-    private async Task OnMyAsync(string name)
+    private async Task OnFolderAsync(AIFolderDto aIFolderDto)
     {
-        await navigator.NavigateViewAsync<TopicOverviewPage>(this);
+        await navigator.NavigateViewAsync<TopicOverviewPage>(this, data: aIFolderDto);
     }
 
     public override async void Initialize(NavigationEventArgs e)

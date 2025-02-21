@@ -7,14 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:rxui="using:ReactiveUI.Uno"
     xmlns:vms="using:Supporter_Uno.Presentation.Folders"
+    Name="root"
     mc:Ignorable="d">
     <Grid>
         <ListView ItemsSource="{Binding Folders}" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Button
-                        Command="{Binding DataContext.MyCommand, ElementName=root}"
-                        CommandParameter="{Binding Name}"
+                        Command="{Binding DataContext.FolderCommand, ElementName=root}"
+                        CommandParameter="{Binding}"
                         Content="{Binding Name}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
