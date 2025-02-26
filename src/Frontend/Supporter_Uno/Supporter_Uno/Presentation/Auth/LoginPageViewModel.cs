@@ -25,6 +25,7 @@ public partial class LoginPageViewModel : BasePageViewModel
     {
         _authentication = authentication;
         Login = new AsyncRelayCommand(DoLogin);
+        this.IsBusy = true;
     }
 
     private async Task DoLogin()

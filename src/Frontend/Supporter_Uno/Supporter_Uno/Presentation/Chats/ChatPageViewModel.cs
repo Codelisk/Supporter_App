@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using OpenAI.Assistants;
+using ReactiveUI;
 using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
@@ -71,14 +72,24 @@ public partial class ChatPageViewModel : BasePageViewModel
     public string Question { get; set; }
 
 #pragma warning disable OPENAI001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-    public Task<ClientResult<ThreadRun>> OnChatAsync()
+    public Task<string> OnChatAsync()
 #pragma warning restore OPENAI001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
     {
-        return azureOpenAIChatService.Chat(
-            Question,
-            threadId: AzureTopicMappingDto.ThreadId,
-            assistantId: AzureTopicMappingDto.AssistantId,
-            temperature: null
-        );
+        try
+        {
+            this.IsBusy = true;
+            return azureOpenAIChatService.Chat(
+                Question,
+                threadId: AzureTopicMappingDto.ThreadId,
+                assistantId: AzureTopicMappingDto.AssistantId,
+                temperature: null
+            );
+        }
+        finally
+        {
+            this.IsBusy = false;
+            Question = string.Empty;
+            this.RaisePropertyChanged(nameof(Question));
+        }
     }
 }

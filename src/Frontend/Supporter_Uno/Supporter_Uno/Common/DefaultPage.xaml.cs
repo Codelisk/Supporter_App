@@ -15,21 +15,15 @@ using Windows.Foundation.Collections;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Supporter_Uno.Presentation.Chats;
+namespace Supporter_Uno.Common;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class ChatPage
+public partial class DefaultPage
 {
-    public ChatPage()
+    public DefaultPage()
     {
         this.InitializeComponent();
-    }
-
-    private async void Ask(object sender, RoutedEventArgs e)
-    {
-        var result = await (this.DataContext as ChatPageViewModel).OnChatAsync();
-        this.WebView.SetContent(result);
     }
 }

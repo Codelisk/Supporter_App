@@ -22,5 +22,12 @@ public partial class BasePageViewModel : ReactiveObject
         this.Dispatcher = baseVmServices.Dispatcher;
     }
 
+    private bool isBusy;
+    public bool IsBusy
+    {
+        get => isBusy;
+        set => this.RaiseAndSetIfChanged(ref isBusy, value);
+    }
+
     public virtual void Initialize(NavigationEventArgs e) { }
 }
