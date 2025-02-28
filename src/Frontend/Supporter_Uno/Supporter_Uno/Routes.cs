@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats;
+using Supporter_Uno.Presentation.Chats.Settings;
+using Supporter_Uno.Presentation.Chats.Training;
 using Supporter_Uno.Presentation.Folders;
 using Supporter_Uno.Presentation.Folders.Add;
 using Supporter_Uno.Presentation.Topics;
@@ -24,7 +26,9 @@ internal static class Routes
             new ViewMap<AddFolderPage, AddFolderPageViewModel>(),
             new ViewMap<TopicOverviewPage, TopicOverviewPageViewModel>(),
             new ViewMap<AddTopicPage, AddTopicPageViewModel>(),
-            new ViewMap<ChatPage, ChatPageViewModel>()
+            new ViewMap<ChatPage, ChatPageViewModel>(),
+            new ViewMap<ChatSettingsPage, ChatSettingsPageViewModel>(),
+            new ViewMap<ChatTrainingPage, ChatTrainingPageViewModel>()
         );
 
         routes.Register(
@@ -40,6 +44,8 @@ internal static class Routes
                     new("Topics", View: views.FindByView<TopicOverviewPage>()),
                     new("AddTopic", View: views.FindByView<AddTopicPage>()),
                     new("Chat", View: views.FindByView<ChatPage>()),
+                    new("ChatSettings", View: views.FindByView<ChatSettingsPage>()),
+                    new("ChatTraining", View: views.FindByView<ChatTrainingPage>()),
                 ]
             )
         );

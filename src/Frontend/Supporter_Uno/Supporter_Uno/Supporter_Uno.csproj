@@ -91,5 +91,15 @@
         <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\Chats\Settings\ChatSettingsPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\Chats\Training\ChatTrainingPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
 
 </Project>

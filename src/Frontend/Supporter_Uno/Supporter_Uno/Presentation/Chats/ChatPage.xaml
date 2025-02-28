@@ -11,14 +11,21 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-        <controls:WidgetWebView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="WebView" />
-        <TextBox Grid.Row="1" Text="{Binding Question, Mode=TwoWay}" PlaceholderText="Frage"  />
-        <Button Click="Ask" Grid.Row="2" Content="Fragen"/>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ProgressRing IsActive="{Binding IsBusy}"/>
+        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Button Content="Einstellungen" Command="{Binding SettingsCommand}"/>
+            <Button Content="Training" Command="{Binding TrainingCommand}"/>
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <controls:WidgetWebView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="WebView" MinHeight="500"/>
+                <TextBox Grid.Row="1" Text="{Binding Question, Mode=TwoWay}" PlaceholderText="Frage"  />
+                <Button Click="Ask" Grid.Row="2" Content="Fragen"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </common:BasePage>

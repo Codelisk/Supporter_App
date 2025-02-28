@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Supporter_AI.Models
 {
-    internal record TrainingData(string question, string answer);
+    public record TrainingData(string? systemMessage, string? question, string? answer);
 }

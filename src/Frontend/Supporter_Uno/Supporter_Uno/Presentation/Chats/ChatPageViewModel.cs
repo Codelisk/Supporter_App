@@ -10,6 +10,8 @@ using ReactiveUI;
 using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
+using Supporter_Uno.Presentation.Chats.Settings;
+using Supporter_Uno.Presentation.Chats.Training;
 using Supporter_Uno.Providers;
 
 namespace Supporter_Uno.Presentation.Chats;
@@ -91,5 +93,19 @@ public partial class ChatPageViewModel : BasePageViewModel
             Question = string.Empty;
             this.RaisePropertyChanged(nameof(Question));
         }
+    }
+
+    public ICommand SettingsCommand => new AsyncRelayCommand<AzureTopicMappingDto>(OnSettings);
+
+    private async Task OnSettings(AzureTopicMappingDto? dto)
+    {
+        await this.Navigator.NavigateViewAsync<ChatSettingsPage>(this, data: AzureTopicMappingDto);
+    }
+
+    public ICommand TrainingCommand => new AsyncRelayCommand<AzureTopicMappingDto>(OnTraining);
+
+    private async Task OnTraining(AzureTopicMappingDto? dto)
+    {
+        await this.Navigator.NavigateViewAsync<ChatTrainingPage>(this, data: AzureTopicMappingDto);
     }
 }

@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\User\UserBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\conversation\chat\ChatAnswerDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\Chat\ChatQuestionDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\Chat\Training\TrainingMessageDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\Ai\OwnerEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Usings.cs" />
   </ItemGroup>

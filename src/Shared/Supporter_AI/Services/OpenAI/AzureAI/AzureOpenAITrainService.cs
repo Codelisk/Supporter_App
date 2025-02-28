@@ -17,6 +17,8 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
     using global::OpenAI.Files;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
+    using Supporter_AI.Extensions;
+    using Supporter_AI.Models;
 
     internal class AzureOpenAITrainService : IAzureOpenAITrainService
     {
@@ -35,17 +37,17 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
             _logger = logger;
         }
 
-        private async Task StartFineTuningAsync(string threadName, string text)
+        public async Task StartFineTuningAsync(string threadName, List<TrainingData> data)
         {
             try
             {
                 var fineTuningClient = _openAIClient.GetFineTuningClient();
                 var fileClient = _openAIClient.GetOpenAIFileClient();
-                fileClient.UploadFileAsync("", FileUploadPurpose.FineTune);
 
-                var byteArray = Encoding.UTF8.GetBytes(text);
+                var byteArray = data.ToJsonlBinary();
+
                 var fineTuningJob = await fineTuningClient.CreateFineTuningJobAsync(
-                    BinaryContent.Create(new BinaryData("")),
+                    BinaryContent.Create(new BinaryData(byteArray)),
                     true
                 );
             }
