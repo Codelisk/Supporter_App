@@ -21,6 +21,7 @@ namespace Supporter_AI
         {
             services.AddAIClient(configuration);
             services.AddTransient<IAzureOpenAIChatService, AzureOpenAIChatService>();
+            services.AddTransient<IAzureOpenAITrainService, AzureOpenAITrainService>();
         }
 
         private static void AddAIClient(

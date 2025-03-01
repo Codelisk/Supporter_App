@@ -15,16 +15,19 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
 {
     private readonly IAzureOpenAITrainService azureOpenAITrainService;
     private readonly IAzureOpenAIChatService azureOpenAIChatService;
+    private readonly ITrainingMessageApi trainingMessageApi;
 
     public ChatTrainingPageViewModel(
         BaseVmServices baseVmServices,
         IAzureOpenAITrainService azureOpenAITrainService,
-        IAzureOpenAIChatService azureOpenAIChatService
+        IAzureOpenAIChatService azureOpenAIChatService,
+        ITrainingMessageApi trainingMessageApi
     )
         : base(baseVmServices)
     {
         this.azureOpenAITrainService = azureOpenAITrainService;
         this.azureOpenAIChatService = azureOpenAIChatService;
+        this.trainingMessageApi = trainingMessageApi;
     }
 
     AzureTopicMappingDto AzureTopicMappingDto;
@@ -37,6 +40,7 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
         {
             Value = "Merk dir das für die Zukunft:\n\n" + TrainingText,
         };
+        await trainingMessageApi.Add(trainingMessage);
         var answer = await azureOpenAIChatService.Chat(
             TrainingText,
             AzureTopicMappingDto.ThreadId,

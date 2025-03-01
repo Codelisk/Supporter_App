@@ -465,6 +465,82 @@ namespace Supporter_Dtos
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface ITrainingMessageApi
+    {
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/TrainingMessage/GetPaginated")]
+        Task<object> GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/TrainingMessage/DeleteAll")]
+        Task<int> DeleteAll([Query] bool? areYouSure);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/TrainingMessage/DeleteAllByRange")]
+        Task<int> DeleteAllByRange([Body] IEnumerable<System.Guid> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/TrainingMessage/GetRange")]
+        Task<ICollection<TrainingMessageDto>> GetRange([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/TrainingMessage/Count")]
+        Task<int> Count();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/TrainingMessage/GetAll")]
+        Task<ICollection<TrainingMessageDto>> GetAll();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/TrainingMessage/Get")]
+        Task<TrainingMessageDto> Get([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/TrainingMessage/Delete")]
+        Task Delete([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/TrainingMessage/AddRange")]
+        Task AddRange([Body] IEnumerable<TrainingMessageDto> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/TrainingMessage/Add")]
+        Task<TrainingMessageDto> Add([Body] TrainingMessageDto body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/TrainingMessage/GetLastOrDefault")]
+        Task<TrainingMessageDto> GetLastOrDefault();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/TrainingMessage/Save")]
+        Task<TrainingMessageDto> Save([Body] TrainingMessageDto body);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IWeatherForecastApi
     {
         /// <returns>OK</returns>

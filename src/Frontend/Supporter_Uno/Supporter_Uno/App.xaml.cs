@@ -124,6 +124,11 @@ public partial class App : Application
                                     endpointOptions,
                                     settingsBuilder: ConfigureRefitSettings
                                 )
+                                .AddRefitClient<ITrainingMessageApi>(
+                                    context,
+                                    endpointOptions,
+                                    settingsBuilder: ConfigureRefitSettings
+                                )
                     )
                     .UseAuthentication(auth => auth.AddMsal(builder.Window))
                     .ConfigureServices(

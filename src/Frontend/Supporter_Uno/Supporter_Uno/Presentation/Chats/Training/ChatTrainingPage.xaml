@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:uen="using:Uno.Extensions.Navigation.UI"
+    d:DataContext="{d:DesignInstance Type=local:ChatTrainingPageViewModel}"
     xmlns:utu="using:Uno.Toolkit.UI"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -18,6 +19,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Button uen:Navigation.Request="-" Content="Back"/>
-        <TextBox PlaceholderText="Training" Grid.Row="1"/>
+        <TextBox Text="{Binding TrainingText, Mode=TwoWay}" PlaceholderText="Training" Grid.Row="1"/>
+        <Button Content="Hinzufügen" Command="{Binding AddTrainingCommand}" Grid.Row="2"/>
     </Grid>
 </common:BasePage>

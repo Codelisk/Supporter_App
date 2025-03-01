@@ -12,7 +12,6 @@
     mc:Ignorable="d">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <ProgressRing IsActive="{Binding IsBusy}"/>
         <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Button Content="Einstellungen" Command="{Binding SettingsCommand}"/>
             <Button Content="Training" Command="{Binding TrainingCommand}"/>
@@ -27,5 +26,6 @@
                 <Button Click="Ask" Grid.Row="2" Content="Fragen"/>
             </Grid>
         </StackPanel>
+        <ProgressRing IsActive="{Binding IsBusy}" />
     </Grid>
 </common:BasePage>

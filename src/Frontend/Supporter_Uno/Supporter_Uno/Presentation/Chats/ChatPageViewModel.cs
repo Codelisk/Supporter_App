@@ -74,18 +74,19 @@ public partial class ChatPageViewModel : BasePageViewModel
     public string Question { get; set; }
 
 #pragma warning disable OPENAI001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-    public Task<string> OnChatAsync()
+    public async Task<string> OnChatAsync()
 #pragma warning restore OPENAI001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
     {
         try
         {
             this.IsBusy = true;
-            return azureOpenAIChatService.Chat(
+            var result = await azureOpenAIChatService.Chat(
                 Question,
                 threadId: AzureTopicMappingDto.ThreadId,
                 assistantId: AzureTopicMappingDto.AssistantId,
                 temperature: null
             );
+            return result;
         }
         finally
         {
