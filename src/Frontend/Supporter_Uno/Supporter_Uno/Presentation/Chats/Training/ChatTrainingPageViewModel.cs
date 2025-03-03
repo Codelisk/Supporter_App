@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ReactiveUI;
 using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
@@ -36,17 +37,33 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
 
     private async Task OnAddTrainingAsync()
     {
-        var trainingMessage = new TrainingMessageDto
+        const int maxLength = 15000;
+        var trainingTexts = SplitText(TrainingText, maxLength);
+        string prefix = "Merk dir das für die Zukunft:\n\n";
+
+        foreach (var textPart in trainingTexts)
         {
-            Value = "Merk dir das für die Zukunft:\n\n" + TrainingText,
-        };
-        await trainingMessageApi.Add(trainingMessage);
+            var trainingMessage = new TrainingMessageDto { Value = prefix + textPart };
+            await trainingMessageApi.Add(trainingMessage);
+            prefix = "\n\nSo geht’s weiter \n\n";
+        }
+
         var answer = await azureOpenAIChatService.Chat(
             TrainingText,
             AzureTopicMappingDto.ThreadId,
             AzureTopicMappingDto.AssistantId,
             null
         );
+    }
+
+    private List<string> SplitText(string text, int maxLength)
+    {
+        var parts = new List<string>();
+        for (int i = 0; i < text.Length; i += maxLength)
+        {
+            parts.Add(text.Substring(i, Math.Min(maxLength, text.Length - i)));
+        }
+        return parts;
     }
 
     public override void Initialize(NavigationEventArgs e)

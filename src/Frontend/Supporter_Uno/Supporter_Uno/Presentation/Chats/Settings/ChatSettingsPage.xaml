@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uen="using:Uno.Extensions.Navigation.UI"
+    d:DataContext="{d:DesignInstance Type=local:ChatSettingsPageViewModel}"
     mc:Ignorable="d" xmlns:utu="using:Uno.Toolkit.UI"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -15,9 +16,17 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Button uen:Navigation.Request="-" Content="Back"/>
-        <TextBox PlaceholderText="Frage" Grid.Row="1"/>
-        <TextBox PlaceholderText="Anstwort" Grid.Row="2"/>
+        <TextBox Text="{Binding Model, Mode=TwoWay}" PlaceholderText="Model" Grid.Row="1"/>
+        <TextBox Text="{Binding Description, Mode=TwoWay}" PlaceholderText="Description" Grid.Row="2"/>
+        <TextBox Text="{Binding Instructions, Mode=TwoWay}" PlaceholderText="Instructions" Grid.Row="3"/>
+        <NumberBox Value="{Binding Temperature, Mode=TwoWay}" PlaceholderText="Temperature" Grid.Row="4"/>
+        <NumberBox Value="{Binding NucleusSamplingFactor, Mode=TwoWay}" PlaceholderText="NucleusSamplingFactor" Grid.Row="5"/>
+        <Button Content="Speichern" Command="{Binding EditAssistantCommand}" Grid.Row="6"/>
     </Grid>
 </common:BasePage>

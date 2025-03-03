@@ -1,8 +1,10 @@
 using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Refit;
 using Supporter_AI;
 using Supporter_Dtos;
+using Supporter_Uno.ApiClient.Helpers;
 using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats;
 using Supporter_Uno.Presentation.Folders;
@@ -29,11 +31,6 @@ public partial class App : Application
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         var builder = this.CreateBuilder(args);
-
-        var endpointOptions = new EndpointOptions
-        {
-            Url = "https://orderlyzesupporter-a4gyd0chgjh9aah6.canadacentral-01.azurewebsites.net",
-        };
 
         // Add navigation support for toolkit controls such as TabBar and NavigationView
         builder
@@ -92,6 +89,12 @@ public partial class App : Application
                     )
                     .UseHttp(
                         (context, services) =>
+                        {
+                            var endpointOptions = new EndpointOptions
+                            {
+                                Url = context.Configuration.GetSection("ApiClient")["Url"],
+                            };
+
                             services
                                 // Register HttpClient
 #if DEBUG
@@ -128,7 +131,8 @@ public partial class App : Application
                                     context,
                                     endpointOptions,
                                     settingsBuilder: ConfigureRefitSettings
-                                )
+                                );
+                        }
                     )
                     .UseAuthentication(auth => auth.AddMsal(builder.Window))
                     .ConfigureServices(
@@ -153,9 +157,21 @@ public partial class App : Application
             initialNavigate: async (services, navigator) =>
             {
                 var auth = services.GetRequiredService<IAuthenticationService>();
-                var authenticated = await auth.RefreshAsync();
+                var token = await services.GetRequiredService<ITokenCache>().AccessTokenAsync();
+                //var authenticated = await auth.RefreshAsync();
+                //tokens = await services
+                //    .GetRequiredService<ITokenCache>()
+                //    .AccessTokenAsync(CancellationToken.None);
+                if (
+                    !await AzureServiceChecker.CheckServiceAvailability(
+                        services.GetRequiredService<IConfiguration>().GetSection("ApiClient")["Url"]
+                    )
+                )
+                {
+                    await navigator.ShowMessageDialogAsync(this, content: "Server nicht verfügbar");
+                }
 
-                if (authenticated && false)
+                if (await auth.IsAuthenticated())
                 {
                     await navigator.NavigateViewAsync<FolderOverviewPage>(
                         this,

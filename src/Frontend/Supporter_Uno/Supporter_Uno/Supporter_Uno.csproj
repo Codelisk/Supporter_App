@@ -62,9 +62,6 @@
         <PackageReference Include="Microsoft.Web.WebView2" Aliases="WpfWebView" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="ApiClient\" />
-    </ItemGroup>
-    <ItemGroup>
       <ProjectReference Include="..\..\..\..\submodules\CodeGen\src\Common\Codelisk.GeneratorAttributes\Codelisk.GeneratorAttributes.csproj" />
       <ProjectReference Include="..\..\..\Shared\Supporter_AI\Supporter_AI.csproj" />
     </ItemGroup>

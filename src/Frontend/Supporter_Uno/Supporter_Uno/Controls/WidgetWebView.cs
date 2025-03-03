@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 using Markdig;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 
 namespace Supporter_Uno.Controls;
 
@@ -16,20 +15,38 @@ public partial class WidgetWebView : WebView2
 {
     public WidgetWebView()
     {
-        Loaded += async (_, __) =>
-        {
+        Loaded += async (_, __) => {
 #if !BROWSERWASM
             await this.EnsureCoreWebView2Async();
 #endif
-
-            string markdown = "# Hallo Welt\nDas ist **fetter** Text!";
-            string html = Markdown.ToHtml(markdown);
-            SetContent(html);
         };
+    }
+
+    public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(
+        nameof(Content),
+        typeof(string),
+        typeof(WidgetWebView),
+        new PropertyMetadata(string.Empty, OnContentChanged)
+    );
+
+    public string Content
+    {
+        get => (string)GetValue(ContentProperty);
+        set => SetValue(ContentProperty, value);
+    }
+
+    private static void OnContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is WidgetWebView webView && e.NewValue is string newContent)
+        {
+            webView.SetContent(newContent);
+        }
     }
 
     public async void SetContent(string content)
     {
+        if (string.IsNullOrWhiteSpace(content))
+            return;
         content = Markdown.ToHtml(content);
 #if BROWSERWASM
         this.SetHtmlAttribute("srcdoc", content);

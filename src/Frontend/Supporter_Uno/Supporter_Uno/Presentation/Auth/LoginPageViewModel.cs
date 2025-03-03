@@ -30,13 +30,20 @@ public partial class LoginPageViewModel : BasePageViewModel
 
     private async Task DoLogin()
     {
-        var success = await _authentication.LoginAsync(Dispatcher);
-        if (success)
+        try
         {
-            await Navigator.NavigateViewAsync<FolderOverviewPage>(
-                this,
-                qualifier: Qualifiers.ClearBackStack
-            );
+            var success = await _authentication.LoginAsync(Dispatcher);
+            if (success)
+            {
+                await Navigator.NavigateViewAsync<FolderOverviewPage>(
+                    this,
+                    qualifier: Qualifiers.ClearBackStack
+                );
+            }
+        }
+        catch (Exception ex)
+        {
+            await Navigator.ShowMessageDialogAsync(this, content: "Login abgebrochen");
         }
     }
 

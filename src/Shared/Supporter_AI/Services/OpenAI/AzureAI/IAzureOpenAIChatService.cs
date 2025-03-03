@@ -56,5 +56,14 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
         /// <param name="question">Die Frage, die an den Assistenten gestellt wird.</param>
         /// <returns>Die Antwort des Assistenten als String.</returns>
         Task<string> Chat(string question);
+        Task<ClientResult<Assistant>> EditAssistant(
+            string assistantId,
+            float? temperature = null,
+            float? nucleusSamplingFactor = null,
+            string? model = null,
+            string? instructions = null,
+            string? description = null
+        );
+        AssistantClient GetChatClient();
     }
 }

@@ -49,7 +49,7 @@ public partial class ChatPageViewModel : BasePageViewModel
         {
             throw new ArgumentNullException(nameof(topic));
         }
-        var test = await azureTopicMappingApi.GetAll();
+
         var azureTopics = await azureTopicMappingApi.GetByTopicId(topic.GetId());
         if (azureTopics.Count == 0)
         {
@@ -73,28 +73,44 @@ public partial class ChatPageViewModel : BasePageViewModel
 
     public string Question { get; set; }
 
+    private ChatQuestionDto? LastQuestion;
 #pragma warning disable OPENAI001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-    public async Task<string> OnChatAsync()
+    public async Task OnChatAsync()
 #pragma warning restore OPENAI001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
     {
         try
         {
             this.IsBusy = true;
-            var result = await azureOpenAIChatService.Chat(
+            var chatQuestion = await chatQuestionApi.Add(
+                new ChatQuestionDto { TopicId = AzureTopicMappingDto.TopicId, Value = Question }
+            );
+            LastQuestion = chatQuestion;
+            this.Answer = await azureOpenAIChatService.Chat(
                 Question,
                 threadId: AzureTopicMappingDto.ThreadId,
                 assistantId: AzureTopicMappingDto.AssistantId,
                 temperature: null
             );
-            return result;
+            await chatAnswerApi.Add(
+                new ChatAnswerDto
+                {
+                    QuestionId = chatQuestion.GetId(),
+                    Owner = OwnerEnum.Bot,
+                    Value = Answer,
+                }
+            );
         }
         finally
         {
             this.IsBusy = false;
             Question = string.Empty;
             this.RaisePropertyChanged(nameof(Question));
+            this.RaisePropertyChanged(nameof(Answer));
         }
     }
+
+    public string Answer { get; set; }
+    public ICommand AskCommand => new AsyncRelayCommand(OnChatAsync);
 
     public ICommand SettingsCommand => new AsyncRelayCommand<AzureTopicMappingDto>(OnSettings);
 
@@ -108,5 +124,45 @@ public partial class ChatPageViewModel : BasePageViewModel
     private async Task OnTraining(AzureTopicMappingDto? dto)
     {
         await this.Navigator.NavigateViewAsync<ChatTrainingPage>(this, data: AzureTopicMappingDto);
+    }
+
+    public ICommand PreviousCommand => new AsyncRelayCommand(OnPrevious);
+
+    private async Task OnPrevious()
+    {
+        this.IsBusy = true;
+        try
+        {
+            if (LastQuestion is null)
+            {
+                var questions = await chatQuestionApi.GetByTopicId(AzureTopicMappingDto.TopicId);
+                LastQuestion = questions.LastOrDefault();
+            }
+            else
+            {
+                var questions = await chatQuestionApi.GetByTopicId(AzureTopicMappingDto.TopicId);
+
+                // Sortiere die Fragen nach CreatedAt absteigend
+                var previousQuestion = questions
+                    .OrderByDescending(q => q.CreatedAt)
+                    .FirstOrDefault(q => q.CreatedAt < LastQuestion.CreatedAt);
+                LastQuestion = previousQuestion;
+            }
+
+            if (LastQuestion is null)
+            {
+                return;
+            }
+
+            Question = LastQuestion.Value;
+            Answer = (await chatAnswerApi.GetByQuestionId(LastQuestion.GetId()))
+                .LastOrDefault()
+                .Value;
+        }
+        finally
+        {
+            this.IsBusy = false;
+            this.RaisePropertyChanged(nameof(Answer));
+        }
     }
 }

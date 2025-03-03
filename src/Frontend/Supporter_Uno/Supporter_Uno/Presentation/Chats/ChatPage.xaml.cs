@@ -26,10 +26,4 @@ public sealed partial class ChatPage
     {
         this.InitializeComponent();
     }
-
-    private async void Ask(object sender, RoutedEventArgs e)
-    {
-        var result = await (this.DataContext as ChatPageViewModel).OnChatAsync();
-        this.WebView.SetContent(result);
-    }
 }

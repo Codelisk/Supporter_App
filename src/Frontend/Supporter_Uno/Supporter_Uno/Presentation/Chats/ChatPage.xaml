@@ -15,15 +15,24 @@
         <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Button Content="Einstellungen" Command="{Binding SettingsCommand}"/>
             <Button Content="Training" Command="{Binding TrainingCommand}"/>
-            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-                <controls:WidgetWebView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="WebView" MinHeight="500"/>
-                <TextBox Grid.Row="1" Text="{Binding Question, Mode=TwoWay}" PlaceholderText="Frage"  />
-                <Button Click="Ask" Grid.Row="2" Content="Fragen"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowSpacing="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <ScrollView>
+                        <controls:WidgetWebView Content="{Binding Answer}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="WebView" MinHeight="500"/>
+                    </ScrollView>
+                    <TextBox InputScope="Chat" Grid.Row="1" Text="{Binding Question, Mode=TwoWay}" PlaceholderText="Frage" AcceptsReturn="True" />
+                    <Button Command="{Binding AskCommand}" Grid.Row="2" Content="Fragen"/>
+                </Grid>
+                <Button Content="Letzte" Command="{Binding PreviousCommand}" Grid.Column="1"/>
             </Grid>
         </StackPanel>
         <ProgressRing IsActive="{Binding IsBusy}" />

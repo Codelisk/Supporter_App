@@ -32,6 +32,35 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
             _openAIFileClient = _client.GetOpenAIFileClient();
         }
 
+        public AssistantClient GetChatClient() => _assistantClient;
+
+        public async Task<ClientResult<Assistant>> EditAssistant(
+            string assistantId,
+            float? temperature = null,
+            float? nucleusSamplingFactor = null,
+            string? model = null,
+            string? instructions = null,
+            string? description = null
+        )
+        {
+            var assistant = await _assistantClient.GetAssistantAsync(assistantId);
+            return await _assistantClient.ModifyAssistantAsync(
+                assistantId,
+                new AssistantModificationOptions()
+                {
+                    Description = description ?? assistant.Value.Description,
+                    Instructions = instructions ?? assistant.Value.Instructions,
+                    Model = model ?? assistant.Value.Model,
+                    Name = assistant.Value.Name,
+                    NucleusSamplingFactor =
+                        nucleusSamplingFactor ?? assistant.Value?.NucleusSamplingFactor,
+                    ResponseFormat = assistant.Value.ResponseFormat,
+                    Temperature = temperature ?? assistant.Value.Temperature,
+                    ToolResources = assistant.Value.ToolResources,
+                }
+            );
+        }
+
         public Task<ClientResult<Assistant>> CreateAssistant(string name, int temperature)
         {
             return _assistantClient.CreateAssistantAsync(

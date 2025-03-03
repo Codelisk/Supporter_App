@@ -37,8 +37,8 @@ internal static class Routes
                 View: views.FindByViewModel<ShellViewModel>(),
                 Nested:
                 [
-                    new("Main", View: views.FindByView<MainPage>(), IsDefault: true),
-                    new("Login", View: views.FindByView<LoginPage>()),
+                    new("Main", View: views.FindByView<MainPage>()),
+                    new("Login", View: views.FindByView<LoginPage>(), IsDefault: true),
                     new("Folders", View: views.FindByView<FolderOverviewPage>()),
                     new("AddFolder", View: views.FindByView<AddFolderPage>()),
                     new("Topics", View: views.FindByView<TopicOverviewPage>()),
