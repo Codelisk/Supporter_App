@@ -43,7 +43,11 @@ public partial class LoginPageViewModel : BasePageViewModel
         }
         catch (Exception ex)
         {
-            await Navigator.ShowMessageDialogAsync(this, content: "Login abgebrochen");
+            await Navigator.ShowMessageDialogAsync(
+                this,
+                title: "Fehler",
+                content: "Login abgebrochen"
+            );
         }
     }
 
