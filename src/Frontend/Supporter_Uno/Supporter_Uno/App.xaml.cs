@@ -35,116 +35,117 @@ public partial class App : Application
         // Add navigation support for toolkit controls such as TabBar and NavigationView
         builder
             .UseToolkitNavigation()
-            .Configure(host =>
-                host
+            .Configure(
+                (host, window) =>
+                    host
 #if DEBUG
-                // Switch to Development environment when running in DEBUG
-                .UseEnvironment(Environments.Development)
+                    // Switch to Development environment when running in DEBUG
+                    .UseEnvironment(Environments.Development)
 #endif
                     .UseLogging(
-                        configure: (context, logBuilder) =>
-                        {
-                            // Configure log levels for different categories of logging
-                            logBuilder
-                                .SetMinimumLevel(
-                                    context.HostingEnvironment.IsDevelopment()
-                                        ? LogLevel.Information
-                                        : LogLevel.Warning
-                                )
-                                // Default filters for core Uno Platform namespaces
-                                .CoreLogLevel(LogLevel.Warning);
-
-                            // Uno Platform namespace filter groups
-                            // Uncomment individual methods to see more detailed logging
-                            //// Generic Xaml events
-                            //logBuilder.XamlLogLevel(LogLevel.Debug);
-                            //// Layout specific messages
-                            //logBuilder.XamlLayoutLogLevel(LogLevel.Debug);
-                            //// Storage messages
-                            //logBuilder.StorageLogLevel(LogLevel.Debug);
-                            //// Binding related messages
-                            //logBuilder.XamlBindingLogLevel(LogLevel.Debug);
-                            //// Binder memory references tracking
-                            //logBuilder.BinderMemoryReferenceLogLevel(LogLevel.Debug);
-                            //// DevServer and HotReload related
-                            //logBuilder.HotReloadCoreLogLevel(LogLevel.Information);
-                            //// Debug JS interop
-                            //logBuilder.WebAssemblyLogLevel(LogLevel.Debug);
-                        },
-                        enableUnoLogging: true
-                    )
-                    .UseConfiguration(configure: configBuilder =>
-                        configBuilder.EmbeddedSource<App>()
-                    )
-                    // Enable localization (see appsettings.json for supported languages)
-                    .UseLocalization()
-                    // Register Json serializers (ISerializer and ISerializer)
-                    .UseSerialization(
-                        (context, services) =>
-                            services
-                                .AddContentSerializer(context)
-                                .AddJsonTypeInfo(
-                                    WeatherForecastContext.Default.IImmutableListWeatherForecast
-                                )
-                    )
-                    .UseHttp(
-                        (context, services) =>
-                        {
-                            var endpointOptions = new EndpointOptions
+                            configure: (context, logBuilder) =>
                             {
-                                Url = context.Configuration.GetSection("ApiClient")["Url"],
-                            };
+                                // Configure log levels for different categories of logging
+                                logBuilder
+                                    .SetMinimumLevel(
+                                        context.HostingEnvironment.IsDevelopment()
+                                            ? LogLevel.Information
+                                            : LogLevel.Warning
+                                    )
+                                    // Default filters for core Uno Platform namespaces
+                                    .CoreLogLevel(LogLevel.Warning);
 
-                            services
-                                // Register HttpClient
+                                // Uno Platform namespace filter groups
+                                // Uncomment individual methods to see more detailed logging
+                                //// Generic Xaml events
+                                //logBuilder.XamlLogLevel(LogLevel.Debug);
+                                //// Layout specific messages
+                                //logBuilder.XamlLayoutLogLevel(LogLevel.Debug);
+                                //// Storage messages
+                                //logBuilder.StorageLogLevel(LogLevel.Debug);
+                                //// Binding related messages
+                                //logBuilder.XamlBindingLogLevel(LogLevel.Debug);
+                                //// Binder memory references tracking
+                                //logBuilder.BinderMemoryReferenceLogLevel(LogLevel.Debug);
+                                //// DevServer and HotReload related
+                                //logBuilder.HotReloadCoreLogLevel(LogLevel.Information);
+                                //// Debug JS interop
+                                //logBuilder.WebAssemblyLogLevel(LogLevel.Debug);
+                            },
+                            enableUnoLogging: true
+                        )
+                        .UseConfiguration(configure: configBuilder =>
+                            configBuilder.EmbeddedSource<App>()
+                        )
+                        // Enable localization (see appsettings.json for supported languages)
+                        .UseLocalization()
+                        // Register Json serializers (ISerializer and ISerializer)
+                        .UseSerialization(
+                            (context, services) =>
+                                services
+                                    .AddContentSerializer(context)
+                                    .AddJsonTypeInfo(
+                                        WeatherForecastContext.Default.IImmutableListWeatherForecast
+                                    )
+                        )
+                        .UseHttp(
+                            (context, services) =>
+                            {
+                                var endpointOptions = new EndpointOptions
+                                {
+                                    Url = context.Configuration.GetSection("ApiClient")["Url"],
+                                };
+
+                                services
+                                    // Register HttpClient
 #if DEBUG
-                                // DelegatingHandler will be automatically injected into Refit Client
-                                .AddTransient<DelegatingHandler, DebugHttpHandler>()
+                                    // DelegatingHandler will be automatically injected into Refit Client
+                                    .AddTransient<DelegatingHandler, DebugHttpHandler>()
 #endif
-                                .AddSingleton<IWeatherCache, WeatherCache>()
-                                .AddRefitClient<IAIFolderApi>(
-                                    context,
-                                    endpointOptions,
-                                    settingsBuilder: ConfigureRefitSettings
-                                )
-                                .AddRefitClient<IAITopicApi>(
-                                    context,
-                                    endpointOptions,
-                                    settingsBuilder: ConfigureRefitSettings
-                                )
-                                .AddRefitClient<IAzureTopicMappingApi>(
-                                    context,
-                                    endpointOptions,
-                                    settingsBuilder: ConfigureRefitSettings
-                                )
-                                .AddRefitClient<IChatQuestionApi>(
-                                    context,
-                                    endpointOptions,
-                                    settingsBuilder: ConfigureRefitSettings
-                                )
-                                .AddRefitClient<IChatAnswerApi>(
-                                    context,
-                                    endpointOptions,
-                                    settingsBuilder: ConfigureRefitSettings
-                                )
-                                .AddRefitClient<ITrainingMessageApi>(
-                                    context,
-                                    endpointOptions,
-                                    settingsBuilder: ConfigureRefitSettings
-                                );
-                        }
-                    )
-                    .UseAuthentication(auth => auth.AddMsal(builder.Window))
-                    .ConfigureServices(
-                        (context, services) =>
-                        {
-                            // TODO: Register your services
-                            //services.AddSingleton<IMyService, MyService>();
-                            services.TryAddScoped<BaseVmServices>();
-                            services.AddAIServices(context.Configuration);
-                        }
-                    )
-                    .UseNavigation(Routes.RegisterRoutes)
+                                    .AddSingleton<IWeatherCache, WeatherCache>()
+                                    .AddRefitClient<IAIFolderApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IAITopicApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IAzureTopicMappingApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IChatQuestionApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IChatAnswerApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<ITrainingMessageApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    );
+                            }
+                        )
+                        .UseAuthentication(auth => auth.AddMsal(window))
+                        .ConfigureServices(
+                            (context, services) =>
+                            {
+                                // TODO: Register your services
+                                //services.AddSingleton<IMyService, MyService>();
+                                services.TryAddScoped<BaseVmServices>();
+                                services.AddAIServices(context.Configuration);
+                            }
+                        )
+                        .UseNavigation(Routes.RegisterRoutes)
             );
         MainWindow = builder.Window;
 
@@ -162,11 +163,16 @@ public partial class App : Application
                 //tokens = await services
                 //    .GetRequiredService<ITokenCache>()
                 //    .AccessTokenAsync(CancellationToken.None);
+#if BROWSERWASM
+                if (false)
+#else
+
                 if (
                     !await AzureServiceChecker.CheckServiceAvailability(
                         services.GetRequiredService<IConfiguration>().GetSection("ApiClient")["Url"]
                     )
                 )
+#endif
                 {
                     await navigator.ShowMessageDialogAsync(this, content: "Server nicht verfügbar");
                 }

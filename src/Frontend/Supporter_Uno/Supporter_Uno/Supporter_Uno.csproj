@@ -1,6 +1,6 @@
-﻿<Project Sdk="Uno.Sdk">
+<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0-android;net9.0-windows10.0.26100</TargetFrameworks>
+    <TargetFrameworks>net9.0-android;net9.0-windows10.0.26100;net9.0-browserwasm</TargetFrameworks>
 
       <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
       <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)/generated</CompilerGeneratedFilesOutputPath>
