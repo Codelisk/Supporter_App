@@ -7,7 +7,8 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Supporter_Api.Common.Controller
 {
-    [Authorize]
+    [Authorize(Policy = "AzureADUsers")]
+    [Authorize(Policy = "ApiKeyUsers")]
     [Route("api/[controller]")]
     [Produces("application/json")]
     public abstract class BaseController<TDto, TKey, TEntity>

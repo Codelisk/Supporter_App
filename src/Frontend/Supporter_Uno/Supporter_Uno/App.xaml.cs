@@ -135,7 +135,10 @@ public partial class App : Application
                                     );
                             }
                         )
-                        .UseAuthentication(auth => auth.AddMsal(window))
+                        .UseAuthentication(auth =>
+                        {
+                            auth.AddMsal(window);
+                        })
                         .ConfigureServices(
                             (context, services) =>
                             {

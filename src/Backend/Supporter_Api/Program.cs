@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph.ExternalConnectors;
 using Microsoft.Identity.Web;
 using Supporter_Api;
+using Supporter_Api.Auth;
 using Supporter_Api.Helpers.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,10 +13,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder
     .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>("ApiKey", null)
     .AddMicrosoftIdentityWebApi(builder.Configuration)
     .EnableTokenAcquisitionToCallDownstreamApi()
     .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
     .AddInMemoryTokenCaches();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(
+        "AzureADUsers",
+        policy => policy.RequireAuthenticatedUser().AddAuthenticationSchemes("Bearer")
+    );
+
+    options.AddPolicy(
+        "ApiKeyUsers",
+        policy => policy.RequireAuthenticatedUser().AddAuthenticationSchemes("ApiKey")
+    );
+});
 
 builder.Services.AddControllers();
 
