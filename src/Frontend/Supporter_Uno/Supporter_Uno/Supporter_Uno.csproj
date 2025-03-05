@@ -49,6 +49,7 @@
         ThemeService;
         AuthenticationMsal
     </UnoFeatures>
+      <PublishTrimmed>false</PublishTrimmed>
       <NoWarn>KE0001</NoWarn>
     <UserSecretsId>063cce4b-0fd4-4ca9-9cb1-2ecced2df4a7</UserSecretsId>
   </PropertyGroup>
