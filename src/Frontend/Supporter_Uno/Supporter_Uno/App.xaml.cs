@@ -99,10 +99,10 @@ public partial class App : Application
 
                                 services
                                     // Register HttpClient
-#if DEBUG
+                                    //TODO ADD#if DEBUG
                                     // DelegatingHandler will be automatically injected into Refit Client
                                     .AddTransient<DelegatingHandler, DebugHttpHandler>()
-#endif
+                                    //TODO ADD#endif
                                     .AddSingleton<IWeatherCache, WeatherCache>()
                                     .AddRefitClient<IAIFolderApi>(
                                         context,
