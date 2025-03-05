@@ -155,9 +155,10 @@ public partial class ChatPageViewModel : BasePageViewModel
             }
 
             Question = LastQuestion.Value;
-            Answer = (await chatAnswerApi.GetByQuestionId(LastQuestion.GetId()))
-                .LastOrDefault()
-                .Value;
+            Answer =
+                $"**Frage:**\n{Question}\n\n"
+                + $"**Antwort:**\n"
+                + $"{(await chatAnswerApi.GetByQuestionId(LastQuestion.GetId())).LastOrDefault()?.Value}";
         }
         finally
         {
