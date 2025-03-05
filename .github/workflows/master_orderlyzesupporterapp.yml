@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: src/Frontend/Supporter_Uno/Supporter_Uno
+          path: src/Frontend/Supporter_Uno/Supporter_Uno/bin/Release/net9.0-browserwasm/publish
 
   deploy:
     runs-on: windows-latest
