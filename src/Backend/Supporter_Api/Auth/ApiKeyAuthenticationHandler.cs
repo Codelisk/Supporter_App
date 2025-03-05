@@ -10,14 +10,18 @@ namespace Supporter_Api.Auth
     public class ApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
         private const string ApiKeyHeaderName = "X-API-KEY";
-        private const string ExpectedApiKey = "MeinSichererApiKey"; // Sicher speichern, z. B. in der Konfiguration
+        private string ExpectedApiKey; // Sicher speichern, z. B. in der Konfiguration
 
         public ApiKeyAuthenticationHandler(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
-            UrlEncoder encoder
+            UrlEncoder encoder,
+            IConfiguration configuration
         )
-            : base(options, logger, encoder) { }
+            : base(options, logger, encoder)
+        {
+            ExpectedApiKey = configuration.GetSection("ApiAuth")["ApiKey"];
+        }
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {

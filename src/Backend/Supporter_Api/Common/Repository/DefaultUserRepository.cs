@@ -1,5 +1,6 @@
 ﻿using Codelisk.GeneratorAttributes.WebAttributes.Repository;
 using Supporter_Api.Common.Repository.Providers;
+using Supporter_Api.Constants;
 using Supporter_Api.Database;
 
 namespace Supporter_Api.Common.Repository
@@ -36,12 +37,15 @@ namespace Supporter_Api.Common.Repository
 
         public Guid GetUserObjectId()
         {
-            var user = _contextAccessor.HttpContext?.User;
-            return Guid.Parse(
-                user?.FindFirst(
-                    "http://schemas.microsoft.com/identity/claims/objectidentifier"
-                ).Value
+            var user = _contextAccessor.HttpContext?.User?.FindFirst(
+                "http://schemas.microsoft.com/identity/claims/objectidentifier"
             );
+            if (user is not null)
+            {
+                return Guid.Parse(user.Value);
+            }
+
+            return Guid.Parse(ApiConstants.DefaultGuid);
         }
     }
 }

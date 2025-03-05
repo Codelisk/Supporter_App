@@ -36,10 +36,22 @@ namespace Supporter_Api.Common.Repository
 
         public Guid GetTenantObjectId()
         {
-            var user = _contextAccessor.HttpContext?.User;
-            return Guid.Parse(
-                user?.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value
+            var user = _contextAccessor.HttpContext?.User?.FindFirst(
+                "http://schemas.microsoft.com/identity/claims/tenantid"
             );
+            if (user is not null)
+            {
+                return Guid.Parse(user.Value);
+            }
+            var apiKey = _contextAccessor
+                .HttpContext?.Request.Headers["Authorization"]
+                .FirstOrDefault();
+            if (apiKey is not null)
+            {
+                return Guid.Parse("111");
+            }
+
+            throw new AccessViolationException();
         }
     }
 }
