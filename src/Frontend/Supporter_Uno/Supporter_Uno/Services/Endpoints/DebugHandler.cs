@@ -51,6 +51,7 @@ internal class DebugHttpHandler : DelegatingHandler
     {
         request.Headers.Authorization = await GetTokenAsync(cancellationToken);
         request.Headers.Add("X-API-KEY", "MeinSichererApiKey");
+        request.Headers.Add("Access-Control-Allow-Origin", "*");
         Console.WriteLine($"Authorization-Header: {request.Headers.Authorization}");
         var response = await base.SendAsync(request, cancellationToken);
 #if DEBUG

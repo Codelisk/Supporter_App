@@ -32,6 +32,7 @@ builder.Services.AddAuthorization(options =>
     );
 });
 
+builder.Services.AddCors();
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<MyDbContext>(options =>
@@ -55,6 +56,14 @@ if (app.Environment.IsDevelopment() || true)
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(builder =>
+    builder
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin()
+        .SetIsOriginAllowedToAllowWildcardSubdomains()
+);
 
 app.UseAuthentication();
 

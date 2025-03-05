@@ -36,11 +36,19 @@ public partial class FolderOverviewPageViewModel : BasePageViewModel
     {
         base.Initialize(e);
 
-        Folders = (await this.aIFolderApi.GetAll()).ToList();
-        Dispatcher.TryEnqueue(() =>
+        try
         {
-            this.RaisePropertyChanged(nameof(Folders));
-        });
+            Folders = (await this.aIFolderApi.GetAll()).ToList();
+            Dispatcher.TryEnqueue(() =>
+            {
+                this.RaisePropertyChanged(nameof(Folders));
+            });
+        }
+        catch (Exception ex)
+        {
+            await this.Navigator.GoBack(this);
+            //TODO
+        }
     }
 
     public ICommand AddCommand => new AsyncRelayCommand(OnAddAsync);
