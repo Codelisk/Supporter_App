@@ -28,6 +28,17 @@ public partial class LoginPageViewModel : BasePageViewModel
         this.IsBusy = true;
     }
 
+    [RelayCommand]
+    public async Task DoApiKeyLogin()
+    {
+        var apiKeyLogin = await _authentication.LoginAsync(Dispatcher, provider: "ApiKey");
+
+        await Navigator.NavigateViewAsync<FolderOverviewPage>(
+            this,
+            qualifier: Qualifiers.ClearBackStack
+        );
+    }
+
     private async Task DoLogin()
     {
         try

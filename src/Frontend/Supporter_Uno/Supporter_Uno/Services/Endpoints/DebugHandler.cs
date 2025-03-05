@@ -1,4 +1,6 @@
+using System.Net;
 using System.Net.Http.Headers;
+using Newtonsoft.Json.Linq;
 
 namespace Supporter_Uno.Services.Endpoints;
 
@@ -23,12 +25,23 @@ internal class DebugHttpHandler : DelegatingHandler
         CancellationToken cancellationToken
     )
     {
-        string token = await authenticationTokenProvider.AccessTokenAsync();
-        if (string.IsNullOrEmpty(token))
+        var provider = await authenticationTokenProvider.GetCurrentProviderAsync(
+            CancellationToken.None
+        );
+        if (provider == "Msal")
         {
-            token = await authenticationTokenProvider.AccessTokenAsync();
+            string token = await authenticationTokenProvider.AccessTokenAsync();
+            if (string.IsNullOrEmpty(token))
+            {
+                token = await authenticationTokenProvider.AccessTokenAsync();
+            }
+            return new AuthenticationHeaderValue("Bearer", token);
         }
-        return new AuthenticationHeaderValue("Bearer", token);
+        else
+        {
+            var byteArray = System.Text.Encoding.ASCII.GetBytes("myusername:mypassword");
+            return new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+        }
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(
@@ -37,6 +50,7 @@ internal class DebugHttpHandler : DelegatingHandler
     )
     {
         request.Headers.Authorization = await GetTokenAsync(cancellationToken);
+        request.Headers.Add("X-API-KEY", "MeinSichererApiKey");
         Console.WriteLine($"Authorization-Header: {request.Headers.Authorization}");
         var response = await base.SendAsync(request, cancellationToken);
 #if DEBUG

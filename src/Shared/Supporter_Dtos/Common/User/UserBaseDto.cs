@@ -15,7 +15,8 @@ public abstract record UserBaseDto<TKey> : BaseBaseDto<TKey>, IUserBaseDto<TKey>
 
     public bool IsUser(TKey userId)
     {
-        return userId.Equals(userId);
+        var result = UserId.Equals(userId);
+        return result;
     }
 
     public void SetUserId(TKey userId)

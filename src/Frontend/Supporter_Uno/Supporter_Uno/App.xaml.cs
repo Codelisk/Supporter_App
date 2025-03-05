@@ -10,6 +10,7 @@ using Supporter_Uno.Presentation.Chats;
 using Supporter_Uno.Presentation.Folders;
 using Supporter_Uno.Presentation.Topics;
 using Supporter_Uno.Providers;
+using Uno.Extensions.Http;
 using Uno.Resizetizer;
 
 namespace Supporter_Uno;
@@ -42,7 +43,7 @@ public partial class App : Application
                     // Switch to Development environment when running in DEBUG
                     .UseEnvironment(Environments.Development)
 #endif
-                    .UseLogging(
+                        .UseLogging(
                             configure: (context, logBuilder) =>
                             {
                                 // Configure log levels for different categories of logging
@@ -138,6 +139,24 @@ public partial class App : Application
                         .UseAuthentication(auth =>
                         {
                             auth.AddMsal(window);
+                            auth.AddCustom(
+                                configure =>
+                                {
+                                    configure.Login(
+                                        async (
+                                            sp,
+                                            dispatcher,
+                                            tokenCache,
+                                            credentials,
+                                            cancellationToken
+                                        ) =>
+                                        {
+                                            return default;
+                                        }
+                                    );
+                                },
+                                "ApiKey"
+                            );
                         })
                         .ConfigureServices(
                             (context, services) =>
@@ -166,19 +185,17 @@ public partial class App : Application
                 //tokens = await services
                 //    .GetRequiredService<ITokenCache>()
                 //    .AccessTokenAsync(CancellationToken.None);
-#if BROWSERWASM
-                if (false)
-#else
+#if !BROWSERWASM
 
                 if (
                     !await AzureServiceChecker.CheckServiceAvailability(
                         services.GetRequiredService<IConfiguration>().GetSection("ApiClient")["Url"]
                     )
                 )
-#endif
                 {
                     await navigator.ShowMessageDialogAsync(this, content: "Server nicht verfügbar");
                 }
+#endif
 
                 if (await auth.IsAuthenticated())
                 {

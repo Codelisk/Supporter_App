@@ -26,7 +26,14 @@ public partial class AddFolderPageViewModel : BasePageViewModel
 
     private async Task OnAddAsync()
     {
-        await aIFolderApi.Add(Folder);
+        try
+        {
+            await aIFolderApi.Add(Folder);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("TEST");
+        }
         await Navigator.GoBack(this);
     }
 }

@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uen="using:Uno.Extensions.Navigation.UI"
     xmlns:utu="using:Uno.Toolkit.UI"
+    d:DataContext="{d:DesignInstance Type=local:LoginPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
@@ -28,6 +29,10 @@
                 HorizontalAlignment="Stretch"
                 Command="{Binding Login}"
                 Content="Login" />
+            <Button
+                HorizontalAlignment="Stretch"
+                Command="{Binding DoApiKeyLoginCommand}"
+                Content="Api-Key Login" />
         </StackPanel>
     </Grid>
 </common:BasePage>

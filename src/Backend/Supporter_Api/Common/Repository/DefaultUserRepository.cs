@@ -27,7 +27,8 @@ namespace Supporter_Api.Common.Repository
         public override List<TEntity> FilterBeforeReturn(List<TEntity> entities)
         {
             var userId = GetUserObjectId();
-            return entities.Where(x => x.IsUser(userId)).ToList();
+            var result = entities.Where(x => x.IsUser(userId)).ToList();
+            return result;
         }
 
         public override Task<TEntity?> GetLastOrDefault()
