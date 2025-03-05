@@ -29,7 +29,7 @@ jobs:
         run: dotnet build src/Frontend/Supporter_Uno --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o "src/Frontend/Supporter_Uno/Supporter_Uno" -f "net9.0-browserwasm"
+        run: dotnet publish 'src/Frontend/Supporter_Uno/Supporter_Uno/Supporter_Uno.csproj' -c Release -f "net9.0-browserwasm"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
