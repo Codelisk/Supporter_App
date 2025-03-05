@@ -1,93 +1,58 @@
-name: Wasm
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy ASP.Net Core app to Azure Web App - orderlyzesupporterapp
+
 on:
-  pull_request:
-    types:
-    - opened
-    - synchronize
-    - reopened
-    - closed
-    branches:
-    - release
   push:
     branches:
-    - release
-  workflow_dispatch: # This line adds the manual trigger option 
-
-env:
-  AZURE_STATIC_WEBAPP_NAME: orderlyzesupporterapp
-  APP_DIRECTORY: ${{env.DOTNET_ROOT}}/src/Frontend/Supporter_Uno/Supporter_Uno/bin/Debug/net9.0-browserwasm/publish
-  API_DIRECTORY: ''
-  OUTPUT: ${{env.DOTNET_ROOT}}/src/Frontend/Supporter_Uno/Supporter_Uno/bin/Debug/net9.0-browserwasm/publish
-  DEPLOYMENT_ENVIRONMENT: preview
+      - master
+  workflow_dispatch:
 
 jobs:
-  build_job:
-    name: Build Job
+  build:
     runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - name: Setup dotnet
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '9.x.x'
-    # - name: Build 1
-    #   run: |
-    #     cd ./src/ooeentwickleruno/ApiConnector/ooeentwickleruno.apiclient
-    #     dotnet build -c Debug
-    # - name: Build 2
-    #   run: |
-    #     cd ./src/ooeentwickleruno/ooeentwickleruno
-    #     dotnet build -c Debug
-    - name: Build 3
-      run: |
-        cd ${{env.DOTNET_ROOT}}/src/Frontend/Supporter_Uno/Supporter_Uno
-        dotnet build -c Debug
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: built-app
-        path: ${{ env.OUTPUT }}
-    # - name: 'Artifact: azure-swa'
-    #   run: |
-    #     cd ./src/ooeentwickleruno/ooeentwickleruno.Wasm
-    #     dotnet publish --output dist
-  deploy_job:
-    name: Deploy Job
-    needs: build_job
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download Artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: built-app
-        path: ${{ env.APP_DIRECTORY }}
-    - name: Setup dotnet
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '9.x.x'
-    - name: Build And Deploy
-      uses: Azure/static-web-apps-deploy@v1
-      with:
-        azure_static_web_apps_api_token: ${{ secrets.orderlyzesupporterapp_SPN }}
-        #repo_token: ${{ secrets.GITHUB_TOKEN }}
-        action: upload
-        deployment_environment: ${{env.DEPLOYMENT_ENVIRONMENT}}
-        app_location: ${{ env.APP_DIRECTORY }}
-        output_location: ${{ env.OUTPUT }}
-        skip_app_build: true
-        skip_api_build: true
+    permissions:
+      contents: read #This is required for actions/checkout
 
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    name: Close Pull Request Job
-    runs-on: ubuntu-latest
     steps:
-    - id: closepullrequest
-      name: Close Pull Request
-      uses: Azure/static-web-apps-deploy@v1
-      with:
-        azure_static_web_apps_api_token: ${{ secrets.ooeentwickler_SPN }}
-        action: close
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: dotnet publish
+        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/src/Frontend/Supporter_Uno/Supporter_Uno" -f "net9.0-browserwasm"
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/src/Frontend/Supporter_Uno/Supporter_Uno
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-app
+      
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'orderlyzesupporterapp'
+          slot-name: 'Production'
+          package: .
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D6D82D745034422A891D3E098345DEF0 }}
