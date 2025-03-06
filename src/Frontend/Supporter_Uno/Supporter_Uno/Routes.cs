@@ -21,6 +21,7 @@ internal static class Routes
         views.Register(
             new ViewMap(ViewModel: typeof(ShellViewModel)),
             new ViewMap<MainPage, MainViewModel>(),
+            new ViewMap<OrderlyzeDirectLoginPage, OrderlyzeDirectLoginPageViewModel>(),
             new ViewMap<LoginPage, LoginPageViewModel>(),
             new ViewMap<FolderOverviewPage, FolderOverviewPageViewModel>(),
             new ViewMap<AddFolderPage, AddFolderPageViewModel>(),
@@ -40,6 +41,7 @@ internal static class Routes
                     new("Main", View: views.FindByView<MainPage>()),
                     new("Login", View: views.FindByView<LoginPage>(), IsDefault: true),
                     new("Folders", View: views.FindByView<FolderOverviewPage>()),
+                    new("OrderlyzeDirectLogin", View: views.FindByView<OrderlyzeDirectLoginPage>()),
                     new("AddFolder", View: views.FindByView<AddFolderPage>()),
                     new("Topics", View: views.FindByView<TopicOverviewPage>()),
                     new("AddTopic", View: views.FindByView<AddTopicPage>()),
