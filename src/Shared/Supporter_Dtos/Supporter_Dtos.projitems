@@ -11,13 +11,19 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Common\Tenant\" />
     <Folder Include="$(MSBuildThisFileDirectory)Common\User\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Dtos\AI\CodeAnalysis\Chat\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)common\IValueDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Tenant\ITenantBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Tenant\TenantBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TenantConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\azure\AzureRepoMappingDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Azure\AzureTopicMappingDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\codeanalysis\AIRepoDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\codeanalysis\chat\CodeAnswerDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\codeanalysis\chat\CodeQuestionDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\CodeAnalysis\Training\CodeTrainingMessageDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\AIFolderDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\AITopicDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\BaseBaseDto.cs" />
@@ -28,7 +34,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\User\UserBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\conversation\chat\ChatAnswerDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\Chat\ChatQuestionDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\Chat\Training\TrainingMessageDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\Training\ChatTrainingMessageDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\Ai\OwnerEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Usings.cs" />
   </ItemGroup>

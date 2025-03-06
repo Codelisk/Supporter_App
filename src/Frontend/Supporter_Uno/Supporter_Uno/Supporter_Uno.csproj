@@ -128,7 +128,9 @@
       </Page>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Presentation\CodeAnalysis\Overview\" />
+      <Page Update="Presentation\CodeAnalysis\Overview\RepoOverviewPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
     </ItemGroup>
 
 </Project>

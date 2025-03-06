@@ -43,7 +43,11 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
 
         foreach (var textPart in trainingTexts)
         {
-            var trainingMessage = new TrainingMessageDto { Value = prefix + textPart };
+            var trainingMessage = new TrainingMessageDto
+            {
+                Value = prefix + textPart,
+                TopicId = AzureTopicMappingDto.TopicId,
+            };
             await trainingMessageApi.Add(trainingMessage);
             prefix = "\n\nSo geht’s weiter \n\n";
         }
