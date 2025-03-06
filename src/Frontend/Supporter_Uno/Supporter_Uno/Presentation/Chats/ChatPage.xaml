@@ -12,29 +12,34 @@
     mc:Ignorable="d">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Button Content="Einstellungen" Command="{Binding SettingsCommand}"/>
-            <Button Content="Training" Command="{Binding TrainingCommand}"/>
-            <Grid>
+            <Button Content="Training" Command="{Binding TrainingCommand}" Grid.Row="1"/>
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowSpacing="4">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <ScrollView>
-                        <controls:WidgetWebView Content="{Binding Answer}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="WebView" MinHeight="500"/>
+                        <controls:WidgetWebView FontSize="50" Content="{Binding Answer}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="WebView"/>
                     </ScrollView>
-                    <TextBox InputScope="Chat" Grid.Row="1" Text="{Binding Question, Mode=TwoWay}" PlaceholderText="Frage" AcceptsReturn="True" />
-                    <Button Command="{Binding AskCommand}" Grid.Row="2" Content="Fragen"/>
+                    <Button Content="Letzte" Command="{Binding PreviousCommand}" Grid.Row="1"/>
+                    <TextBox MinHeight="100" InputScope="Chat" Grid.Row="2" Text="{Binding Question, Mode=TwoWay}" PlaceholderText="Frage" AcceptsReturn="True" />
+                    <Button Command="{Binding AskCommand}" Grid.Row="3" Content="Fragen"/>
                 </Grid>
-                <Button Content="Letzte" Command="{Binding PreviousCommand}" Grid.Column="1"/>
             </Grid>
-        </StackPanel>
+        </Grid>
         <ProgressRing IsActive="{Binding IsBusy}" />
     </Grid>
 </common:BasePage>

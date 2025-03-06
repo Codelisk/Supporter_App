@@ -15,7 +15,8 @@ public partial class WidgetWebView : WebView2
 {
     public WidgetWebView()
     {
-        Loaded += async (_, __) => {
+        Loaded += async (_, __) =>
+        {
 #if !BROWSERWASM
             await this.EnsureCoreWebView2Async();
 #endif
@@ -48,6 +49,10 @@ public partial class WidgetWebView : WebView2
         if (string.IsNullOrWhiteSpace(content))
             return;
         content = Markdown.ToHtml(content);
+#if __MOBILE__
+        content = "<div style='font-size: 2em;'>" + content + "</div>";
+#endif
+
 #if BROWSERWASM
         this.SetHtmlAttribute("srcdoc", content);
 #else

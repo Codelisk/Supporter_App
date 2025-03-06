@@ -43,7 +43,7 @@ public partial class App : Application
                     // Switch to Development environment when running in DEBUG
                     .UseEnvironment(Environments.Development)
 #endif
-                        .UseLogging(
+                    .UseLogging(
                             configure: (context, logBuilder) =>
                             {
                                 // Configure log levels for different categories of logging
@@ -185,7 +185,7 @@ public partial class App : Application
                 //tokens = await services
                 //    .GetRequiredService<ITokenCache>()
                 //    .AccessTokenAsync(CancellationToken.None);
-#if !BROWSERWASM
+#if WINDOWS
 
                 if (
                     !await AzureServiceChecker.CheckServiceAvailability(
