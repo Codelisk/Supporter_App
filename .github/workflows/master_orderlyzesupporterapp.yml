@@ -50,6 +50,15 @@ jobs:
         with:
           name: .net-app
       
+      - name: Set Azure App Settings
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: 'orderlyzesupporterapp'
+          settings-json: |
+            {
+              "AzureOpenAI__ApiKey": "${{ secrets.AZUREOPENAI__APIKEY }}"
+            }
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
