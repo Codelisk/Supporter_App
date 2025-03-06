@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Supporter_Dtos;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -25,5 +26,12 @@ public sealed partial class TopicOverviewPage
     public TopicOverviewPage()
     {
         this.InitializeComponent();
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        (this.DataContext as TopicOverviewPageViewModel).TopicCommand.Execute(
+            (sender as Button).DataContext as AITopicDto
+        );
     }
 }

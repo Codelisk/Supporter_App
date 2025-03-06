@@ -20,7 +20,7 @@
         <ListView ItemsSource="{Binding Topics}" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding Name}" Command="{Binding DataContext.TopicCommand, ElementName=root}" CommandParameter="{Binding}"/>
+                    <Button Content="{Binding Name}" Click="Button_Click"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

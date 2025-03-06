@@ -20,8 +20,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Button
-                        Command="{Binding DataContext.FolderCommand, ElementName=root}"
-                        CommandParameter="{Binding}"
+                        Click="Button_Click"
                         Content="{Binding Name}" />
                 </DataTemplate>
             </ListView.ItemTemplate>

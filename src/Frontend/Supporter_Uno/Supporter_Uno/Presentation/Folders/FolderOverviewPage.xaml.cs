@@ -34,4 +34,11 @@ public partial class FolderOverviewPage
         //    Console.WriteLine("");
         //});
     }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        (this.DataContext as FolderOverviewPageViewModel).FolderCommand.Execute(
+            (sender as Button).DataContext
+        );
+    }
 }
