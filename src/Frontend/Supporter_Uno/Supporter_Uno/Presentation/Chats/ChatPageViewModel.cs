@@ -11,6 +11,7 @@ using ReactiveUI;
 using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
+using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats.Settings;
 using Supporter_Uno.Presentation.Chats.Training;
 using Supporter_Uno.Providers;
@@ -24,6 +25,7 @@ public partial class ChatPageViewModel : BasePageViewModel
     private readonly IChatAnswerApi chatAnswerApi;
     private readonly IAzureOpenAIChatService azureOpenAIChatService;
     private readonly IConfiguration configuration;
+    private readonly ILogger<OrderlyzeDirectLoginPageViewModel> logger;
 
     public ChatPageViewModel(
         BaseVmServices baseVmServices,
@@ -31,7 +33,8 @@ public partial class ChatPageViewModel : BasePageViewModel
         IChatQuestionApi chatQuestionApi,
         IChatAnswerApi chatAnswerApi,
         IAzureOpenAIChatService azureOpenAIChatService,
-        IConfiguration configuration
+        IConfiguration configuration,
+        ILogger<OrderlyzeDirectLoginPageViewModel> logger
     )
         : base(baseVmServices)
     {
@@ -40,17 +43,26 @@ public partial class ChatPageViewModel : BasePageViewModel
         this.chatAnswerApi = chatAnswerApi;
         this.azureOpenAIChatService = azureOpenAIChatService;
         this.configuration = configuration;
+        this.logger = logger;
     }
 
     private AzureTopicMappingDto AzureTopicMappingDto;
 
     public void SetKey()
     {
-        var settings = configuration.GetSection("AzureOpenAI");
-        string endpoint = settings["Endpoint"];
-        this.ApiKey =
-            settings["ApiKey"] ?? throw new InvalidOperationException("API Key not found!");
-        this.RaisePropertyChanged(nameof(ApiKey));
+        try
+        {
+            var settings = configuration.GetSection("AzureOpenAI");
+            string endpoint = settings["Endpoint"];
+            this.ApiKey =
+                settings["ApiKey"] ?? throw new InvalidOperationException("API Key not found!");
+            logger.LogInformation(ApiKey);
+            this.RaisePropertyChanged(nameof(ApiKey));
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error setting API Key");
+        }
     }
 
     public string ApiKey { get; set; }

@@ -20,7 +20,8 @@ public partial class OrderlyzeDirectLoginPageViewModel : BasePageViewModel
         BaseVmServices baseVmServices,
         IAuthenticationService authenticationService,
         IAzureTopicMappingApi azureTopicMappingApi,
-        IAITopicApi aITopicApi
+        IAITopicApi aITopicApi,
+        ILogger<OrderlyzeDirectLoginPageViewModel> logger
     )
         : base(baseVmServices)
     {
