@@ -129,7 +129,32 @@ public partial class App : Application
                                         endpointOptions,
                                         settingsBuilder: ConfigureRefitSettings
                                     )
-                                    .AddRefitClient<ITrainingMessageApi>(
+                                    .AddRefitClient<IChatTrainingMessageApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IAIRepoApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<ICodeAnswerApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<ICodeQuestionApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<ICodeTrainingMessageApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IAzureRepoMappingApi>(
                                         context,
                                         endpointOptions,
                                         settingsBuilder: ConfigureRefitSettings

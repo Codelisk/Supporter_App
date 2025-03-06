@@ -16,13 +16,13 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
 {
     private readonly IAzureOpenAITrainService azureOpenAITrainService;
     private readonly IAzureOpenAIChatService azureOpenAIChatService;
-    private readonly ITrainingMessageApi trainingMessageApi;
+    private readonly IChatTrainingMessageApi trainingMessageApi;
 
     public ChatTrainingPageViewModel(
         BaseVmServices baseVmServices,
         IAzureOpenAITrainService azureOpenAITrainService,
         IAzureOpenAIChatService azureOpenAIChatService,
-        ITrainingMessageApi trainingMessageApi
+        IChatTrainingMessageApi trainingMessageApi
     )
         : base(baseVmServices)
     {
@@ -43,7 +43,7 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
 
         foreach (var textPart in trainingTexts)
         {
-            var trainingMessage = new TrainingMessageDto
+            var trainingMessage = new ChatTrainingMessageDto
             {
                 Value = prefix + textPart,
                 TopicId = AzureTopicMappingDto.TopicId,
