@@ -54,7 +54,7 @@ jobs:
         uses: azure/appservice-settings@v1
         with:
           app-name: 'orderlyzesupporterapp'
-          settings-json: |
+          app-settings-json: |
             {
               "AzureOpenAI__ApiKey": "${{ secrets.AZUREOPENAI__APIKEY }}"
             }
