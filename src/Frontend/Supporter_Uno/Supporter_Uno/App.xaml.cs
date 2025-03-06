@@ -179,11 +179,13 @@ public partial class App : Application
         Host = await builder.NavigateAsync<Shell>(
             initialNavigate: async (services, navigator) =>
             {
+#if BROWSERWASM
                 await navigator.NavigateViewAsync<OrderlyzeDirectLoginPage>(
                     this,
                     qualifier: Qualifiers.Nested
                 );
                 return;
+#endif
                 var auth = services.GetRequiredService<IAuthenticationService>();
                 var token = await services.GetRequiredService<ITokenCache>().AccessTokenAsync();
                 //var authenticated = await auth.RefreshAsync();
