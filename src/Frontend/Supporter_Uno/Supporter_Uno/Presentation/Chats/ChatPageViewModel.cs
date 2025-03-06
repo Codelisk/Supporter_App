@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Extensions.Configuration;
 using OpenAI.Assistants;
 using ReactiveUI;
 using Supporter_AI.Services.OpenAI.AzureAI;
@@ -22,13 +23,15 @@ public partial class ChatPageViewModel : BasePageViewModel
     private readonly IChatQuestionApi chatQuestionApi;
     private readonly IChatAnswerApi chatAnswerApi;
     private readonly IAzureOpenAIChatService azureOpenAIChatService;
+    private readonly IConfiguration configuration;
 
     public ChatPageViewModel(
         BaseVmServices baseVmServices,
         IAzureTopicMappingApi azureTopicMappingApi,
         IChatQuestionApi chatQuestionApi,
         IChatAnswerApi chatAnswerApi,
-        IAzureOpenAIChatService azureOpenAIChatService
+        IAzureOpenAIChatService azureOpenAIChatService,
+        IConfiguration configuration
     )
         : base(baseVmServices)
     {
@@ -36,14 +39,26 @@ public partial class ChatPageViewModel : BasePageViewModel
         this.chatQuestionApi = chatQuestionApi;
         this.chatAnswerApi = chatAnswerApi;
         this.azureOpenAIChatService = azureOpenAIChatService;
+        this.configuration = configuration;
     }
 
     private AzureTopicMappingDto AzureTopicMappingDto;
 
+    public void SetKey()
+    {
+        var settings = configuration.GetSection("AzureOpenAI");
+        string endpoint = settings["Endpoint"];
+        this.ApiKey =
+            settings["ApiKey"] ?? throw new InvalidOperationException("API Key not found!");
+        this.RaisePropertyChanged(nameof(ApiKey));
+    }
+
+    public string ApiKey { get; set; }
+
     public override async void Initialize(NavigationEventArgs e)
     {
         base.Initialize(e);
-
+        SetKey();
         AITopicDto topic = (e.Parameter as AITopicDto)!;
         if (topic is null)
         {

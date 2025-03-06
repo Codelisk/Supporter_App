@@ -117,5 +117,18 @@
         <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\CodeAnalysis\RepoSelectionPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\CodeAnalysis\Selection\RepoSelectionPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Presentation\CodeAnalysis\Overview\" />
+    </ItemGroup>
 
 </Project>
