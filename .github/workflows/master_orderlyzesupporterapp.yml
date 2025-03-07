@@ -58,10 +58,7 @@ jobs:
         uses: azure/appservice-settings@v1
         with:
           app-name: 'orderlyzesupporterapp'
-          app-settings-json: |
-            {
-              "AzureOpenAI__ApiKey": "${{ secrets.AZUREOPENAI__APIKEY }}"
-            }
+          app-settings-json: '[{ "name": "AzureOpenAI__ApiKey", "value": "${{ secrets.AZUREOPENAI__APIKEY }}", "slotSetting": false }]'
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
