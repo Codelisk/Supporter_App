@@ -19,7 +19,8 @@ internal partial class RepoAnalyzePageViewModel : BasePageViewModel
         ILogger<RepoAnalyzePageViewModel> logger,
         IConfiguration configuration,
         IAzureOpenAIChatService openAIChatService,
-        IAzureRepoMappingApi azureRepoMappingApi
+        IAzureRepoMappingApi azureRepoMappingApi,
+        IAIRepoApi aIRepoApi
     )
         : base(baseVmServices)
     {
@@ -27,6 +28,7 @@ internal partial class RepoAnalyzePageViewModel : BasePageViewModel
         this.configuration = configuration;
         this.openAIChatService = openAIChatService;
         this.azureRepoMappingApi = azureRepoMappingApi;
+        this.aIRepoApi = aIRepoApi;
     }
 
     AIRepoDto repo;
@@ -35,13 +37,14 @@ internal partial class RepoAnalyzePageViewModel : BasePageViewModel
     private readonly IConfiguration configuration;
     private readonly IAzureOpenAIChatService openAIChatService;
     private readonly IAzureRepoMappingApi azureRepoMappingApi;
+    private readonly IAIRepoApi aIRepoApi;
 
     public override async void Initialize(NavigationEventArgs e)
     {
         base.Initialize(e);
 
-        repo = e.Parameter as AIRepoDto;
-        azureRepoMappingDto = (await azureRepoMappingApi.GetByRepoId(repo.GetId())).Last();
+        this.azureRepoMappingDto = e.Parameter as AzureRepoMappingDto;
+        this.repo = await aIRepoApi.Get(azureRepoMappingDto.RepoId);
     }
 
     private void ShowMessage(string message)

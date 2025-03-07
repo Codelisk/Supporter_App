@@ -16,8 +16,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBox Text="{Binding Name}" PlaceholderText="Name"/>
-        <TextBox Text="{Binding Owner}" PlaceholderText="Owner" InputScope="Url" Grid.Row="1"/>
-        <Button Content="Add" Command="{Binding AddCommand}"/>
+        <TextBox Text="{Binding Name, Mode=TwoWay}" PlaceholderText="Name"/>
+        <TextBox Text="{Binding Owner, Mode=TwoWay}" PlaceholderText="Owner" InputScope="Url" Grid.Row="1"/>
+        <Button Content="Add" Command="{Binding AddCommand}" Grid.Row="2"/>
     </Grid>
 </common:BasePage>

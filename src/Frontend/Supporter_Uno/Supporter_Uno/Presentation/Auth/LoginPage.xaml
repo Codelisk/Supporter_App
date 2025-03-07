@@ -27,8 +27,12 @@
             Spacing="16">
             <Button
                 HorizontalAlignment="Stretch"
-                Command="{Binding Login}"
+                Command="{Binding LoginCommand}"
                 Content="Login" />
+            <Button
+                HorizontalAlignment="Stretch"
+                Command="{Binding LoginCodeCommand}"
+                Content="Login Code Analysis" />
             <Button
                 HorizontalAlignment="Stretch"
                 Command="{Binding DoApiKeyLoginCommand}"

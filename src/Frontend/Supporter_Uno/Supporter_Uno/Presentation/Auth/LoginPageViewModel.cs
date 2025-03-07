@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ReactiveUI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
+using Supporter_Uno.Presentation.CodeAnalysis.Overview;
 using Supporter_Uno.Presentation.Folders;
 using Supporter_Uno.Providers;
 
@@ -24,7 +25,6 @@ public partial class LoginPageViewModel : BasePageViewModel
         : base(baseVmServices)
     {
         _authentication = authentication;
-        Login = new AsyncRelayCommand(DoLogin);
         this.IsBusy = true;
     }
 
@@ -39,17 +39,36 @@ public partial class LoginPageViewModel : BasePageViewModel
         );
     }
 
-    private async Task DoLogin()
+    [RelayCommand]
+    public async Task Login()
     {
         try
         {
             var success = await _authentication.LoginAsync(Dispatcher);
             if (success)
             {
-                await Navigator.NavigateViewAsync<FolderOverviewPage>(
-                    this,
-                    qualifier: Qualifiers.ClearBackStack
-                );
+                await Navigator.NavigateViewAsync<FolderOverviewPage>(this);
+            }
+        }
+        catch (Exception ex)
+        {
+            await Navigator.ShowMessageDialogAsync(
+                this,
+                title: "Fehler",
+                content: "Login abgebrochen"
+            );
+        }
+    }
+
+    [RelayCommand]
+    public async Task LoginCode()
+    {
+        try
+        {
+            var success = await _authentication.LoginAsync(Dispatcher, provider: "Msal");
+            if (success)
+            {
+                await Navigator.NavigateViewAsync<RepoOverviewPage>(this);
             }
         }
         catch (Exception ex)
@@ -63,6 +82,4 @@ public partial class LoginPageViewModel : BasePageViewModel
     }
 
     public string Title { get; } = "Login";
-
-    public ICommand Login { get; }
 }

@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
+using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
+using Supporter_Uno.Presentation.CodeAnalysis.Add;
+using Supporter_Uno.Presentation.CodeAnalysis.Analyze;
 using Supporter_Uno.Providers;
 
 namespace Supporter_Uno.Presentation.CodeAnalysis.Overview;
@@ -13,11 +16,20 @@ namespace Supporter_Uno.Presentation.CodeAnalysis.Overview;
 public partial class RepoOverviewPageViewModel : BasePageViewModel
 {
     private readonly IAIRepoApi aIRepoApi;
+    private readonly IAzureRepoMappingApi azureRepoMappingApi;
+    private readonly IAzureOpenAIChatService azureOpenAIChatService;
 
-    public RepoOverviewPageViewModel(BaseVmServices baseVmServices, IAIRepoApi aIRepoApi)
+    public RepoOverviewPageViewModel(
+        BaseVmServices baseVmServices,
+        IAIRepoApi aIRepoApi,
+        IAzureRepoMappingApi azureRepoMappingApi,
+        IAzureOpenAIChatService azureOpenAIChatService
+    )
         : base(baseVmServices)
     {
         this.aIRepoApi = aIRepoApi;
+        this.azureRepoMappingApi = azureRepoMappingApi;
+        this.azureOpenAIChatService = azureOpenAIChatService;
     }
 
     public ICollection<AIRepoDto> Repos { get; set; }
@@ -27,5 +39,35 @@ public partial class RepoOverviewPageViewModel : BasePageViewModel
         base.Initialize(e);
         Repos = await aIRepoApi.GetAll();
         this.RaisePropertyChanged(nameof(Repos));
+    }
+
+    [RelayCommand]
+    public async Task Add()
+    {
+        await this.Navigator.NavigateViewAsync<RepoAddPage>(this);
+    }
+
+    [RelayCommand]
+    public async Task Repo(AIRepoDto aIRepo)
+    {
+        var byRepoId = await azureRepoMappingApi.GetByRepoId(aIRepo.Id);
+        if (byRepoId.Count == 0)
+        {
+            var newAssistant = await azureOpenAIChatService.CreateAssistant(aIRepo.Name, 0);
+            var newThread = await azureOpenAIChatService.CreateThreadAsync(aIRepo.Name);
+            var repoMapping = await azureRepoMappingApi.Add(
+                new AzureRepoMappingDto
+                {
+                    AssistantId = newAssistant.Value.Id,
+                    ThreadId = newThread.Value.Id,
+                    RepoId = aIRepo.GetId(),
+                }
+            );
+            await this.Navigator.NavigateViewAsync<RepoAnalyzePage>(this, data: repoMapping);
+        }
+        else
+        {
+            await this.Navigator.NavigateViewAsync<RepoAnalyzePage>(this, data: byRepoId.Last());
+        }
     }
 }

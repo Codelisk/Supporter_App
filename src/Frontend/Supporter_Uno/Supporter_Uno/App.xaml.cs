@@ -230,7 +230,7 @@ public partial class App : Application
                 }
 #endif
 
-                if (await auth.IsAuthenticated())
+                if (await auth.IsAuthenticated() && false)
                 {
                     await navigator.NavigateViewAsync<FolderOverviewPage>(
                         this,

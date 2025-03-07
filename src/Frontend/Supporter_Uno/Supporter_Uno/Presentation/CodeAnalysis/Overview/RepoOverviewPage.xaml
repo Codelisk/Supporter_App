@@ -7,14 +7,20 @@
     xmlns:common="using:Supporter_Uno.Common"
     d:DataContext="{d:DesignInstance Type=local:RepoOverviewPageViewModel}"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utu="using:Uno.Toolkit.UI"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ItemsRepeater ItemsSource="{Binding Repos}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Add" Command="{Binding AddCommand}"/>
+        <ItemsRepeater ItemsSource="{Binding Repos}" Grid.Row="1"  utu:CommandExtensions.Command="{Binding RepoCommand}">
             <ItemsRepeater.ItemTemplate>
                 <DataTemplate>
-                    <TextBox />
+                    <Button Content="{Binding Name}" Command="{Binding }"/>
                 </DataTemplate>
             </ItemsRepeater.ItemTemplate>
         </ItemsRepeater>
