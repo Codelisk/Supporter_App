@@ -52,9 +52,6 @@ public partial class ChatPageViewModel : BasePageViewModel
     {
         try
         {
-            this.ApiKey = Environment.GetEnvironmentVariable("AzureOpenAI:ApiKey");
-            this.RaisePropertyChanged(nameof(ApiKey));
-            return;
             var settings = configuration.GetSection("AzureOpenAI");
             string endpoint = settings["Endpoint"];
             this.ApiKey =
@@ -74,7 +71,6 @@ public partial class ChatPageViewModel : BasePageViewModel
     {
         base.Initialize(e);
         SetKey();
-        return;
         AITopicDto topic = (e.Parameter as AITopicDto)!;
         if (topic is null)
         {

@@ -100,17 +100,17 @@ internal partial class RepoAnalyzePageViewModel : BasePageViewModel
         string path = "src"
     )
     {
-        var rateLimits = await client.RateLimit.GetRateLimits();
         var files = new List<string>();
+        var rateLimits = await client.RateLimit.GetRateLimits();
+        if (rateLimits.Rate.Remaining < 2000)
+        {
+            return files;
+        }
         var contents = await client.Repository.Content.GetAllContents(owner, repo, path);
         foreach (var content in contents)
         {
             if (content.Type == ContentType.File)
             {
-                if (content.Path.EndsWith(".cs"))
-                {
-                    return files;
-                }
                 files.Add(content.Path);
             }
             else if (content.Type == ContentType.Dir)
