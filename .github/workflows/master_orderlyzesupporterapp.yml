@@ -50,15 +50,9 @@ jobs:
         with:
           name: .net-app
       
-      - uses: azure/login@v1
-        with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
-      
-      - name: Set Azure App Settings
-        uses: azure/appservice-settings@v1
-        with:
-          app-name: 'orderlyzesupporterapp'
-          app-settings-json: '[{ "name": "AzureOpenAI__ApiKey", "value": "${{ secrets.AZUREOPENAI__APIKEY }}", "slotSetting": false }]'
+      - name: Set Environment Variables
+        run: |
+          echo "VITE_AZURE_OPENAI_API_KEY=${{ secrets.AZURE_OPENAI_API_KEY }}" >> $GITHUB_ENV
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
