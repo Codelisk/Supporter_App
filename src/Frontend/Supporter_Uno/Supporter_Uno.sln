@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.targets = Directory.Build.targets
 		Directory.Packages.props = Directory.Packages.props
 		global.json = global.json
+		..\..\..\.github\workflows\master_orderlyzesupporterapp.yml = ..\..\..\.github\workflows\master_orderlyzesupporterapp.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supporter_AI", "..\..\Shared\Supporter_AI\Supporter_AI.csproj", "{5EBFD9F7-F088-4C41-BFB8-11702D2B1FA9}"
