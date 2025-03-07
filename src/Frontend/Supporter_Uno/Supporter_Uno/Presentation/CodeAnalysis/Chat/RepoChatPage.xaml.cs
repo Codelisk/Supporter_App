@@ -15,14 +15,14 @@ using Windows.Foundation.Collections;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Supporter_Uno.Presentation.CodeAnalysis.Selection;
+namespace Supporter_Uno.Presentation.CodeAnalysis.Chat;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public partial class RepoSelectionPage
+public sealed partial class RepoChatPage
 {
-    public RepoSelectionPage()
+    public RepoChatPage()
     {
         this.InitializeComponent();
     }

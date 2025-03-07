@@ -7,6 +7,7 @@ using Supporter_Dtos;
 using Supporter_Uno.ApiClient.Helpers;
 using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats;
+using Supporter_Uno.Presentation.CodeAnalysis.Analyze;
 using Supporter_Uno.Presentation.Folders;
 using Supporter_Uno.Presentation.Topics;
 using Supporter_Uno.Providers;

@@ -7,6 +7,10 @@ using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats;
 using Supporter_Uno.Presentation.Chats.Settings;
 using Supporter_Uno.Presentation.Chats.Training;
+using Supporter_Uno.Presentation.CodeAnalysis.Add;
+using Supporter_Uno.Presentation.CodeAnalysis.Analyze;
+using Supporter_Uno.Presentation.CodeAnalysis.Chat;
+using Supporter_Uno.Presentation.CodeAnalysis.Overview;
 using Supporter_Uno.Presentation.Folders;
 using Supporter_Uno.Presentation.Folders.Add;
 using Supporter_Uno.Presentation.Topics;
@@ -29,7 +33,11 @@ internal static class Routes
             new ViewMap<AddTopicPage, AddTopicPageViewModel>(),
             new ViewMap<ChatPage, ChatPageViewModel>(),
             new ViewMap<ChatSettingsPage, ChatSettingsPageViewModel>(),
-            new ViewMap<ChatTrainingPage, ChatTrainingPageViewModel>()
+            new ViewMap<ChatTrainingPage, ChatTrainingPageViewModel>(),
+            new ViewMap<RepoOverviewPage, RepoOverviewPageViewModel>(),
+            new ViewMap<RepoAddPage, RepoAddPageViewModel>(),
+            new ViewMap<RepoChatPage, RepoChatPageViewModel>(),
+            new ViewMap<RepoAnalyzePage, RepoAnalyzePageViewModel>()
         );
 
         routes.Register(
@@ -48,6 +56,10 @@ internal static class Routes
                     new("Chat", View: views.FindByView<ChatPage>()),
                     new("ChatSettings", View: views.FindByView<ChatSettingsPage>()),
                     new("ChatTraining", View: views.FindByView<ChatTrainingPage>()),
+                    new("AddRepo", View: views.FindByView<RepoAddPage>()),
+                    new("RepoOverview", View: views.FindByView<RepoOverviewPage>()),
+                    new("RepoChat", View: views.FindByView<RepoChatPage>()),
+                    new("RepoAnalyze", View: views.FindByView<RepoAnalyzePage>()),
                 ]
             )
         );

@@ -5,11 +5,18 @@
     xmlns:local="using:Supporter_Uno.Presentation.CodeAnalysis.Overview"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:common="using:Supporter_Uno.Common"
+    d:DataContext="{d:DesignInstance Type=local:RepoOverviewPageViewModel}"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <ItemsRepeater ItemsSource="{Binding Repos}">
+            <ItemsRepeater.ItemTemplate>
+                <DataTemplate>
+                    <TextBox />
+                </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
     </Grid>
 </common:BasePage>

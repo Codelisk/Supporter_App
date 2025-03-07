@@ -4,6 +4,6 @@ namespace Supporter_Dtos
     public partial record AIRepoDto : UserBaseDto<Guid>, INameDto
     {
         public string Name { get; set; }
-        public string Url { get; set; }
+        public string Owner { get; set; }
     }
 }
