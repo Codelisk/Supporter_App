@@ -40,6 +40,7 @@
     <ProjectReference Include="..\..\..\submodules\CodeGen\src\Generators\Web\WebManager.Generator\WebManager.Generator.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
     <ProjectReference Include="..\..\..\submodules\CodeGen\src\Generators\Web\WebRepositories.Contract.Generator\WebRepositories.Contract.Generator.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
     <ProjectReference Include="..\..\..\submodules\CodeGen\src\Generators\Web\WebRepositories.Generator\WebRepositories.Generator.csproj" PrivateAssets="all" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\Shared\Supporter_AI\Supporter_AI.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\Shared\Supporter_Dtos\Supporter_Dtos.projitems" Label="Shared" />

@@ -1011,6 +1011,34 @@ namespace Supporter_Dtos
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IAIApi
+    {
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AI/Chat")]
+        Task<string> Chat([Query] string question, [Query] string threadId, [Query] string assistantId, [Query] float? temperature);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AI/CreateAssistant")]
+        Task<string> CreateAssistant([Query] string name, [Query] int? temperature);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AI/EditAssistant")]
+        Task<string> EditAssistant([Query] string assistantId, [Query] float? temperature, [Query] float? nucleusSamplingFactor, [Query] string model, [Query] string instructions, [Query] string description);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AI/CreateThreadAsync")]
+        Task<string> CreateThreadAsync([Query] string threadId);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IWeatherForecastApi
     {
         /// <returns>OK</returns>

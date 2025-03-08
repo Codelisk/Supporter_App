@@ -1,6 +1,7 @@
 ﻿using Codelisk.GeneratorAttributes.GeneralAttributes.ModuleInitializers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Supporter_AI;
 using Supporter_Api.Common.Services;
 
 namespace Supporter_Api
@@ -29,6 +30,7 @@ namespace Supporter_Api
             services.TryAddScoped<IPaginationService, PaginationService>();
             services.TryAddScoped<BaseUserRepositoryProvider>();
             services.TryAddScoped<BaseManagerProvider>();
+            Initializer.AddAIServices(services, configurationManager);
             AddServices(services);
             AddManagerServices(services);
             AddRepositoryServices(services);
