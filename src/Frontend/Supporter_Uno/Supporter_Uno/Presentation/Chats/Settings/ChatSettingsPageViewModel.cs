@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
-using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Providers;
@@ -13,20 +12,12 @@ namespace Supporter_Uno.Presentation.Chats.Settings;
 
 internal partial class ChatSettingsPageViewModel : BasePageViewModel
 {
-    private readonly IAzureOpenAITrainService azureOpenAITrainService;
-    private readonly IAzureOpenAIChatService azureOpenAIChatService;
-
     AzureTopicMappingDto AzureTopicMappingDto;
 
-    public ChatSettingsPageViewModel(
-        BaseVmServices baseVmServices,
-        IAzureOpenAITrainService azureOpenAITrainService,
-        IAzureOpenAIChatService azureOpenAIChatService
-    )
+    public ChatSettingsPageViewModel(BaseVmServices baseVmServices, IAIApi aIApi)
         : base(baseVmServices)
     {
-        this.azureOpenAITrainService = azureOpenAITrainService;
-        this.azureOpenAIChatService = azureOpenAIChatService;
+        this.aIApi = aIApi;
     }
 
     private double? temperature;
@@ -57,30 +48,32 @@ internal partial class ChatSettingsPageViewModel : BasePageViewModel
     }
 
     private string? description;
+    private readonly IAIApi aIApi;
+
     public string? Description
     {
         get => description;
         set => this.RaiseAndSetIfChanged(ref description, value);
     }
 
-    public override void Initialize(NavigationEventArgs e)
+    public override async void Initialize(NavigationEventArgs e)
     {
         base.Initialize(e);
         AzureTopicMappingDto = e.Parameter as AzureTopicMappingDto;
-        var assistantClient = azureOpenAIChatService.GetChatClient();
-        var assistant = assistantClient.GetAssistant(AzureTopicMappingDto.AssistantId);
-        Temperature = assistant.Value.Temperature.GetValueOrDefault(0);
-        NucleusSamplingFactor = assistant.Value.NucleusSamplingFactor.GetValueOrDefault(0);
-        Model = assistant.Value.Model;
-        Instructions = assistant.Value.Instructions;
-        Description = assistant.Value.Description;
+        var settings = await aIApi.GetSettings(AzureTopicMappingDto.AssistantId);
+
+        Temperature = settings.Temperature.GetValueOrDefault(0);
+        NucleusSamplingFactor = settings.NucleusSamplingFactor.GetValueOrDefault(0);
+        Model = settings.Model;
+        Instructions = settings.Instructions;
+        Description = settings.Description;
     }
 
     public ICommand EditAssistantCommand => new AsyncRelayCommand(OnEditAssistantAsync);
 
     private async Task OnEditAssistantAsync()
     {
-        var result = await azureOpenAIChatService.EditAssistant(
+        var result = await aIApi.EditAssistant(
             AzureTopicMappingDto.AssistantId,
             Temperature.HasValue ? ((float?)Temperature) : null,
             NucleusSamplingFactor.HasValue ? ((float)NucleusSamplingFactor) : null,

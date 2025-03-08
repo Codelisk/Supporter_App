@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpenAI.Assistants;
+using Supporter_AI.Models;
 using Supporter_AI.Services.OpenAI.AzureAI;
 
 namespace Supporter_Api.Controllers
@@ -18,6 +19,20 @@ namespace Supporter_Api.Controllers
         public AIController(IAzureOpenAIChatService azureOpenAIChatService)
         {
             this.azureOpenAIChatService = azureOpenAIChatService;
+        }
+
+        [HttpGet("GetSettings")]
+        public async Task<AISettings> GetSettings(string assistantId)
+        {
+            var client = azureOpenAIChatService.GetChatClient();
+            var assistant = await client.GetAssistantAsync(assistantId);
+            return new AISettings(
+                assistant.Value.Model,
+                assistant.Value.Description,
+                assistant.Value.Instructions,
+                assistant.Value.Temperature,
+                assistant.Value.NucleusSamplingFactor
+            );
         }
 
         [Microsoft.AspNetCore.Mvc.HttpGet("Chat")]

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
-using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Presentation.CodeAnalysis.Add;
@@ -17,19 +16,19 @@ public partial class RepoOverviewPageViewModel : BasePageViewModel
 {
     private readonly IAIRepoApi aIRepoApi;
     private readonly IAzureRepoMappingApi azureRepoMappingApi;
-    private readonly IAzureOpenAIChatService azureOpenAIChatService;
+    private readonly IAIApi aIApi;
 
     public RepoOverviewPageViewModel(
         BaseVmServices baseVmServices,
         IAIRepoApi aIRepoApi,
         IAzureRepoMappingApi azureRepoMappingApi,
-        IAzureOpenAIChatService azureOpenAIChatService
+        IAIApi aIApi
     )
         : base(baseVmServices)
     {
         this.aIRepoApi = aIRepoApi;
         this.azureRepoMappingApi = azureRepoMappingApi;
-        this.azureOpenAIChatService = azureOpenAIChatService;
+        this.aIApi = aIApi;
     }
 
     public ICollection<AIRepoDto> Repos { get; set; }
@@ -53,13 +52,13 @@ public partial class RepoOverviewPageViewModel : BasePageViewModel
         var byRepoId = await azureRepoMappingApi.GetByRepoId(aIRepo.Id);
         if (byRepoId.Count == 0)
         {
-            var newAssistant = await azureOpenAIChatService.CreateAssistant(aIRepo.Name, 0);
-            var newThread = await azureOpenAIChatService.CreateThreadAsync(aIRepo.Name);
+            var newAssistant = await aIApi.CreateAssistant(aIRepo.Name, 0);
+            var newThread = await aIApi.CreateThreadAsync(aIRepo.Name);
             var repoMapping = await azureRepoMappingApi.Add(
                 new AzureRepoMappingDto
                 {
-                    AssistantId = newAssistant.Value.Id,
-                    ThreadId = newThread.Value.Id,
+                    AssistantId = newAssistant,
+                    ThreadId = newThread,
                     RepoId = aIRepo.GetId(),
                 }
             );

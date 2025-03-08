@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ReactiveUI;
-using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Providers;
@@ -14,21 +13,18 @@ namespace Supporter_Uno.Presentation.Chats.Training;
 
 internal partial class ChatTrainingPageViewModel : BasePageViewModel
 {
-    private readonly IAzureOpenAITrainService azureOpenAITrainService;
-    private readonly IAzureOpenAIChatService azureOpenAIChatService;
     private readonly IChatTrainingMessageApi trainingMessageApi;
+    private readonly IAIApi aIApi;
 
     public ChatTrainingPageViewModel(
         BaseVmServices baseVmServices,
-        IAzureOpenAITrainService azureOpenAITrainService,
-        IAzureOpenAIChatService azureOpenAIChatService,
-        IChatTrainingMessageApi trainingMessageApi
+        IChatTrainingMessageApi trainingMessageApi,
+        IAIApi aIApi
     )
         : base(baseVmServices)
     {
-        this.azureOpenAITrainService = azureOpenAITrainService;
-        this.azureOpenAIChatService = azureOpenAIChatService;
         this.trainingMessageApi = trainingMessageApi;
+        this.aIApi = aIApi;
     }
 
     AzureTopicMappingDto AzureTopicMappingDto;
@@ -52,7 +48,7 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
             prefix = "\n\nSo geht’s weiter \n\n";
         }
 
-        var answer = await azureOpenAIChatService.Chat(
+        var answer = await aIApi.Chat(
             TrainingText,
             AzureTopicMappingDto.ThreadId,
             AzureTopicMappingDto.AssistantId,

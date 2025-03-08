@@ -8,6 +8,7 @@ using Azure.AI.OpenAI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OpenAI;
+using OpenAI.Assistants;
 using Supporter_AI.Services.OpenAI.AzureAI;
 
 namespace Supporter_AI
@@ -34,14 +35,12 @@ namespace Supporter_AI
             string apiKey =
                 settings["ApiKey"] ?? throw new InvalidOperationException("API Key not found!");
 
-            services.AddSingleton(
-                new AzureOpenAIClient(
-                    new Uri(endpoint),
-                    new System.ClientModel.ApiKeyCredential(apiKey),
-                    new AzureOpenAIClientOptions(
-                        AzureOpenAIClientOptions.ServiceVersion.V2025_01_01_Preview
+            services.AddScoped(
+                (x) =>
+                    new AzureOpenAIClient(
+                        new Uri(endpoint),
+                        new System.ClientModel.ApiKeyCredential(apiKey)
                     )
-                )
             );
         }
     }

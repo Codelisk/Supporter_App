@@ -2,7 +2,6 @@ using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Refit;
-using Supporter_AI;
 using Supporter_Dtos;
 using Supporter_Uno.ApiClient.Helpers;
 using Supporter_Uno.Presentation.Auth;
@@ -159,6 +158,11 @@ public partial class App : Application
                                         context,
                                         endpointOptions,
                                         settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IAIApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
                                     );
                             }
                         )
@@ -190,7 +194,6 @@ public partial class App : Application
                                 // TODO: Register your services
                                 //services.AddSingleton<IMyService, MyService>();
                                 services.TryAddScoped<BaseVmServices>();
-                                services.AddAIServices(context.Configuration);
                             }
                         )
                         .UseNavigation(Routes.RegisterRoutes)

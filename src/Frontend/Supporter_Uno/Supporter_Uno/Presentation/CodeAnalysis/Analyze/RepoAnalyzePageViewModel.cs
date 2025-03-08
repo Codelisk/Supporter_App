@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Octokit;
-using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Providers;
@@ -18,26 +17,26 @@ internal partial class RepoAnalyzePageViewModel : BasePageViewModel
         BaseVmServices baseVmServices,
         ILogger<RepoAnalyzePageViewModel> logger,
         IConfiguration configuration,
-        IAzureOpenAIChatService openAIChatService,
         IAzureRepoMappingApi azureRepoMappingApi,
-        IAIRepoApi aIRepoApi
+        IAIRepoApi aIRepoApi,
+        IAIApi aIApi
     )
         : base(baseVmServices)
     {
         this.logger = logger;
         this.configuration = configuration;
-        this.openAIChatService = openAIChatService;
         this.azureRepoMappingApi = azureRepoMappingApi;
         this.aIRepoApi = aIRepoApi;
+        this.aIApi = aIApi;
     }
 
     AIRepoDto repo;
     AzureRepoMappingDto azureRepoMappingDto;
     private readonly ILogger<RepoAnalyzePageViewModel> logger;
     private readonly IConfiguration configuration;
-    private readonly IAzureOpenAIChatService openAIChatService;
     private readonly IAzureRepoMappingApi azureRepoMappingApi;
     private readonly IAIRepoApi aIRepoApi;
+    private readonly IAIApi aIApi;
 
     public override async void Initialize(NavigationEventArgs e)
     {
@@ -141,7 +140,7 @@ internal partial class RepoAnalyzePageViewModel : BasePageViewModel
         string code
     )
     {
-        return await openAIChatService.Chat(
+        return await aIApi.Chat(
             $"Merk dir das File ({file} im Github Repository {repoName} für den Owner {repoOwner})\n\n{code}",
             azureRepoMappingDto.ThreadId,
             azureRepoMappingDto.AssistantId,

@@ -1016,6 +1016,12 @@ namespace Supporter_Dtos
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
+        [Get("/api/AI/GetSettings")]
+        Task<AISettings> GetSettings([Query] string assistantId);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
         [Get("/api/AI/Chat")]
         Task<string> Chat([Query] string question, [Query] string threadId, [Query] string assistantId, [Query] float? temperature);
 

@@ -1,14 +1,11 @@
 using System;
-using System.ClientModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Extensions.Configuration;
-using OpenAI.Assistants;
 using ReactiveUI;
-using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Presentation.Auth;
@@ -23,27 +20,27 @@ public partial class ChatPageViewModel : BasePageViewModel
     private readonly IAzureTopicMappingApi azureTopicMappingApi;
     private readonly IChatQuestionApi chatQuestionApi;
     private readonly IChatAnswerApi chatAnswerApi;
-    private readonly IAzureOpenAIChatService azureOpenAIChatService;
     private readonly IConfiguration configuration;
     private readonly ILogger<OrderlyzeDirectLoginPageViewModel> logger;
+    private readonly IAIApi aiApi;
 
     public ChatPageViewModel(
         BaseVmServices baseVmServices,
         IAzureTopicMappingApi azureTopicMappingApi,
         IChatQuestionApi chatQuestionApi,
         IChatAnswerApi chatAnswerApi,
-        IAzureOpenAIChatService azureOpenAIChatService,
         IConfiguration configuration,
-        ILogger<OrderlyzeDirectLoginPageViewModel> logger
+        ILogger<OrderlyzeDirectLoginPageViewModel> logger,
+        IAIApi aiApi
     )
         : base(baseVmServices)
     {
         this.azureTopicMappingApi = azureTopicMappingApi;
         this.chatQuestionApi = chatQuestionApi;
         this.chatAnswerApi = chatAnswerApi;
-        this.azureOpenAIChatService = azureOpenAIChatService;
         this.configuration = configuration;
         this.logger = logger;
+        this.aiApi = aiApi;
     }
 
     private AzureTopicMappingDto AzureTopicMappingDto;
@@ -80,13 +77,13 @@ public partial class ChatPageViewModel : BasePageViewModel
         var azureTopics = await azureTopicMappingApi.GetByTopicId(topic.GetId());
         if (azureTopics.Count == 0)
         {
-            var newAssistant = await azureOpenAIChatService.CreateAssistant(topic.Name, 0);
-            var newThread = await azureOpenAIChatService.CreateThreadAsync(topic.Name);
+            var newAssistant = await aiApi.CreateAssistant(topic.Name, 0);
+            var newThread = await aiApi.CreateThreadAsync(topic.Name);
             AzureTopicMappingDto = await azureTopicMappingApi.Add(
                 new AzureTopicMappingDto
                 {
-                    AssistantId = newAssistant.Value.Id,
-                    ThreadId = newThread.Value.Id,
+                    AssistantId = newAssistant,
+                    ThreadId = newThread,
                     TopicId = topic.GetId(),
                 }
             );
@@ -112,7 +109,7 @@ public partial class ChatPageViewModel : BasePageViewModel
                 new ChatQuestionDto { TopicId = AzureTopicMappingDto.TopicId, Value = Question }
             );
             LastQuestion = chatQuestion;
-            this.Answer = await azureOpenAIChatService.Chat(
+            this.Answer = await aiApi.Chat(
                 Question,
                 threadId: AzureTopicMappingDto.ThreadId,
                 assistantId: AzureTopicMappingDto.AssistantId,
