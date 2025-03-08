@@ -45,29 +45,9 @@ public partial class ChatPageViewModel : BasePageViewModel
 
     private AzureTopicMappingDto AzureTopicMappingDto;
 
-    public void SetKey()
-    {
-        try
-        {
-            var settings = configuration.GetSection("AzureOpenAI");
-            string endpoint = settings["Endpoint"];
-            this.ApiKey =
-                settings["ApiKey"] ?? throw new InvalidOperationException("API Key not found!");
-            logger.LogInformation(ApiKey);
-            this.RaisePropertyChanged(nameof(ApiKey));
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Error setting API Key");
-        }
-    }
-
-    public string ApiKey { get; set; }
-
     public override async void Initialize(NavigationEventArgs e)
     {
         base.Initialize(e);
-        SetKey();
         AITopicDto topic = (e.Parameter as AITopicDto)!;
         if (topic is null)
         {

@@ -39,7 +39,10 @@ namespace Supporter_AI
                 (x) =>
                     new AzureOpenAIClient(
                         new Uri(endpoint),
-                        new System.ClientModel.ApiKeyCredential(apiKey)
+                        new System.ClientModel.ApiKeyCredential(apiKey),
+                        new AzureOpenAIClientOptions(
+                            AzureOpenAIClientOptions.ServiceVersion.V2025_01_01_Preview
+                        )
                     )
             );
         }

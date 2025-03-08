@@ -26,7 +26,6 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowSpacing="4">
                     <Grid.RowDefinitions>
@@ -42,7 +41,6 @@
                     <TextBox MinHeight="100" InputScope="Chat" Grid.Row="2" Text="{Binding Question, Mode=TwoWay}" PlaceholderText="Frage" AcceptsReturn="True" />
                     <Button Command="{Binding AskCommand}" Grid.Row="3" Content="Fragen"/>
                 </Grid>
-                <TextBlock Text="{Binding ApiKey}" Grid.Row="1"/>
             </Grid>
         </Grid>
         <ProgressRing IsActive="{Binding IsBusy}" />
