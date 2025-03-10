@@ -37,7 +37,7 @@ namespace Supporter_Api.Controllers
         }
 
         [Produces("text/markdown")]
-        [Microsoft.AspNetCore.Mvc.HttpGet("Chat")]
+        [Microsoft.AspNetCore.Mvc.HttpPost("Chat")]
         public async Task<ActionResult<string>> Chat(ChatPayload chatPayload)
         {
             var result = await azureOpenAIChatService.Chat(

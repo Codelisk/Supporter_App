@@ -1022,7 +1022,7 @@ namespace Supporter_Dtos
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: text/markdown, application/json")]
-        [Get("/api/AI/Chat")]
+        [Post("/api/AI/Chat")]
         Task<string> Chat([Body] ChatPayload body);
 
         /// <returns>OK</returns>
