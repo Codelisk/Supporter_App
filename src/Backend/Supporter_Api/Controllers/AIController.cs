@@ -35,15 +35,22 @@ namespace Supporter_Api.Controllers
             );
         }
 
+        [Produces("text/markdown")]
         [Microsoft.AspNetCore.Mvc.HttpGet("Chat")]
-        public Task<string> Chat(
+        public async Task<IActionResult> Chat(
             string question,
             string threadId,
             string assistantId,
             float? temperature
         )
         {
-            return azureOpenAIChatService.Chat(question, threadId, assistantId, temperature);
+            var result = await azureOpenAIChatService.Chat(
+                question,
+                threadId,
+                assistantId,
+                temperature
+            );
+            return Content(result);
         }
 
         [Microsoft.AspNetCore.Mvc.HttpGet("CreateAssistant")]
