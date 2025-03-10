@@ -14,6 +14,7 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
     using System.Threading.Tasks;
     using Azure;
     using Azure.AI.OpenAI;
+    using global::OpenAI.Embeddings;
     using global::OpenAI.Files;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
@@ -35,6 +36,15 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
         )
         {
             _logger = logger;
+        }
+
+        public async Task Test(List<string> fileContents, string userId)
+        {
+            var embeddingClient = _openAIClient.GetEmbeddingClient("text-embedding-3-large");
+            var result = await embeddingClient.GenerateEmbeddingsAsync(
+                fileContents,
+                new EmbeddingGenerationOptions { EndUserId = userId }
+            );
         }
 
         public async Task StartFineTuningAsync(string threadName, List<TrainingData> data)
