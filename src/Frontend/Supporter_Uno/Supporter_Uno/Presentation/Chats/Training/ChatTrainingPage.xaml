@@ -11,15 +11,17 @@
     d:DataContext="{d:DesignInstance Type=local:ChatTrainingPageViewModel}"
     xmlns:utu="using:Uno.Toolkit.UI"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <Button uen:Navigation.Request="-" Content="Back"/>
-        <TextBox AcceptsReturn="True" InputScope="Chat" Text="{Binding TrainingText, Mode=TwoWay}" PlaceholderText="Training" Grid.Row="1"/>
-        <Button Content="Hinzufügen" Command="{Binding AddTrainingCommand}" Grid.Row="2"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Button uen:Navigation.Request="-" Content="Back"/>
+            <TextBox AcceptsReturn="True" InputScope="Chat" Text="{Binding TrainingText, Mode=TwoWay}" PlaceholderText="Training" Grid.Row="1"/>
+            <Button Content="Hinzufügen" Command="{Binding AddTrainingCommand}" Grid.Row="2"/>
+        </Grid>
+        <ProgressRing IsActive="{Binding IsBusy}" />
     </Grid>
 </common:BasePage>

@@ -33,27 +33,36 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
 
     private async Task OnAddTrainingAsync()
     {
-        const int maxLength = 15000;
-        var trainingTexts = SplitText(TrainingText, maxLength);
-        string prefix = "Merk dir das für die Zukunft:\n\n";
-
-        foreach (var textPart in trainingTexts)
+        this.IsBusy = true;
+        try
         {
-            var trainingMessage = new ChatTrainingMessageDto
-            {
-                Value = prefix + textPart,
-                TopicId = AzureTopicMappingDto.TopicId,
-            };
-            await trainingMessageApi.Add(trainingMessage);
-            prefix = "\n\nSo geht’s weiter \n\n";
-        }
+            const int maxLength = 15000;
+            var trainingTexts = SplitText(TrainingText, maxLength);
+            string prefix = "Merk dir das für die Zukunft:\n\n";
 
-        var answer = await aIApi.Chat(
-            TrainingText,
-            AzureTopicMappingDto.ThreadId,
-            AzureTopicMappingDto.AssistantId,
-            null
-        );
+            foreach (var textPart in trainingTexts)
+            {
+                var trainingMessage = new ChatTrainingMessageDto
+                {
+                    Value = prefix + textPart,
+                    TopicId = AzureTopicMappingDto.TopicId,
+                };
+                await trainingMessageApi.Add(trainingMessage);
+
+                var answer = await aIApi.Chat(
+                    TrainingText,
+                    AzureTopicMappingDto.ThreadId,
+                    AzureTopicMappingDto.AssistantId,
+                    null
+                );
+                prefix = "\n\nSo geht’s weiter \n\n";
+            }
+        }
+        finally
+        {
+            this.IsBusy = false;
+            await this.Navigator.GoBack(this);
+        }
     }
 
     private List<string> SplitText(string text, int maxLength)
