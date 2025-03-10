@@ -51,7 +51,7 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
 
                 var answer = await aIApi.Chat(
                     new ChatPayload(
-                        TrainingText,
+                        trainingMessage.Value,
                         AzureTopicMappingDto.ThreadId,
                         AzureTopicMappingDto.AssistantId,
                         null
