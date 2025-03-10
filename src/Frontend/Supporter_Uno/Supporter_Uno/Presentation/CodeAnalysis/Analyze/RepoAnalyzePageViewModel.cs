@@ -141,10 +141,12 @@ internal partial class RepoAnalyzePageViewModel : BasePageViewModel
     )
     {
         return await aIApi.Chat(
-            $"Merk dir das File ({file} im Github Repository {repoName} für den Owner {repoOwner})\n\n{code}",
-            azureRepoMappingDto.ThreadId,
-            azureRepoMappingDto.AssistantId,
-            null
+            new ChatPayload(
+                $"Merk dir das File ({file} im Github Repository {repoName} für den Owner {repoOwner})\n\n{code}",
+                azureRepoMappingDto.ThreadId,
+                azureRepoMappingDto.AssistantId,
+                null
+            )
         );
     }
 }

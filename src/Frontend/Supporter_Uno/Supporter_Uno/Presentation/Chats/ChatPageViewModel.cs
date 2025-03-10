@@ -90,10 +90,12 @@ public partial class ChatPageViewModel : BasePageViewModel
             );
             LastQuestion = chatQuestion;
             this.Answer = await aiApi.Chat(
-                Question,
-                threadId: AzureTopicMappingDto.ThreadId,
-                assistantId: AzureTopicMappingDto.AssistantId,
-                temperature: null
+                new ChatPayload(
+                    Question,
+                    AzureTopicMappingDto.ThreadId,
+                    AzureTopicMappingDto.AssistantId,
+                    null
+                )
             );
             await chatAnswerApi.Add(
                 new ChatAnswerDto

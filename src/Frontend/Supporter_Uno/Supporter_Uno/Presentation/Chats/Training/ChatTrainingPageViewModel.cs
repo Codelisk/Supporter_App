@@ -50,10 +50,12 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
                 await trainingMessageApi.Add(trainingMessage);
 
                 var answer = await aIApi.Chat(
-                    TrainingText,
-                    AzureTopicMappingDto.ThreadId,
-                    AzureTopicMappingDto.AssistantId,
-                    null
+                    new ChatPayload(
+                        TrainingText,
+                        AzureTopicMappingDto.ThreadId,
+                        AzureTopicMappingDto.AssistantId,
+                        null
+                    )
                 );
                 prefix = "\n\nSo geht’s weiter \n\n";
             }

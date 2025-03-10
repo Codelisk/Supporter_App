@@ -44,7 +44,7 @@ public partial class LoginPageViewModel : BasePageViewModel
     {
         try
         {
-            var success = await _authentication.LoginAsync(Dispatcher);
+            var success = await _authentication.LoginAsync(Dispatcher, provider: "Msal");
             if (success)
             {
                 await Navigator.NavigateViewAsync<FolderOverviewPage>(this);

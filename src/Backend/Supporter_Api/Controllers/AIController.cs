@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OpenAI.Assistants;
 using Supporter_AI.Models;
 using Supporter_AI.Services.OpenAI.AzureAI;
+using Supporter_Api.Models;
 
 namespace Supporter_Api.Controllers
 {
@@ -37,18 +38,13 @@ namespace Supporter_Api.Controllers
 
         [Produces("text/markdown")]
         [Microsoft.AspNetCore.Mvc.HttpGet("Chat")]
-        public async Task<IActionResult> Chat(
-            string question,
-            string threadId,
-            string assistantId,
-            float? temperature
-        )
+        public async Task<ActionResult<string>> Chat(ChatPayload chatPayload)
         {
             var result = await azureOpenAIChatService.Chat(
-                question,
-                threadId,
-                assistantId,
-                temperature
+                chatPayload.question,
+                chatPayload.threadId,
+                chatPayload.assistantId,
+                chatPayload.temperature
             );
             return Content(result);
         }
