@@ -10,6 +10,7 @@ using Supporter_Uno.Presentation.CodeAnalysis.Analyze;
 using Supporter_Uno.Presentation.Folders;
 using Supporter_Uno.Presentation.Topics;
 using Supporter_Uno.Providers;
+using Supporter_Uno.Services.Settings;
 using Uno.Extensions.Http;
 using Uno.Resizetizer;
 
@@ -194,6 +195,7 @@ public partial class App : Application
                                 // TODO: Register your services
                                 //services.AddSingleton<IMyService, MyService>();
                                 services.TryAddScoped<BaseVmServices>();
+                                services.TryAddSingleton<ISettingsService, SettingsService>();
                             }
                         )
                         .UseNavigation(Routes.RegisterRoutes)
@@ -233,7 +235,7 @@ public partial class App : Application
                 }
 #endif
 
-                if (await auth.IsAuthenticated() && false)
+                if (await auth.IsAuthenticated())
                 {
                     await navigator.NavigateViewAsync<FolderOverviewPage>(
                         this,
