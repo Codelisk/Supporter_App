@@ -142,5 +142,10 @@
         <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\CodeAnalysis\Analyze\FileRepoAnalyzePage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
 
 </Project>

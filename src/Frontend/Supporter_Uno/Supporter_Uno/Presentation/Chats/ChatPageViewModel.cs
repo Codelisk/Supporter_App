@@ -122,7 +122,10 @@ public partial class ChatPageViewModel : BasePageViewModel
 
     private async Task OnSettings(AzureTopicMappingDto? dto)
     {
-        await this.Navigator.NavigateViewAsync<ChatSettingsPage>(this, data: AzureTopicMappingDto);
+        await this.Navigator.NavigateViewAsync<ChatSettingsPage>(
+            this,
+            data: AzureTopicMappingDto.AssistantId
+        );
     }
 
     public ICommand TrainingCommand => new AsyncRelayCommand<AzureTopicMappingDto>(OnTraining);

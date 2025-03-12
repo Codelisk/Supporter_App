@@ -37,7 +37,8 @@ internal static class Routes
             new ViewMap<RepoOverviewPage, RepoOverviewPageViewModel>(),
             new ViewMap<RepoAddPage, RepoAddPageViewModel>(),
             new ViewMap<RepoChatPage, RepoChatPageViewModel>(),
-            new ViewMap<RepoAnalyzePage, RepoAnalyzePageViewModel>()
+            new ViewMap<RepoAnalyzePage, RepoAnalyzePageViewModel>(),
+            new ViewMap<FileRepoAnalyzePage, FileRepoAnalyzePageViewModel>()
         );
 
         routes.Register(
@@ -60,6 +61,7 @@ internal static class Routes
                     new("RepoOverview", View: views.FindByView<RepoOverviewPage>()),
                     new("RepoChat", View: views.FindByView<RepoChatPage>()),
                     new("RepoAnalyze", View: views.FindByView<RepoAnalyzePage>()),
+                    new("FileRepoAnalyze", View: views.FindByView<FileRepoAnalyzePage>()),
                 ]
             )
         );

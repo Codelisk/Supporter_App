@@ -10,7 +10,7 @@ namespace Supporter_Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Produces("application/json")]
+    [Produces("text/plain")]
     [Authorize(Policy = "AzureADUsers")]
     [Authorize(Policy = "ApiKeyUsers")]
     public class AIController : ControllerBase
@@ -22,6 +22,7 @@ namespace Supporter_Api.Controllers
             this.azureOpenAIChatService = azureOpenAIChatService;
         }
 
+        [Produces("application/json")]
         [HttpGet("GetSettings")]
         public async Task<AISettings> GetSettings(string assistantId)
         {

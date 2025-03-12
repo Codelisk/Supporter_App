@@ -12,7 +12,7 @@ namespace Supporter_Uno.Presentation.Chats.Settings;
 
 internal partial class ChatSettingsPageViewModel : BasePageViewModel
 {
-    AzureTopicMappingDto AzureTopicMappingDto;
+    string ParameterAssistant;
 
     public ChatSettingsPageViewModel(BaseVmServices baseVmServices, IAIApi aIApi)
         : base(baseVmServices)
@@ -59,8 +59,8 @@ internal partial class ChatSettingsPageViewModel : BasePageViewModel
     public override async void Initialize(NavigationEventArgs e)
     {
         base.Initialize(e);
-        AzureTopicMappingDto = e.Parameter as AzureTopicMappingDto;
-        var settings = await aIApi.GetSettings(AzureTopicMappingDto.AssistantId);
+        ParameterAssistant = e.Parameter as string;
+        var settings = await aIApi.GetSettings(ParameterAssistant);
 
         Temperature = settings.Temperature.GetValueOrDefault(0);
         NucleusSamplingFactor = settings.NucleusSamplingFactor.GetValueOrDefault(0);
@@ -74,7 +74,7 @@ internal partial class ChatSettingsPageViewModel : BasePageViewModel
     private async Task OnEditAssistantAsync()
     {
         var result = await aIApi.EditAssistant(
-            AzureTopicMappingDto.AssistantId,
+            ParameterAssistant,
             Temperature.HasValue ? ((float?)Temperature) : null,
             NucleusSamplingFactor.HasValue ? ((float)NucleusSamplingFactor) : null,
             Model,

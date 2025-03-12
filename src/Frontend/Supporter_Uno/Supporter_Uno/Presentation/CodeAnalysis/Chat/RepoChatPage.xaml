@@ -5,12 +5,43 @@
     xmlns:local="using:Supporter_Uno.Presentation.CodeAnalysis.Chat"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:common="using:Supporter_Uno.Common"
+    xmlns:controls="using:Supporter_Uno.Controls"
     d:DataContext="{d:DesignInstance Type=local:RepoChatPageViewModel}"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Content="Einstellungen" Command="{Binding SettingsCommand}"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowSpacing="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <ScrollView>
+                        <controls:WidgetWebView Margin="10" Content="{Binding Answer}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="WebView"/>
+                    </ScrollView>
+                    <Button Content="Letzte" Command="{Binding PreviousCommand}" Grid.Row="1"/>
+                    <TextBox MinHeight="100" InputScope="Chat" Grid.Row="2" Text="{Binding Question, Mode=TwoWay}" PlaceholderText="Frage" AcceptsReturn="True" />
+                    <Button Command="{Binding AskCommand}" Grid.Row="3" Content="Fragen"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        <ProgressRing IsActive="{Binding IsBusy}" />
     </Grid>
 </common:BasePage>

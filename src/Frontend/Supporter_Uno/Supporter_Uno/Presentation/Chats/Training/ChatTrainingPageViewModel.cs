@@ -7,6 +7,7 @@ using System.Windows.Input;
 using ReactiveUI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
+using Supporter_Uno.Extensions;
 using Supporter_Uno.Providers;
 
 namespace Supporter_Uno.Presentation.Chats.Training;
@@ -37,7 +38,7 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
         try
         {
             const int maxLength = 15000;
-            var trainingTexts = SplitText(TrainingText, maxLength);
+            var trainingTexts = TrainingText.SplitText(maxLength);
             string prefix = "Merk dir das für die Zukunft:\n\n";
 
             foreach (var textPart in trainingTexts)
@@ -65,16 +66,6 @@ internal partial class ChatTrainingPageViewModel : BasePageViewModel
             this.IsBusy = false;
             await this.Navigator.GoBack(this);
         }
-    }
-
-    private List<string> SplitText(string text, int maxLength)
-    {
-        var parts = new List<string>();
-        for (int i = 0; i < text.Length; i += maxLength)
-        {
-            parts.Add(text.Substring(i, Math.Min(maxLength, text.Length - i)));
-        }
-        return parts;
     }
 
     public override void Initialize(NavigationEventArgs e)

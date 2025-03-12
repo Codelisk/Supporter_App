@@ -8,6 +8,7 @@ using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Presentation.CodeAnalysis.Add;
 using Supporter_Uno.Presentation.CodeAnalysis.Analyze;
+using Supporter_Uno.Presentation.CodeAnalysis.Chat;
 using Supporter_Uno.Providers;
 
 namespace Supporter_Uno.Presentation.CodeAnalysis.Overview;
@@ -62,11 +63,11 @@ public partial class RepoOverviewPageViewModel : BasePageViewModel
                     RepoId = aIRepo.GetId(),
                 }
             );
-            await this.Navigator.NavigateViewAsync<RepoAnalyzePage>(this, data: repoMapping);
+            await this.Navigator.NavigateViewAsync<FileRepoAnalyzePage>(this, data: repoMapping);
         }
         else
         {
-            await this.Navigator.NavigateViewAsync<RepoAnalyzePage>(this, data: byRepoId.Last());
+            await this.Navigator.NavigateViewAsync<RepoChatPage>(this, data: byRepoId.Last());
         }
     }
 }
