@@ -162,18 +162,23 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
             return result;
         }
 
-        public async Task<string> Chat(string question)
+        public async Task<string> Chat(string question, string? systemMessage = null)
         {
-            ChatClient chatClient = _client.GetChatClient("gpt-4o-mini");
+            ChatClient chatClient = _client.GetChatClient(AzureConstants.DefaultModel);
 
-            var chatResult = await chatClient.CompleteChatAsync(
-                new ChatMessage[] { new UserChatMessage(question) }
-            );
+            List<ChatMessage> chatMessages = new List<ChatMessage>();
+            if (systemMessage is not null)
+            {
+                chatMessages.Add(new SystemChatMessage(systemMessage));
+            }
+            chatMessages.Add(new UserChatMessage(question));
+
+            var chatResult = await chatClient.CompleteChatAsync(chatMessages);
 
             string result = string.Empty;
             foreach (var item in chatResult.Value.Content)
             {
-                result += string.Join('\n', result);
+                result += string.Join('\n', item.Text);
             }
             return result;
         }

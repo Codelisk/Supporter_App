@@ -55,7 +55,7 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
         /// </summary>
         /// <param name="question">Die Frage, die an den Assistenten gestellt wird.</param>
         /// <returns>Die Antwort des Assistenten als String.</returns>
-        Task<string> Chat(string question);
+        Task<string> Chat(string question, string? systemMessage = null);
         Task<ClientResult<Assistant>> EditAssistant(
             string assistantId,
             float? temperature = null,
