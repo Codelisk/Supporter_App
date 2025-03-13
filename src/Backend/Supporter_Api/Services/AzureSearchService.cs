@@ -14,6 +14,7 @@ namespace Supporter_Api.Services
                 query,
                 new SearchOptions
                 {
+                    Select = { "title", "chunk" },
                     VectorSearch = new VectorSearchOptions()
                     {
                         Queries =

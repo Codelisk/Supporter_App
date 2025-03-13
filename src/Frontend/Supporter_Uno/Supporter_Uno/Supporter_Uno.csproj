@@ -147,5 +147,20 @@
         <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\Storage\Overview\StorageOverviewPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\Storage\Add\StorageAddPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\Storage\Chat\StorageChatPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
 
 </Project>

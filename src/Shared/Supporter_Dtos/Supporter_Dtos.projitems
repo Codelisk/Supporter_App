@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\Tenant\TenantBaseDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TenantConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\azure\AzureRepoMappingDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\azure\AzureStorageMappingDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Azure\AzureTopicMappingDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\codeanalysis\AIRepoDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\codeanalysis\chat\CodeAnswerDto.cs" />
@@ -35,6 +36,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\conversation\chat\ChatAnswerDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\Chat\ChatQuestionDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\Conversation\Training\ChatTrainingMessageDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\storageanalysis\chat\StorageAnswerDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dtos\AI\StorageAnalysis\Chat\StorageQuestionDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)dtos\ai\storageanalysis\StorageTopicDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\Ai\OwnerEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Usings.cs" />
   </ItemGroup>

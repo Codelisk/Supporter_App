@@ -9,11 +9,11 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Supporter_Api.Services
 {
-    public class ReadRetrieveReadChatService(
+    public class CodeAnalyzeService(
         ISearchService searchService,
         IAzureOpenAIChatService azureOpenAIChatService,
         AzureOpenAIClient azureOpenAIClient
-    ) : IReadRetrieveReadChatService
+    ) : ICodeAnalyzeService
     {
         public async Task<string?> ChatAsync(string question)
         {
@@ -53,7 +53,7 @@ namespace Supporter_Api.Services
             return chatTool;
         }
 
-        public async Task<string> ChatWithSearch(string question, string? systemMessage = null)
+        private async Task<string> ChatWithSearch(string question, string? systemMessage = null)
         {
             ChatClient chatClient = azureOpenAIClient.GetChatClient("gpt-4o");
 

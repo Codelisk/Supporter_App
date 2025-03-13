@@ -6,9 +6,9 @@ namespace Supporter_Api.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        private readonly IReadRetrieveReadChatService readRetrieveReadChatService;
+        private readonly ICodeAnalyzeService readRetrieveReadChatService;
 
-        public TestController(IReadRetrieveReadChatService readRetrieveReadChatService)
+        public TestController(ICodeAnalyzeService readRetrieveReadChatService)
         {
             this.readRetrieveReadChatService = readRetrieveReadChatService;
         }
@@ -17,7 +17,7 @@ namespace Supporter_Api.Controllers
         public async Task<string> Test()
         {
             return await readRetrieveReadChatService.ChatAsync(
-                "Does any file use the objectprovider?"
+                "Make top 2 performant improvements for the code"
             );
         }
     }

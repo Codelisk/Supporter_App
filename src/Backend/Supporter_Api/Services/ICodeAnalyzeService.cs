@@ -1,6 +1,6 @@
 ﻿namespace Supporter_Api.Services
 {
-    public interface IReadRetrieveReadChatService
+    public interface ICodeAnalyzeService
     {
         Task<string?> ChatAsync(string question);
     }

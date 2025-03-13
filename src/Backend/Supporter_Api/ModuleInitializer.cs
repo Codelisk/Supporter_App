@@ -44,7 +44,7 @@ namespace Supporter_Api
             ));
             services.TryAddScoped<IPaginationService, PaginationService>();
             services.TryAddScoped<ISearchService, AzureSearchService>();
-            services.TryAddScoped<IReadRetrieveReadChatService, ReadRetrieveReadChatService>();
+            services.TryAddScoped<ICodeAnalyzeService, CodeAnalyzeService>();
             services.TryAddScoped<BaseUserRepositoryProvider>();
             services.TryAddScoped<BaseManagerProvider>();
             Initializer.AddAIServices(services, configurationManager);

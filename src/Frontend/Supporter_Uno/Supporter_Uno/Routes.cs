@@ -13,6 +13,9 @@ using Supporter_Uno.Presentation.CodeAnalysis.Chat;
 using Supporter_Uno.Presentation.CodeAnalysis.Overview;
 using Supporter_Uno.Presentation.Folders;
 using Supporter_Uno.Presentation.Folders.Add;
+using Supporter_Uno.Presentation.Storage.Add;
+using Supporter_Uno.Presentation.Storage.Chat;
+using Supporter_Uno.Presentation.Storage.Overview;
 using Supporter_Uno.Presentation.Topics;
 using Supporter_Uno.Presentation.Topics.Add;
 
@@ -38,7 +41,10 @@ internal static class Routes
             new ViewMap<RepoAddPage, RepoAddPageViewModel>(),
             new ViewMap<RepoChatPage, RepoChatPageViewModel>(),
             new ViewMap<RepoAnalyzePage, RepoAnalyzePageViewModel>(),
-            new ViewMap<FileRepoAnalyzePage, FileRepoAnalyzePageViewModel>()
+            new ViewMap<FileRepoAnalyzePage, FileRepoAnalyzePageViewModel>(),
+            new ViewMap<StorageOverviewPage, StorageOverviewPageViewModel>(),
+            new ViewMap<StorageAddPage, StorageAddPageViewModel>(),
+            new ViewMap<StorageChatPage, StorageChatPageViewModel>()
         );
 
         routes.Register(
@@ -62,6 +68,9 @@ internal static class Routes
                     new("RepoChat", View: views.FindByView<RepoChatPage>()),
                     new("RepoAnalyze", View: views.FindByView<RepoAnalyzePage>()),
                     new("FileRepoAnalyze", View: views.FindByView<FileRepoAnalyzePage>()),
+                    new("StorageOverview", View: views.FindByView<StorageOverviewPage>()),
+                    new("StorageAdd", View: views.FindByView<StorageAddPage>()),
+                    new("StorageChat", View: views.FindByView<StorageChatPage>()),
                 ]
             )
         );
