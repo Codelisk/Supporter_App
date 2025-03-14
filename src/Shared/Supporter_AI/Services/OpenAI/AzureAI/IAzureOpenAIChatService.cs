@@ -18,7 +18,11 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
         /// <param name="name">Der Name des Assistenten.</param>
         /// <param name="temperature">Die Temperatur für den Assistenten (Steuerung der Kreativität der Antworten).</param>
         /// <returns>Ein ClientResult-Objekt, das den Assistenten enthält.</returns>
-        Task<ClientResult<Assistant>> CreateAssistant(string name, int temperature);
+        Task<ClientResult<Assistant>> CreateAssistant(
+            string name,
+            int temperature,
+            string? instructions = null
+        );
 
         /// <summary>
         /// Erstellt einen neuen Thread für eine Konversation zu einem bestimmten Thema.

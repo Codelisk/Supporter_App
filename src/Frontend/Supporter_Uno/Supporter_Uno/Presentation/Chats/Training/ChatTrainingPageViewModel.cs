@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ReactiveUI;
+using Supporer_Shared.Models.AI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Extensions;

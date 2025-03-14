@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpenAI.Assistants;
+using Supporer_Shared.Models.AI;
 using Supporter_AI.Models;
 using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Api.Models;
@@ -68,9 +69,17 @@ namespace Supporter_Api.Controllers
         }
 
         [Microsoft.AspNetCore.Mvc.HttpGet("CreateAssistant")]
-        public async Task<string> CreateAssistant(string name, int temperature)
+        public async Task<string> CreateAssistant(
+            string name,
+            int temperature,
+            string? instructions
+        )
         {
-            var result = await azureOpenAIChatService.CreateAssistant(name, temperature);
+            var result = await azureOpenAIChatService.CreateAssistant(
+                name,
+                temperature,
+                instructions
+            );
             return result.Value.Id;
         }
 

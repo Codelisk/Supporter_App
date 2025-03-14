@@ -68,6 +68,7 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\submodules\CodeGen\src\Common\Codelisk.GeneratorAttributes\Codelisk.GeneratorAttributes.csproj" />
+      <ProjectReference Include="..\..\..\Shared\Supporer_Shared\Supporer_Shared.csproj" />
     </ItemGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.26100'">
 

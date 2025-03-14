@@ -4,6 +4,8 @@
 
 
 using Refit;
+using Supporer_Shared.Models.AI;
+using Supporer_Shared.Models.Azure;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -1393,7 +1395,7 @@ namespace Supporter_Dtos
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: text/plain")]
         [Get("/api/AI/CreateAssistant")]
-        Task<string> CreateAssistant([Query] string name, [Query] int? temperature);
+        Task<string> CreateAssistant([Query] string name, [Query] int? temperature, [Query] string instructions);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -1413,8 +1415,8 @@ namespace Supporter_Dtos
     {
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Get("/api/AzureBlob/UploadFiles")]
-        Task UploadFiles([Query] string containerName, [Query] string fileName, [Query] string fileContent);
+        [Post("/api/AzureBlob/UploadFiles")]
+        Task UploadFiles([Body] UploadFilePayload body);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]

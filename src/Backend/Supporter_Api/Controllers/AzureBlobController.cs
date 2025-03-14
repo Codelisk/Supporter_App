@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Supporer_Shared.Models.Azure;
+using Supporter_Api.Models;
 using Supporter_Api.Services;
 
 namespace Supporter_Api.Controllers
@@ -10,14 +12,14 @@ namespace Supporter_Api.Controllers
     [Authorize(Policy = "ApiKeyUsers")]
     public class AzureBlobController(IBlobStorageService blobStorageService) : ControllerBase
     {
-        [HttpGet("UploadFiles")]
-        public async Task<IActionResult> UploadFiles(
-            string containerName,
-            string fileName,
-            string fileContent
-        )
+        [HttpPost("UploadFiles")]
+        public async Task<IActionResult> UploadFiles([FromBody] UploadFilePayload uploadFilePayload)
         {
-            await blobStorageService.UploadFiles(containerName, fileName, fileContent);
+            await blobStorageService.UploadFiles(
+                uploadFilePayload.containerName,
+                uploadFilePayload.fileName,
+                uploadFilePayload.fileContent
+            );
             return Ok();
         }
     }

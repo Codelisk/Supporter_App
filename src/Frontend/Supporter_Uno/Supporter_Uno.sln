@@ -74,6 +74,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codelisk.GeneratorAttribute
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", "{9E64274A-1769-42F3-A32D-09C0F5E59235}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supporer_Shared", "..\..\Shared\Supporer_Shared\Supporer_Shared.csproj", "{E5B673A7-1118-4E65-B484-057EC3E51071}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -238,6 +240,14 @@ Global
 		{5A622617-1450-403A-B217-89E0CC53961D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A622617-1450-403A-B217-89E0CC53961D}.Release|x64.ActiveCfg = Release|Any CPU
 		{5A622617-1450-403A-B217-89E0CC53961D}.Release|x64.Build.0 = Release|Any CPU
+		{E5B673A7-1118-4E65-B484-057EC3E51071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5B673A7-1118-4E65-B484-057EC3E51071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5B673A7-1118-4E65-B484-057EC3E51071}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E5B673A7-1118-4E65-B484-057EC3E51071}.Debug|x64.Build.0 = Debug|Any CPU
+		{E5B673A7-1118-4E65-B484-057EC3E51071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5B673A7-1118-4E65-B484-057EC3E51071}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5B673A7-1118-4E65-B484-057EC3E51071}.Release|x64.ActiveCfg = Release|Any CPU
+		{E5B673A7-1118-4E65-B484-057EC3E51071}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

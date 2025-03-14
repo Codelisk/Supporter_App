@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
+using Supporer_Shared.Models.Azure;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Providers;
@@ -15,16 +16,19 @@ internal partial class StorageSettingsPageViewModel : BasePageViewModel
 {
     private readonly IAzureStorageMappingApi azureStorageMappingApi;
     private readonly IAzureBlobApi azureBlobApi;
+    private readonly IAIApi aIApi;
 
     public StorageSettingsPageViewModel(
         BaseVmServices baseVmServices,
         IAzureStorageMappingApi azureStorageMappingApi,
-        IAzureBlobApi azureBlobApi
+        IAzureBlobApi azureBlobApi,
+        IAIApi aIApi
     )
         : base(baseVmServices)
     {
         this.azureStorageMappingApi = azureStorageMappingApi;
         this.azureBlobApi = azureBlobApi;
+        this.aIApi = aIApi;
     }
 
     public AzureStorageMappingDto AzureStorageMappingDto { get; set; }
@@ -57,9 +61,11 @@ internal partial class StorageSettingsPageViewModel : BasePageViewModel
                     continue;
                 }
                 await azureBlobApi.UploadFiles(
-                    AzureStorageMappingDto.ContainerName,
-                    item.Item1,
-                    item.Item2
+                    new UploadFilePayload(
+                        AzureStorageMappingDto.ContainerName,
+                        item.Item1,
+                        item.Item2
+                    )
                 );
             }
         }

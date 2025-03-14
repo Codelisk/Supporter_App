@@ -8,6 +8,7 @@ using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Chats;
 using Supporter_Uno.Presentation.CodeAnalysis.Analyze;
 using Supporter_Uno.Presentation.Folders;
+using Supporter_Uno.Presentation.Storage.Overview;
 using Supporter_Uno.Presentation.Topics;
 using Supporter_Uno.Providers;
 using Supporter_Uno.Services.Settings;
@@ -260,9 +261,9 @@ public partial class App : Application
                 }
 #endif
 
-                if (await auth.IsAuthenticated() && false)
+                if (await auth.IsAuthenticated())
                 {
-                    await navigator.NavigateViewAsync<FolderOverviewPage>(
+                    await navigator.NavigateViewAsync<StorageOverviewPage>(
                         this,
                         qualifier: Qualifiers.Nested
                     );

@@ -61,11 +61,24 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
             );
         }
 
-        public Task<ClientResult<Assistant>> CreateAssistant(string name, int temperature)
+        public Task<ClientResult<Assistant>> CreateAssistant(
+            string name,
+            int temperature,
+            string? instructions = null
+        )
         {
+            var createOptions = new AssistantCreationOptions
+            {
+                Name = name,
+                Temperature = temperature,
+            };
+            if (instructions is not null)
+            {
+                createOptions.Instructions = instructions;
+            }
             return _assistantClient.CreateAssistantAsync(
                 AzureConstants.DefaultModel,
-                new AssistantCreationOptions { Name = name, Temperature = temperature }
+                createOptions
             );
         }
 

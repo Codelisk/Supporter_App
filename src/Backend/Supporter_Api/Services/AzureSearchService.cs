@@ -29,6 +29,7 @@ namespace Supporter_Api.Services
                 new SearchOptions
                 {
                     Select = { "title", "chunk" },
+                    QueryType = SearchQueryType.Semantic,
                     VectorSearch = new VectorSearchOptions()
                     {
                         Queries =

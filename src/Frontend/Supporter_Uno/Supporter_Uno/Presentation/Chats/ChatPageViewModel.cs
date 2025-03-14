@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Extensions.Configuration;
 using ReactiveUI;
+using Supporer_Shared.Models.AI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Presentation.Auth;
@@ -57,7 +58,7 @@ public partial class ChatPageViewModel : BasePageViewModel
         var azureTopics = await azureTopicMappingApi.GetByTopicId(topic.GetId());
         if (azureTopics.Count == 0)
         {
-            var newAssistant = await aiApi.CreateAssistant(topic.Name, 0);
+            var newAssistant = await aiApi.CreateAssistant(topic.Name, 0, null);
             var newThread = await aiApi.CreateThreadAsync(topic.Name);
             AzureTopicMappingDto = await azureTopicMappingApi.Add(
                 new AzureTopicMappingDto

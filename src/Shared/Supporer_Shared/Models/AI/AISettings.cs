@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Supporter_AI.Models
+namespace Supporer_Shared.Models.AI
 {
     public record AISettings(
         string Model,
