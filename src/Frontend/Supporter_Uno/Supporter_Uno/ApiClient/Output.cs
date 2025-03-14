@@ -1409,6 +1409,15 @@ namespace Supporter_Dtos
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IAzureBlobApi
+    {
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Get("/api/AzureBlob/UploadFiles")]
+        Task UploadFiles([Query] string containerName, [Query] string fileName, [Query] string fileContent);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface ITestApi
     {
         /// <returns>OK</returns>

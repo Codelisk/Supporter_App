@@ -17,10 +17,12 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TextBox PlaceholderText="IndexName" Text="{Binding AzureStorageMappingDto.IndexName,Mode=TwoWay}"/>
         <TextBox PlaceholderText="SystemMessage" Text="{Binding AzureStorageMappingDto.SystemMessage,Mode=TwoWay}" Grid.Row="1"/>
-        <Button Content="Set" Command="{Binding SetCommand}" Grid.Row="2"/>
-        <Button Content="Back"  uen:Navigation.Request="-" Grid.Row="3"/>
+        <TextBox PlaceholderText="ContainerName" Text="{Binding AzureStorageMappingDto.ContainerName,Mode=TwoWay}" Grid.Row="2"/>
+        <Button Content="Set" Command="{Binding SetCommand}" Grid.Row="3"/>
+        <Button Content="Back"  uen:Navigation.Request="-" Grid.Row="4"/>
     </Grid>
 </common:BasePage>

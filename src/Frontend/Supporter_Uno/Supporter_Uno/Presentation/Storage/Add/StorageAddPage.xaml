@@ -16,10 +16,12 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TextBox PlaceholderText="Name" Text="{Binding Name,Mode=TwoWay}"/>
         <TextBox PlaceholderText="IndexName" Text="{Binding IndexName,Mode=TwoWay}" Grid.Row="1"/>
-        <TextBox AcceptsReturn="True" PlaceholderText="SystemMessage" Text="{Binding SystemMessage,Mode=TwoWay}" Grid.Row="2"/>
-        <Button Content="Add" Command="{Binding AddCommand}" Grid.Row="3"/>
+        <TextBox PlaceholderText="ContainerName" Text="{Binding ContainerName,Mode=TwoWay}" Grid.Row="2"/>
+        <TextBox AcceptsReturn="True" PlaceholderText="SystemMessage" Text="{Binding SystemMessage,Mode=TwoWay}" Grid.Row="3"/>
+        <Button Content="Add" Command="{Binding AddCommand}" Grid.Row="4"/>
     </Grid>
 </common:BasePage>

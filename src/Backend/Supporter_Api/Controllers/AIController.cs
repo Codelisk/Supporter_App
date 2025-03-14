@@ -30,9 +30,13 @@ namespace Supporter_Api.Controllers
 
         [Produces("text/markdown")]
         [HttpGet("ChatWithSearch")]
-        public Task<string?> Chat(string indexName, string systemMessage, string question)
+        public async Task<ActionResult<string>> Chat(
+            string indexName,
+            string systemMessage,
+            string question
+        )
         {
-            return codeAnalyzeService.ChatAsync(indexName, systemMessage, question);
+            return Content(await codeAnalyzeService.ChatAsync(indexName, systemMessage, question));
         }
 
         [Produces("application/json")]

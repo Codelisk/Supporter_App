@@ -32,6 +32,7 @@ internal partial class StorageAddPageViewModel : BasePageViewModel
 
     public string Name { get; set; }
     public string IndexName { get; set; }
+    public string ContainerName { get; set; }
     public string SystemMessage { get; set; }
 
     [RelayCommand]
@@ -43,6 +44,7 @@ internal partial class StorageAddPageViewModel : BasePageViewModel
             {
                 TopicId = topicResult.GetId(),
                 IndexName = IndexName,
+                ContainerName = ContainerName,
                 SystemMessage = SystemMessage,
             }
         );

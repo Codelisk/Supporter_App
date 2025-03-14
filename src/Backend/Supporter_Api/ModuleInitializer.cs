@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Azure.Core;
 using Azure.Search.Documents;
+using Azure.Storage.Blobs;
 using Codelisk.GeneratorAttributes.GeneralAttributes.ModuleInitializers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -32,6 +33,13 @@ namespace Supporter_Api
             IConfigurationManager configurationManager
         )
         {
+            var section = configurationManager.GetSection("AzureBlob");
+            var connectionString = section.GetValue<string>("ConnectionString");
+            services.TryAddScoped<BlobServiceClient>(_ =>
+            {
+                return new BlobServiceClient(connectionString);
+            });
+            services.TryAddScoped<IBlobStorageService, BlobStorageService>();
             services.TryAddScoped<IPaginationService, PaginationService>();
             services.TryAddScoped<ISearchService, AzureSearchService>();
             services.TryAddScoped<ICodeAnalyzeService, CodeAnalyzeService>();

@@ -184,6 +184,11 @@ public partial class App : Application
                                         context,
                                         endpointOptions,
                                         settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IAzureBlobApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
                                     );
                             }
                         )
