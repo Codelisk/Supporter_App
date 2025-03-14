@@ -260,8 +260,12 @@ public partial class App : Application
                     await navigator.ShowMessageDialogAsync(this, content: "Server nicht verfügbar");
                 }
 #endif
-
-                if (await auth.IsAuthenticated())
+                bool isAuth = await auth.IsAuthenticated();
+                if (isAuth)
+                {
+                    //isAuth = await auth.RefreshAsync();
+                }
+                if (await auth.IsAuthenticated() && false)
                 {
                     await navigator.NavigateViewAsync<StorageOverviewPage>(
                         this,

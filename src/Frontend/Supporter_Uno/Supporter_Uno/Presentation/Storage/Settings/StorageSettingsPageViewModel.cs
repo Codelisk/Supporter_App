@@ -8,6 +8,7 @@ using Supporer_Shared.Models.Azure;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Providers;
+using Supporter_Uno.Services.Alert;
 using Windows.Storage.Pickers;
 
 namespace Supporter_Uno.Presentation.Storage.Settings;
@@ -15,20 +16,26 @@ namespace Supporter_Uno.Presentation.Storage.Settings;
 internal partial class StorageSettingsPageViewModel : BasePageViewModel
 {
     private readonly IAzureStorageMappingApi azureStorageMappingApi;
+    private readonly IStorageTopicApi storageTopicApi;
     private readonly IAzureBlobApi azureBlobApi;
     private readonly IAIApi aIApi;
+    private readonly IAlertService alertService;
 
     public StorageSettingsPageViewModel(
         BaseVmServices baseVmServices,
         IAzureStorageMappingApi azureStorageMappingApi,
+        IStorageTopicApi storageTopicApi,
         IAzureBlobApi azureBlobApi,
-        IAIApi aIApi
+        IAIApi aIApi,
+        IAlertService alertService
     )
         : base(baseVmServices)
     {
         this.azureStorageMappingApi = azureStorageMappingApi;
+        this.storageTopicApi = storageTopicApi;
         this.azureBlobApi = azureBlobApi;
         this.aIApi = aIApi;
+        this.alertService = alertService;
     }
 
     public AzureStorageMappingDto AzureStorageMappingDto { get; set; }
@@ -43,8 +50,29 @@ internal partial class StorageSettingsPageViewModel : BasePageViewModel
     [RelayCommand]
     public async Task Set()
     {
+        await aIApi.EditAssistant(
+            AzureStorageMappingDto.AssistantId,
+            null,
+            null,
+            null,
+            AzureStorageMappingDto.SystemMessage,
+            null
+        );
+
         await azureStorageMappingApi.Save(AzureStorageMappingDto);
+
         await this.Navigator.GoBack(this);
+    }
+
+    [RelayCommand]
+    public async Task DeleteStorage()
+    {
+        if (await alertService.Confirm(this, Navigator, "Sicher?", "Sind Sie sicher?"))
+        {
+            await azureStorageMappingApi.Delete(AzureStorageMappingDto.GetId());
+            await storageTopicApi.Delete(AzureStorageMappingDto.TopicId);
+            await this.Navigator.GoBack(this);
+        }
     }
 
     [RelayCommand]
