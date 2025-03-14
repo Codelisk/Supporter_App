@@ -5,6 +5,7 @@ using OpenAI.Assistants;
 using Supporter_AI.Models;
 using Supporter_AI.Services.OpenAI.AzureAI;
 using Supporter_Api.Models;
+using Supporter_Api.Services;
 
 namespace Supporter_Api.Controllers
 {
@@ -16,10 +17,22 @@ namespace Supporter_Api.Controllers
     public class AIController : ControllerBase
     {
         private readonly IAzureOpenAIChatService azureOpenAIChatService;
+        private readonly ICodeAnalyzeService codeAnalyzeService;
 
-        public AIController(IAzureOpenAIChatService azureOpenAIChatService)
+        public AIController(
+            IAzureOpenAIChatService azureOpenAIChatService,
+            ICodeAnalyzeService codeAnalyzeService
+        )
         {
             this.azureOpenAIChatService = azureOpenAIChatService;
+            this.codeAnalyzeService = codeAnalyzeService;
+        }
+
+        [Produces("text/markdown")]
+        [HttpGet("ChatWithSearch")]
+        public Task<string?> Chat(string indexName, string systemMessage, string question)
+        {
+            return codeAnalyzeService.ChatAsync(indexName, systemMessage, question);
         }
 
         [Produces("application/json")]

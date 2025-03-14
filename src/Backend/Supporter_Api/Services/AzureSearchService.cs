@@ -1,15 +1,29 @@
 ﻿using Azure;
 using Azure.Search.Documents;
 using Azure.Search.Documents.Models;
+using Microsoft.Graph.ExternalConnectors;
 using Supporter_Api.Enums;
 using Supporter_Api.Models;
 
 namespace Supporter_Api.Services
 {
-    public class AzureSearchService(SearchClient searchClient) : ISearchService
+    public class AzureSearchService(IConfiguration configuration) : ISearchService
     {
-        public async Task<SupportingContentRecord[]> QueryDocumentsAsync(string? query = null)
+        public async Task<SupportingContentRecord[]> QueryDocumentsAsync(
+            string indexName,
+            string? query = null
+        )
         {
+            var settings = configuration.GetSection("AzureSearch");
+            string endpoint = settings["Endpoint"];
+            string apiKey = settings["ApiKey"];
+
+            var searchClient = new SearchClient(
+                new Uri(endpoint),
+                indexName,
+                new AzureKeyCredential(apiKey)
+            );
+
             var searchResultResponse = await searchClient.SearchAsync<SearchDocument>(
                 query,
                 new SearchOptions

@@ -37,6 +37,10 @@
                 HorizontalAlignment="Stretch"
                 Command="{Binding DoApiKeyLoginCommand}"
                 Content="Api-Key Login" />
+            <Button
+                HorizontalAlignment="Stretch"
+                Command="{Binding LoginStorageCommand}"
+                Content="Storage Login" />
         </StackPanel>
     </Grid>
 </common:BasePage>

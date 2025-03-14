@@ -164,6 +164,26 @@ public partial class App : Application
                                         context,
                                         endpointOptions,
                                         settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IStorageTopicApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IStorageQuestionApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IStorageAnswerApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
+                                    )
+                                    .AddRefitClient<IAzureStorageMappingApi>(
+                                        context,
+                                        endpointOptions,
+                                        settingsBuilder: ConfigureRefitSettings
                                     );
                             }
                         )
@@ -235,7 +255,7 @@ public partial class App : Application
                 }
 #endif
 
-                if (await auth.IsAuthenticated())
+                if (await auth.IsAuthenticated() && false)
                 {
                     await navigator.NavigateViewAsync<FolderOverviewPage>(
                         this,

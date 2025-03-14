@@ -16,6 +16,7 @@ using Supporter_Uno.Presentation.Folders.Add;
 using Supporter_Uno.Presentation.Storage.Add;
 using Supporter_Uno.Presentation.Storage.Chat;
 using Supporter_Uno.Presentation.Storage.Overview;
+using Supporter_Uno.Presentation.Storage.Settings;
 using Supporter_Uno.Presentation.Topics;
 using Supporter_Uno.Presentation.Topics.Add;
 
@@ -44,7 +45,8 @@ internal static class Routes
             new ViewMap<FileRepoAnalyzePage, FileRepoAnalyzePageViewModel>(),
             new ViewMap<StorageOverviewPage, StorageOverviewPageViewModel>(),
             new ViewMap<StorageAddPage, StorageAddPageViewModel>(),
-            new ViewMap<StorageChatPage, StorageChatPageViewModel>()
+            new ViewMap<StorageChatPage, StorageChatPageViewModel>(),
+            new ViewMap<StorageSettingsPage, StorageSettingsPageViewModel>()
         );
 
         routes.Register(
@@ -71,6 +73,7 @@ internal static class Routes
                     new("StorageOverview", View: views.FindByView<StorageOverviewPage>()),
                     new("StorageAdd", View: views.FindByView<StorageAddPage>()),
                     new("StorageChat", View: views.FindByView<StorageChatPage>()),
+                    new("StorageSettings", View: views.FindByView<StorageSettingsPage>()),
                 ]
             )
         );

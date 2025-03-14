@@ -6,10 +6,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:common="using:Supporter_Uno.Common"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utu="using:Uno.Toolkit.UI"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=local:StorageOverviewPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Add" Command="{Binding AddCommand}"/>
+        <ItemsRepeater ItemsSource="{Binding StorageTopics}" Grid.Row="1"  utu:CommandExtensions.Command="{Binding StorageCommand}">
+            <ItemsRepeater.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Name}" Command="{Binding }"/>
+                </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
     </Grid>
 </common:BasePage>

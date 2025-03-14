@@ -7,6 +7,6 @@ namespace Supporter_Api.Services
 {
     public interface ISearchService
     {
-        Task<SupportingContentRecord[]> QueryDocumentsAsync(string? query = null);
+        Task<SupportingContentRecord[]> QueryDocumentsAsync(string indexName, string? query = null);
     }
 }

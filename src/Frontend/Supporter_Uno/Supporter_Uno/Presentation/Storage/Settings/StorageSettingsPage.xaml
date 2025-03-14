@@ -1,13 +1,14 @@
 ﻿<common:BasePage
-    x:Class="Supporter_Uno.Presentation.Storage.Add.StorageAddPage"
+    x:Class="Supporter_Uno.Presentation.Storage.Settings.StorageSettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Supporter_Uno.Presentation.Storage.Add"
+    xmlns:local="using:Supporter_Uno.Presentation.Storage.Settings"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:common="using:Supporter_Uno.Common"
+    xmlns:uen="using:Uno.Extensions.Navigation.UI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=local:StorageAddPageViewModel}"
+    d:DataContext="{d:DesignInstance Type=local:StorageSettingsPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -17,9 +18,9 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBox PlaceholderText="Name" Text="{Binding Name,Mode=TwoWay}"/>
-        <TextBox PlaceholderText="IndexName" Text="{Binding IndexName,Mode=TwoWay}" Grid.Row="1"/>
-        <TextBox AcceptsReturn="True" PlaceholderText="SystemMessage" Text="{Binding SystemMessage,Mode=TwoWay}" Grid.Row="2"/>
-        <Button Content="Add" Command="{Binding AddCommand}" Grid.Row="3"/>
+        <TextBox PlaceholderText="IndexName" Text="{Binding AzureStorageMappingDto.IndexName,Mode=TwoWay}"/>
+        <TextBox PlaceholderText="SystemMessage" Text="{Binding AzureStorageMappingDto.SystemMessage,Mode=TwoWay}" Grid.Row="1"/>
+        <Button Content="Set" Command="{Binding SetCommand}" Grid.Row="2"/>
+        <Button Content="Back"  uen:Navigation.Request="-" Grid.Row="3"/>
     </Grid>
 </common:BasePage>

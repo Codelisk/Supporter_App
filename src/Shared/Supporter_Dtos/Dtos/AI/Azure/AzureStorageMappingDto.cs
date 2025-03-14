@@ -6,6 +6,7 @@ namespace Supporter_Dtos
     public partial record AzureStorageMappingDto : UserBaseDto<Guid>
     {
         public string IndexName { get; set; }
+        public string SystemMessage { get; set; }
 
         [ForeignKey(nameof(StorageTopicDto))]
         public Guid TopicId { get; set; }

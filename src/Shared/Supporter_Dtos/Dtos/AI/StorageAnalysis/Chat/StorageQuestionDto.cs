@@ -7,7 +7,7 @@ namespace Supporter_Dtos
     {
         public string Value { get; set; }
 
-        [ForeignKey(nameof(AIRepoDto))]
-        public Guid RepoId { get; set; }
+        [ForeignKey(nameof(StorageTopicDto))]
+        public Guid TopicId { get; set; }
     }
 }

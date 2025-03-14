@@ -2,6 +2,6 @@
 {
     public interface ICodeAnalyzeService
     {
-        Task<string?> ChatAsync(string question);
+        Task<string?> ChatAsync(string indexName, string systemMessage, string question);
     }
 }

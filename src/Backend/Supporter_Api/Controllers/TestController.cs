@@ -16,9 +16,7 @@ namespace Supporter_Api.Controllers
         [HttpGet("Test")]
         public async Task<string> Test()
         {
-            return await readRetrieveReadChatService.ChatAsync(
-                "Make top 2 performant improvements for the code"
-            );
+            return default;
         }
     }
 }

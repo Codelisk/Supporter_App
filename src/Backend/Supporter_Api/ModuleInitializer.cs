@@ -32,16 +32,6 @@ namespace Supporter_Api
             IConfigurationManager configurationManager
         )
         {
-            var settings = configurationManager.GetSection("AzureSearch");
-            string endpoint = settings["Endpoint"];
-            string indexName = settings["IndexName"];
-            string apiKey = settings["ApiKey"];
-
-            services.TryAddScoped<SearchClient>(_ => new SearchClient(
-                new Uri(endpoint),
-                indexName,
-                new AzureKeyCredential(apiKey)
-            ));
             services.TryAddScoped<IPaginationService, PaginationService>();
             services.TryAddScoped<ISearchService, AzureSearchService>();
             services.TryAddScoped<ICodeAnalyzeService, CodeAnalyzeService>();

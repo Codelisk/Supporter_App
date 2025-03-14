@@ -107,6 +107,100 @@ namespace Supporter_Dtos
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IAzureStorageMappingApi
+    {
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/AzureStorageMapping/GetAllFull")]
+        Task<object> GetAllFull();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureStorageMapping/GetByTopicId")]
+        Task<ICollection<AzureStorageMappingDto>> GetByTopicId([Query] System.Guid? id);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/AzureStorageMapping/GetFull")]
+        Task<object> GetFull([Query] System.Guid? id);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/AzureStorageMapping/GetPaginated")]
+        Task<object> GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/AzureStorageMapping/DeleteAll")]
+        Task<int> DeleteAll([Query] bool? areYouSure);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/AzureStorageMapping/DeleteAllByRange")]
+        Task<int> DeleteAllByRange([Body] IEnumerable<System.Guid> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureStorageMapping/GetRange")]
+        Task<ICollection<AzureStorageMappingDto>> GetRange([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureStorageMapping/Count")]
+        Task<int> Count();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureStorageMapping/GetAll")]
+        Task<ICollection<AzureStorageMappingDto>> GetAll();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureStorageMapping/Get")]
+        Task<AzureStorageMappingDto> Get([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/AzureStorageMapping/Delete")]
+        Task Delete([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/AzureStorageMapping/AddRange")]
+        Task AddRange([Body] IEnumerable<AzureStorageMappingDto> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/AzureStorageMapping/Add")]
+        Task<AzureStorageMappingDto> Add([Body] AzureStorageMappingDto body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/AzureStorageMapping/GetLastOrDefault")]
+        Task<AzureStorageMappingDto> GetLastOrDefault();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/AzureStorageMapping/Save")]
+        Task<AzureStorageMappingDto> Save([Body] AzureStorageMappingDto body);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IAzureTopicMappingApi
     {
         /// <returns>OK</returns>
@@ -1011,37 +1105,317 @@ namespace Supporter_Dtos
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IStorageAnswerApi
+    {
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/StorageAnswer/GetAllFull")]
+        Task<object> GetAllFull();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageAnswer/GetByQuestionId")]
+        Task<ICollection<StorageAnswerDto>> GetByQuestionId([Query] System.Guid? id);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/StorageAnswer/GetFull")]
+        Task<object> GetFull([Query] System.Guid? id);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/StorageAnswer/GetPaginated")]
+        Task<object> GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/StorageAnswer/DeleteAll")]
+        Task<int> DeleteAll([Query] bool? areYouSure);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/StorageAnswer/DeleteAllByRange")]
+        Task<int> DeleteAllByRange([Body] IEnumerable<System.Guid> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageAnswer/GetRange")]
+        Task<ICollection<StorageAnswerDto>> GetRange([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageAnswer/Count")]
+        Task<int> Count();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageAnswer/GetAll")]
+        Task<ICollection<StorageAnswerDto>> GetAll();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageAnswer/Get")]
+        Task<StorageAnswerDto> Get([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/StorageAnswer/Delete")]
+        Task Delete([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/StorageAnswer/AddRange")]
+        Task AddRange([Body] IEnumerable<StorageAnswerDto> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/StorageAnswer/Add")]
+        Task<StorageAnswerDto> Add([Body] StorageAnswerDto body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageAnswer/GetLastOrDefault")]
+        Task<StorageAnswerDto> GetLastOrDefault();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/StorageAnswer/Save")]
+        Task<StorageAnswerDto> Save([Body] StorageAnswerDto body);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IStorageQuestionApi
+    {
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/StorageQuestion/GetAllFull")]
+        Task<object> GetAllFull();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageQuestion/GetByTopicId")]
+        Task<ICollection<StorageQuestionDto>> GetByTopicId([Query] System.Guid? id);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/StorageQuestion/GetFull")]
+        Task<object> GetFull([Query] System.Guid? id);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/StorageQuestion/GetPaginated")]
+        Task<object> GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/StorageQuestion/DeleteAll")]
+        Task<int> DeleteAll([Query] bool? areYouSure);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/StorageQuestion/DeleteAllByRange")]
+        Task<int> DeleteAllByRange([Body] IEnumerable<System.Guid> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageQuestion/GetRange")]
+        Task<ICollection<StorageQuestionDto>> GetRange([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageQuestion/Count")]
+        Task<int> Count();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageQuestion/GetAll")]
+        Task<ICollection<StorageQuestionDto>> GetAll();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageQuestion/Get")]
+        Task<StorageQuestionDto> Get([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/StorageQuestion/Delete")]
+        Task Delete([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/StorageQuestion/AddRange")]
+        Task AddRange([Body] IEnumerable<StorageQuestionDto> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/StorageQuestion/Add")]
+        Task<StorageQuestionDto> Add([Body] StorageQuestionDto body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageQuestion/GetLastOrDefault")]
+        Task<StorageQuestionDto> GetLastOrDefault();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/StorageQuestion/Save")]
+        Task<StorageQuestionDto> Save([Body] StorageQuestionDto body);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface IStorageTopicApi
+    {
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/api/StorageTopic/GetPaginated")]
+        Task<object> GetPaginated([Query] string search, [Query] string searchField, [Query] int? page, [Query] int? perPage, [Query] string sortBy, [Query] string sortOrder, [Query] string filterBy, [Query] string filter);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/StorageTopic/DeleteAll")]
+        Task<int> DeleteAll([Query] bool? areYouSure);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/StorageTopic/DeleteAllByRange")]
+        Task<int> DeleteAllByRange([Body] IEnumerable<System.Guid> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageTopic/GetRange")]
+        Task<ICollection<StorageTopicDto>> GetRange([Query(CollectionFormat.Multi)] IEnumerable<System.Guid> ids);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageTopic/Count")]
+        Task<int> Count();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageTopic/GetAll")]
+        Task<ICollection<StorageTopicDto>> GetAll();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageTopic/Get")]
+        Task<StorageTopicDto> Get([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Delete("/api/StorageTopic/Delete")]
+        Task Delete([Query] System.Guid? id);
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/StorageTopic/AddRange")]
+        Task AddRange([Body] IEnumerable<StorageTopicDto> body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/StorageTopic/Add")]
+        Task<StorageTopicDto> Add([Body] StorageTopicDto body);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Get("/api/StorageTopic/GetLastOrDefault")]
+        Task<StorageTopicDto> GetLastOrDefault();
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json")]
+        [Post("/api/StorageTopic/Save")]
+        Task<StorageTopicDto> Save([Body] StorageTopicDto body);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
     public partial interface IAIApi
     {
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/markdown, text/plain")]
+        [Get("/api/AI/ChatWithSearch")]
+        Task<string> ChatWithSearch([Query] string indexName, [Query] string systemMessage, [Query] string question);
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: application/json, text/plain")]
         [Get("/api/AI/GetSettings")]
         Task<AISettings> GetSettings([Query] string assistantId);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: text/markdown, application/json")]
+        [Headers("Accept: text/markdown, text/plain")]
         [Post("/api/AI/Chat")]
         Task<string> Chat([Body] ChatPayload body);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain")]
         [Get("/api/AI/CreateAssistant")]
         Task<string> CreateAssistant([Query] string name, [Query] int? temperature);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain")]
         [Get("/api/AI/EditAssistant")]
         Task<string> EditAssistant([Query] string assistantId, [Query] float? temperature, [Query] float? nucleusSamplingFactor, [Query] string model, [Query] string instructions, [Query] string description);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Headers("Accept: application/json")]
+        [Headers("Accept: text/plain")]
         [Get("/api/AI/CreateThreadAsync")]
         Task<string> CreateThreadAsync([Query] string threadId);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]
+    public partial interface ITestApi
+    {
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
+        [Get("/Test")]
+        Task<string> Test();
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]

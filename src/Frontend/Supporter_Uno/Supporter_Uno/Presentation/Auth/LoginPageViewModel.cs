@@ -8,6 +8,7 @@ using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Presentation.CodeAnalysis.Overview;
 using Supporter_Uno.Presentation.Folders;
+using Supporter_Uno.Presentation.Storage.Overview;
 using Supporter_Uno.Providers;
 
 namespace Supporter_Uno.Presentation.Auth;
@@ -69,6 +70,27 @@ public partial class LoginPageViewModel : BasePageViewModel
             if (success)
             {
                 await Navigator.NavigateViewAsync<RepoOverviewPage>(this);
+            }
+        }
+        catch (Exception ex)
+        {
+            await Navigator.ShowMessageDialogAsync(
+                this,
+                title: "Fehler",
+                content: "Login abgebrochen"
+            );
+        }
+    }
+
+    [RelayCommand]
+    public async Task LoginStorage()
+    {
+        try
+        {
+            var success = await _authentication.LoginAsync(Dispatcher, provider: "Msal");
+            if (success)
+            {
+                await Navigator.NavigateViewAsync<StorageOverviewPage>(this);
             }
         }
         catch (Exception ex)
