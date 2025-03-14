@@ -33,11 +33,14 @@ namespace Supporter_Api.Controllers
         [HttpGet("ChatWithSearch")]
         public async Task<ActionResult<string>> Chat(
             string indexName,
-            string systemMessage,
-            string question
+            string question,
+            string assistantId,
+            string threadId
         )
         {
-            return Content(await codeAnalyzeService.ChatAsync(indexName, systemMessage, question));
+            return Content(
+                await codeAnalyzeService.ChatAsync(indexName, question, assistantId, threadId)
+            );
         }
 
         [Produces("application/json")]
@@ -69,16 +72,14 @@ namespace Supporter_Api.Controllers
         }
 
         [Microsoft.AspNetCore.Mvc.HttpGet("CreateAssistant")]
-        public async Task<string> CreateAssistant(
-            string name,
-            int temperature,
-            string? instructions
-        )
+        public async Task<string> CreateAssistant(CreateAssistantsPayload createAssistantsPayload)
         {
             var result = await azureOpenAIChatService.CreateAssistant(
-                name,
-                temperature,
-                instructions
+                createAssistantsPayload.name,
+                createAssistantsPayload.temperature,
+                createAssistantsPayload.isFileSearch,
+                createAssistantsPayload.isCodeInterpreter,
+                createAssistantsPayload.instructions
             );
             return result.Value.Id;
         }
@@ -105,9 +106,12 @@ namespace Supporter_Api.Controllers
         }
 
         [Microsoft.AspNetCore.Mvc.HttpGet("CreateThreadAsync")]
-        public async Task<string> CreateThreadAsync(string threadId)
+        public async Task<string> CreateThreadAsync(bool useFile, bool useCodeInterpreter)
         {
-            var result = await azureOpenAIChatService.CreateThreadAsync(threadId);
+            var result = await azureOpenAIChatService.CreateThreadAsync(
+                useFile,
+                useCodeInterpreter
+            );
             return result.Value.Id;
         }
     }

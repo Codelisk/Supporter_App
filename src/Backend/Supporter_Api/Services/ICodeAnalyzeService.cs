@@ -2,6 +2,11 @@
 {
     public interface ICodeAnalyzeService
     {
-        Task<string?> ChatAsync(string indexName, string systemMessage, string question);
+        Task<string?> ChatAsync(
+            string indexName,
+            string question,
+            string assistantId,
+            string threadId
+        );
     }
 }

@@ -20,12 +20,12 @@ internal class AlertService : IAlertService
         string message
     )
     {
-        var result = await navigator.ShowMessageDialogAsync<bool>(
+        var result = await navigator.ShowMessageDialogAsync<string>(
             this,
             title: title,
             content: message,
             buttons: new DialogAction[] { new DialogAction("Ok"), new DialogAction("Abbrechen") }
         );
-        return result;
+        return result.Equals("Ok");
     }
 }

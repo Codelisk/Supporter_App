@@ -78,8 +78,9 @@ internal partial class StorageChatPageViewModel : BasePageViewModel
             LastQuestion = chatQuestion;
             this.Answer = await aiApi.ChatWithSearch(
                 AzureStorageMappingDto.IndexName,
-                AzureStorageMappingDto.SystemMessage,
-                chatQuestion.Value
+                chatQuestion.Value,
+                AzureStorageMappingDto.AssistantId,
+                AzureStorageMappingDto.ThreadId
             );
             await chatAnswerApi.Add(
                 new StorageAnswerDto

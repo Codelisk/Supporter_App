@@ -44,7 +44,7 @@ internal partial class StorageAddPageViewModel : BasePageViewModel
         var topicResult = await storageTopicApi.Add(new StorageTopicDto { Name = Name });
 
         var assistant = await aIApi.CreateAssistant(Name, null, SystemMessage);
-        var thread = await aIApi.CreateThreadAsync(Name);
+        var thread = await aIApi.CreateThreadAsync(true, false);
         await azureStorageMappingApi.Add(
             new AzureStorageMappingDto
             {

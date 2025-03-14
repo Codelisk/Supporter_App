@@ -1,4 +1,4 @@
-﻿global using System.Collections.Immutable;
+global using System.Collections.Immutable;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
 global using Microsoft.Extensions.DependencyInjection;
@@ -6,6 +6,8 @@ global using Microsoft.Extensions.Hosting;
 global using Microsoft.Extensions.Localization;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Options;
+global using Supporer_Shared.Models.AI;
+global using Supporer_Shared.Models.Azure;
 global using Supporter_Uno.DataContracts;
 global using Supporter_Uno.DataContracts.Serialization;
 global using Supporter_Uno.Models;

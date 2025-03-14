@@ -11,6 +11,7 @@ using Supporter_Uno.Presentation.Folders;
 using Supporter_Uno.Presentation.Storage.Overview;
 using Supporter_Uno.Presentation.Topics;
 using Supporter_Uno.Providers;
+using Supporter_Uno.Services.Alert;
 using Supporter_Uno.Services.Settings;
 using Uno.Extensions.Http;
 using Uno.Resizetizer;
@@ -222,6 +223,7 @@ public partial class App : Application
                                 //services.AddSingleton<IMyService, MyService>();
                                 services.TryAddScoped<BaseVmServices>();
                                 services.TryAddSingleton<ISettingsService, SettingsService>();
+                                services.TryAddSingleton<IAlertService, AlertService>();
                             }
                         )
                         .UseNavigation(Routes.RegisterRoutes)

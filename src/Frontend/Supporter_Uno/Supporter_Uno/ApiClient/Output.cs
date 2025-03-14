@@ -4,8 +4,6 @@
 
 
 using Refit;
-using Supporer_Shared.Models.AI;
-using Supporer_Shared.Models.Azure;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -1377,7 +1375,7 @@ namespace Supporter_Dtos
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: text/markdown, text/plain")]
         [Get("/api/AI/ChatWithSearch")]
-        Task<string> ChatWithSearch([Query] string indexName, [Query] string systemMessage, [Query] string question);
+        Task<string> ChatWithSearch([Query] string indexName, [Query] string question, [Query] string assistantId, [Query] string threadId);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -1407,7 +1405,7 @@ namespace Supporter_Dtos
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: text/plain")]
         [Get("/api/AI/CreateThreadAsync")]
-        Task<string> CreateThreadAsync([Query] string threadId);
+        Task<string> CreateThreadAsync([Query] bool? useFile, [Query] bool? useCodeInterpreter);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.3.2.0")]

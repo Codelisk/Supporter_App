@@ -61,9 +61,35 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
             );
         }
 
+        private ChatTool GetSearchTool()
+        {
+            string parameters =
+                @"
+{
+    ""type"": ""object"",
+    ""properties"": {
+        ""query"": {
+            ""type"": ""string"",
+            ""description"": ""The search query to use for the documentation. Generate this based on the chat history, with focus on the last user question, and your own analysis of what to search""
+        }
+    },
+    ""required"": [""query""],
+    ""additionalProperties"": false
+}";
+            var chatTool = ChatTool.CreateFunctionTool(
+                "search",
+                "Search the documentation to find the right data to answer the last question in this conversation.",
+                BinaryData.FromBytes(Encoding.UTF8.GetBytes(parameters))
+            );
+
+            return chatTool;
+        }
+
         public Task<ClientResult<Assistant>> CreateAssistant(
             string name,
             int temperature,
+            bool isFileSearch,
+            bool isCodeInterpreter,
             string? instructions = null
         )
         {
@@ -76,14 +102,44 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
             {
                 createOptions.Instructions = instructions;
             }
+            if (isFileSearch || isCodeInterpreter)
+            {
+                createOptions.ToolResources = new ToolResources();
+                if (isFileSearch)
+                {
+                    createOptions.ToolResources.FileSearch = new FileSearchToolResources();
+                }
+                if (isCodeInterpreter)
+                {
+                    createOptions.ToolResources.CodeInterpreter =
+                        new CodeInterpreterToolResources();
+                }
+            }
+
             return _assistantClient.CreateAssistantAsync(
                 AzureConstants.DefaultModel,
                 createOptions
             );
         }
 
-        public Task<ClientResult<AssistantThread>> CreateThreadAsync(string threadId)
+        public Task<ClientResult<AssistantThread>> CreateThreadAsync(
+            bool useFile,
+            bool useCodeInterpreter
+        )
         {
+            var threadCreationOptions = new ThreadCreationOptions();
+            if (useFile)
+            {
+                threadCreationOptions.ToolResources = (
+                    new ToolResources() { FileSearch = new FileSearchToolResources() }
+                );
+            }
+            if (useCodeInterpreter)
+            {
+                threadCreationOptions.ToolResources = (
+                    new ToolResources() { CodeInterpreter = new CodeInterpreterToolResources() }
+                );
+            }
             return _assistantClient.CreateThreadAsync();
         }
 

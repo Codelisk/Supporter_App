@@ -1,10 +1,14 @@
-﻿using System.Text;
+﻿using System.ClientModel;
+using System.Text;
 using System.Threading;
 using Azure;
 using Azure.AI.OpenAI;
 using Azure.AI.OpenAI.Chat;
 using Azure.Search.Documents;
+using OpenAI.Assistants;
 using OpenAI.Chat;
+using OpenAI.Files;
+using Supporter_AI.Extensions;
 using Supporter_AI.Services.OpenAI.AzureAI;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -19,112 +23,109 @@ namespace Supporter_Api.Services
     {
         public async Task<string?> ChatAsync(
             string indexName,
-            string systemMessage,
-            string question
+            string question,
+            string assistantId,
+            string threadId
         )
         {
-            var result = await ChatWithSearch(indexName, question, systemMessage);
+            var result = await ChatWithSearch(indexName, question, assistantId, threadId);
             return result;
         }
 
-        private ChatTool GetSearchTool()
-        {
-            string parameters =
-                @"
-{
-    ""type"": ""object"",
-    ""properties"": {
-        ""query"": {
-            ""type"": ""string"",
-            ""description"": ""The search query to use for the documentation. Generate this based on the chat history, with focus on the last user question, and your own analysis of what to search""
-        }
-    },
-    ""required"": [""query""],
-    ""additionalProperties"": false
-}";
-            var chatTool = ChatTool.CreateFunctionTool(
-                "search",
-                "Search the documentation to find the right data to answer the last question in this conversation.",
-                BinaryData.FromBytes(Encoding.UTF8.GetBytes(parameters))
-            );
-
-            return chatTool;
-        }
-
-        private async Task<string> ChatWithSearch(
+#pragma warning disable OPENAI001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+        public async Task<string> ChatWithSearch(
             string indexName,
             string question,
-            string? systemMessage = null
+            string assistantId,
+            string threadId
         )
         {
-            ChatClient chatClient = azureOpenAIClient.GetChatClient("gpt-4o");
-
             List<ChatMessage> chatMessages = new List<ChatMessage>();
-            if (systemMessage is not null)
-            {
-                chatMessages.Add(new SystemChatMessage(systemMessage));
-            }
             chatMessages.Add(new UserChatMessage(question));
-
-            string result = string.Empty;
-            while (true)
+            var _assistantClient = azureOpenAIChatService.GetChatClient();
+            foreach (var item in chatMessages)
             {
-                var chatResult = await chatClient.CompleteChatAsync(
-                    chatMessages,
-                    new ChatCompletionOptions()
-                    {
-                        Tools = { GetSearchTool() },
-                        AllowParallelToolCalls = false,
-                    }
+                await _assistantClient.CreateMessageAsync(
+                    threadId,
+                    item.GetRole(),
+                    item.Content.ToMessageContent()
                 );
-                if (chatResult.Value.FinishReason == ChatFinishReason.ToolCalls)
+            }
+
+            var runResponse = await _assistantClient.CreateRunAsync(threadId, assistantId);
+            ClientResult<ThreadRun> threadRun = null;
+            do
+            {
+                await Task.Delay(TimeSpan.FromSeconds(0.5));
+                threadRun = await _assistantClient.GetRunAsync(threadId, runResponse.Value.Id);
+            } while (threadRun.Value.Status != RunStatus.RequiresAction);
+
+            // Finally, we'll print out the full history for the thread that includes the augmented generation
+            AsyncCollectionResult<ThreadMessage> messages = _assistantClient.GetMessagesAsync(
+                threadId,
+                new MessageCollectionOptions() { Order = MessageCollectionOrder.Ascending }
+            );
+
+            string result = "";
+            await foreach (ThreadMessage message in messages)
+            {
+                result = ($"[{message.Role.ToString().ToUpper()}]: ");
+                foreach (MessageContent contentItem in message.Content)
                 {
-                    foreach (var call in chatResult.Value.ToolCalls)
+                    if (!string.IsNullOrEmpty(contentItem.Text))
                     {
-                        if (call.FunctionName == "search")
+                        result = ($"{contentItem.Text}");
+
+                        if (contentItem.TextAnnotations.Count > 0)
                         {
-                            string query = call.FunctionArguments.ToString();
-
-                            var response = await searchService.QueryDocumentsAsync(
-                                indexName,
-                                query: query
-                            );
-
-                            chatMessages.Add(
-                                new AssistantChatMessage(
-                                    new List<ChatToolCall>
-                                    {
-                                        ChatToolCall.CreateFunctionToolCall(
-                                            call.Id,
-                                            call.FunctionName,
-                                            call.FunctionArguments
-                                        ),
-                                    }
-                                )
-                            );
-                            chatMessages.Add(
-                                ChatMessage.CreateToolMessage(
-                                    call.Id,
-                                    string.Join(
-                                        "\n\n",
-                                        response.Select(x =>
-                                            "Filename" + x.Title + "\nContent:" + x.Content
-                                        )
-                                    )
-                                )
-                            );
+                            result += "\n";
                         }
                     }
                 }
-                else
-                {
-                    var message = chatResult.Value.Content[0].Text;
-                    result += string.Join('\n', message);
-                    break;
-                }
+                result += "\n";
             }
 
+            var response = await searchService.QueryDocumentsAsync(indexName, query: result);
+
+            await _assistantClient.CreateMessageAsync(
+                threadId,
+                MessageRole.Assistant,
+                response
+                    .Select(x =>
+                        MessageContent.FromText("Filename" + x.Title + "\nContent:" + x.Content)
+                    )
+                    .ToList()
+            );
+            do
+            {
+                await Task.Delay(TimeSpan.FromSeconds(0.5));
+                threadRun = await _assistantClient.GetRunAsync(threadId, runResponse.Value.Id);
+            } while (!threadRun.Value.Status.IsTerminal);
+
+            messages = _assistantClient.GetMessagesAsync(
+                threadId,
+                new MessageCollectionOptions() { Order = MessageCollectionOrder.Ascending }
+            );
+
+            await foreach (ThreadMessage message in messages)
+            {
+                result = ($"[{message.Role.ToString().ToUpper()}]: ");
+                foreach (MessageContent contentItem in message.Content)
+                {
+                    if (!string.IsNullOrEmpty(contentItem.Text))
+                    {
+                        result = ($"{contentItem.Text}");
+
+                        if (contentItem.TextAnnotations.Count > 0)
+                        {
+                            result += "\n";
+                        }
+                    }
+                }
+                result += "\n";
+            }
             return result;
         }
+#pragma warning restore OPENAI001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
     }
 }

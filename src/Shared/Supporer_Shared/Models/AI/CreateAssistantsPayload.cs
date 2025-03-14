@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Supporer_Shared.Models.AI
 {
-    internal class CreateAssistantsPayload
-    {
-    }
+    public record CreateAssistantsPayload(
+        string name,
+        int temperature,
+        bool isFileSearch,
+        bool isCodeInterpreter,
+        string? instructions = null
+    );
 }

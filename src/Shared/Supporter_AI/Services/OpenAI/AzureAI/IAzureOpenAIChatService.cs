@@ -21,6 +21,8 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
         Task<ClientResult<Assistant>> CreateAssistant(
             string name,
             int temperature,
+            bool isFileSearch,
+            bool isCodeInterpreter,
             string? instructions = null
         );
 
@@ -29,7 +31,10 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
         /// </summary>
         /// <param name="threadId">Die ID des Threads (wird zum Erstellen des Threads verwendet).</param>
         /// <returns>Ein ClientResult-Objekt, das den neu erstellten Thread enthält.</returns>
-        Task<ClientResult<AssistantThread>> CreateThreadAsync(string threadId);
+        Task<ClientResult<AssistantThread>> CreateThreadAsync(
+            bool useFile,
+            bool useCodeInterpreter
+        );
 
         /// <summary>
         /// Erstellt einen Run für den angegebenen Thread, um z.B. die Einstellungen zu ändern (z. B. Temperatur oder Assistenten).
