@@ -52,6 +52,10 @@ internal partial class StorageSettingsPageViewModel : BasePageViewModel
             await PickFolder();
             foreach (var item in Contents)
             {
+                if (string.IsNullOrEmpty(item.Item2))
+                {
+                    continue;
+                }
                 await azureBlobApi.UploadFiles(
                     AzureStorageMappingDto.ContainerName,
                     item.Item1,
