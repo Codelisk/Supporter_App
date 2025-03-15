@@ -71,8 +71,10 @@ namespace Supporter_Api.Controllers
             return Content(result);
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpGet("CreateAssistant")]
-        public async Task<string> CreateAssistant(CreateAssistantsPayload createAssistantsPayload)
+        [Microsoft.AspNetCore.Mvc.HttpPost("CreateAssistant")]
+        public async Task<string> CreateAssistant(
+            [FromBody] CreateAssistantsPayload createAssistantsPayload
+        )
         {
             var result = await azureOpenAIChatService.CreateAssistant(
                 createAssistantsPayload.name,

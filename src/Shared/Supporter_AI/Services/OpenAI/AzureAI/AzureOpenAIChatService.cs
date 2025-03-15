@@ -93,27 +93,48 @@ namespace Supporter_AI.Services.OpenAI.AzureAI
             string? instructions = null
         )
         {
-            var createOptions = new AssistantCreationOptions
+            var createOptions = new AssistantCreationOptions()
             {
                 Name = name,
                 Temperature = temperature,
             };
+            if (isFileSearch)
+            {
+                string parameters =
+                    @"
+{
+    ""type"": ""object"",
+    ""properties"": {
+        ""query"": {
+            ""type"": ""string"",
+            ""description"": ""The search query to use for the documentation. Generate this based on the chat history, with focus on the last user question, and your own analysis of what to search""
+        }
+    },
+    ""required"": [""query""],
+    ""additionalProperties"": false
+}";
+                createOptions = new AssistantCreationOptions
+                {
+                    Name = name,
+                    Temperature = temperature,
+                    Tools =
+                    {
+                        ToolDefinition.CreateFunction(
+                            "search",
+                            "Search the documentation to find the right data to answer the last question in this conversation.",
+                            BinaryData.FromBytes(Encoding.UTF8.GetBytes(parameters))
+                        ),
+                    },
+                };
+            }
+
             if (instructions is not null)
             {
                 createOptions.Instructions = instructions;
             }
-            if (isFileSearch || isCodeInterpreter)
+            if (isCodeInterpreter)
             {
-                createOptions.ToolResources = new ToolResources();
-                if (isFileSearch)
-                {
-                    createOptions.ToolResources.FileSearch = new FileSearchToolResources();
-                }
-                if (isCodeInterpreter)
-                {
-                    createOptions.ToolResources.CodeInterpreter =
-                        new CodeInterpreterToolResources();
-                }
+                createOptions.ToolResources.CodeInterpreter = new CodeInterpreterToolResources();
             }
 
             return _assistantClient.CreateAssistantAsync(

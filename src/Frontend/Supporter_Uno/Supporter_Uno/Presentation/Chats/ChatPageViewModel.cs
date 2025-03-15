@@ -58,7 +58,9 @@ public partial class ChatPageViewModel : BasePageViewModel
         var azureTopics = await azureTopicMappingApi.GetByTopicId(topic.GetId());
         if (azureTopics.Count == 0)
         {
-            var newAssistant = await aiApi.CreateAssistant(topic.Name, 0, null);
+            var newAssistant = await aiApi.CreateAssistant(
+                new CreateAssistantsPayload(topic.Name, 0, false, false)
+            );
             var newThread = await aiApi.CreateThreadAsync(false, false);
             AzureTopicMappingDto = await azureTopicMappingApi.Add(
                 new AzureTopicMappingDto

@@ -1392,8 +1392,8 @@ namespace Supporter_Dtos
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: text/plain")]
-        [Get("/api/AI/CreateAssistant")]
-        Task<string> CreateAssistant([Query] string name, [Query] int? temperature, [Query] string instructions);
+        [Post("/api/AI/CreateAssistant")]
+        Task<string> CreateAssistant([Body] CreateAssistantsPayload body);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>

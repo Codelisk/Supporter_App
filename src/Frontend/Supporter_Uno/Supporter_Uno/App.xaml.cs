@@ -267,7 +267,7 @@ public partial class App : Application
                 {
                     //isAuth = await auth.RefreshAsync();
                 }
-                if (await auth.IsAuthenticated() && false)
+                if (await auth.IsAuthenticated())
                 {
                     await navigator.NavigateViewAsync<StorageOverviewPage>(
                         this,

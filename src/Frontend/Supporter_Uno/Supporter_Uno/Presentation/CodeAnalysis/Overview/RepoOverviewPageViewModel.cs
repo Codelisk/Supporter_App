@@ -53,7 +53,9 @@ public partial class RepoOverviewPageViewModel : BasePageViewModel
         var byRepoId = await azureRepoMappingApi.GetByRepoId(aIRepo.Id);
         if (byRepoId.Count == 0)
         {
-            var newAssistant = await aIApi.CreateAssistant(aIRepo.Name, 0, null);
+            var newAssistant = await aIApi.CreateAssistant(
+                new CreateAssistantsPayload(aIRepo.Name, 0, false, false)
+            );
             var newThread = await aIApi.CreateThreadAsync(false, false);
             var repoMapping = await azureRepoMappingApi.Add(
                 new AzureRepoMappingDto
