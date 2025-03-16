@@ -8,7 +8,7 @@ using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Providers;
 
-namespace Supporter_Uno.Presentation.Folders.Add;
+namespace Supporter_Uno.Presentation.Conversation.Folders.Add;
 
 public partial class AddFolderPageViewModel : BasePageViewModel
 {

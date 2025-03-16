@@ -1,5 +1,7 @@
 using Supporter_Uno.Presentation.Auth;
-using Supporter_Uno.Presentation.Chats;
+using Supporter_Uno.Presentation.Conversation.Folders;
+using Supporter_Uno.Presentation.Conversation.Topics;
+using Supporter_Uno.Presentation.Storage.Overview;
 
 namespace Supporter_Uno.Presentation;
 
@@ -11,8 +13,6 @@ public partial class MainViewModel
     private string? name;
 
     public MainViewModel(
-        IStringLocalizer localizer,
-        IOptions<AppConfig> appInfo,
         INavigator navigator,
         IDispatcher dispatcher,
         IAuthenticationService authenticationService
@@ -21,19 +21,30 @@ public partial class MainViewModel
         _navigator = navigator;
         this.dispatcher = dispatcher;
         this.authenticationService = authenticationService;
-        Title = "Main";
-        Title += $" - {localizer["ApplicationName"]}";
-        Title += $" - {appInfo?.Value?.Environment}";
-        GoToSecond = new AsyncRelayCommand(GoToSecondView);
     }
 
-    public string? Title { get; }
-
-    public ICommand GoToSecond { get; }
-
-    private async Task GoToSecondView()
+    [RelayCommand]
+    public async Task Storage()
     {
-        await authenticationService.LogoutAsync(dispatcher: this.dispatcher);
+        await _navigator.NavigateViewAsync<StorageOverviewPage>(this);
+    }
+
+    [RelayCommand]
+    public async Task Chat()
+    {
+        await _navigator.NavigateViewAsync<FolderOverviewPage>(this);
+    }
+
+    [RelayCommand]
+    public async Task Orderlyze()
+    {
+        await _navigator.NavigateViewAsync<OrderlyzeDirectLoginPage>(this);
+    }
+
+    [RelayCommand]
+    public async Task Logout()
+    {
+        await authenticationService.LogoutAsync(dispatcher);
         await _navigator.NavigateViewAsync<LoginPage>(this);
     }
 }

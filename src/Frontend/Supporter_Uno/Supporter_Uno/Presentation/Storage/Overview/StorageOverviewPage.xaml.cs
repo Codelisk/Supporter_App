@@ -26,4 +26,6 @@ public sealed partial class StorageOverviewPage
     {
         this.InitializeComponent();
     }
+
+    private void Button_GettingFocus(UIElement sender, GettingFocusEventArgs args) { }
 }

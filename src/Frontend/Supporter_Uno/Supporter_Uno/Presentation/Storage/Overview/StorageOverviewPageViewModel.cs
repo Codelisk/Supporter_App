@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ReactiveUI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
+using Supporter_Uno.Presentation.Auth;
 using Supporter_Uno.Presentation.Storage.Add;
 using Supporter_Uno.Presentation.Storage.Chat;
 using Supporter_Uno.Providers;
@@ -15,14 +16,17 @@ namespace Supporter_Uno.Presentation.Storage.Overview;
 internal partial class StorageOverviewPageViewModel : BasePageViewModel
 {
     private readonly IStorageTopicApi storageTopicApi;
+    private readonly IAuthenticationService authenticationService;
 
     public StorageOverviewPageViewModel(
         BaseVmServices baseVmServices,
-        IStorageTopicApi storageTopicApi
+        IStorageTopicApi storageTopicApi,
+        IAuthenticationService authenticationService
     )
         : base(baseVmServices)
     {
         this.storageTopicApi = storageTopicApi;
+        this.authenticationService = authenticationService;
     }
 
     public ICollection<StorageTopicDto> StorageTopics { get; set; }
@@ -44,5 +48,12 @@ internal partial class StorageOverviewPageViewModel : BasePageViewModel
     public async Task Storage(StorageTopicDto storageTopicDto)
     {
         await Navigator.NavigateViewAsync<StorageChatPage>(this, data: storageTopicDto);
+    }
+
+    [RelayCommand]
+    public async Task Logout()
+    {
+        await authenticationService.LogoutAsync(Dispatcher);
+        await Navigator.NavigateViewAsync<LoginPage>(this, qualifier: Qualifiers.ClearBackStack);
     }
 }

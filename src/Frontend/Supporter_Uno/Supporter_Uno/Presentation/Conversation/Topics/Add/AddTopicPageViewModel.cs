@@ -7,7 +7,7 @@ using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Providers;
 
-namespace Supporter_Uno.Presentation.Topics.Add;
+namespace Supporter_Uno.Presentation.Conversation.Topics.Add;
 
 public class AddTopicPageViewModel : BasePageViewModel
 {

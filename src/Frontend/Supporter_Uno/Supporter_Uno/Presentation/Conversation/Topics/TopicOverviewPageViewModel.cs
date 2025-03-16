@@ -7,11 +7,10 @@ using System.Windows.Input;
 using ReactiveUI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
-using Supporter_Uno.Presentation.Chats;
-using Supporter_Uno.Presentation.Topics.Add;
+using Supporter_Uno.Presentation.Conversation.Topics.Add;
 using Supporter_Uno.Providers;
 
-namespace Supporter_Uno.Presentation.Topics;
+namespace Supporter_Uno.Presentation.Conversation.Topics;
 
 public partial class TopicOverviewPageViewModel : BasePageViewModel
 {

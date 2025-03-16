@@ -84,27 +84,7 @@
       </Compile>
     </ItemGroup>
     <ItemGroup>
-      <Page Update="Presentation\Topics\Add\AddTopicPage.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-    </ItemGroup>
-    <ItemGroup>
-      <Page Update="Presentation\Folders\Add\AddFolderPage.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-    </ItemGroup>
-    <ItemGroup>
       <Page Update="Common\DefaultPage.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-    </ItemGroup>
-    <ItemGroup>
-      <Page Update="Presentation\Chats\Settings\ChatSettingsPage.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-    </ItemGroup>
-    <ItemGroup>
-      <Page Update="Presentation\Chats\Training\ChatTrainingPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>
@@ -165,6 +145,16 @@
     </ItemGroup>
     <ItemGroup>
       <Page Update="Presentation\Storage\Settings\StorageSettingsPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\Conversation\Settings\ChatSettingsPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Presentation\Conversation\Training\ChatTrainingPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>

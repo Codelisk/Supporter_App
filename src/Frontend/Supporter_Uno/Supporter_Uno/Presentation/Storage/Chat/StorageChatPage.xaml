@@ -8,6 +8,7 @@
     xmlns:controls="using:Supporter_Uno.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:uen="using:Uno.Extensions.Navigation.UI"
     d:DataContext="{d:DesignInstance Type=local:StorageChatPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -18,7 +19,10 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Content="Einstellungen" Command="{Binding SettingsCommand}"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Einstellungen" Command="{Binding SettingsCommand}"/>
+                <Button uen:Navigation.Request="-" Content="Back"/>
+            </StackPanel>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

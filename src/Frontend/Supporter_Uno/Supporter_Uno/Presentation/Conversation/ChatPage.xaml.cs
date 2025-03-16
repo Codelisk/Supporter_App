@@ -15,14 +15,14 @@ using Windows.Foundation.Collections;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Supporter_Uno.Presentation.Chats.Training;
+namespace Supporter_Uno.Presentation.Conversation;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class ChatTrainingPage
+public sealed partial class ChatPage
 {
-    public ChatTrainingPage()
+    public ChatPage()
     {
         this.InitializeComponent();
     }

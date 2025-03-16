@@ -7,6 +7,8 @@
     xmlns:local="using:Supporter_Uno.Presentation"
     xmlns:uen="using:Uno.Extensions.Navigation.UI"
     xmlns:utu="using:Uno.Toolkit.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     NavigationCacheMode="Required">
     <ScrollViewer>
@@ -22,12 +24,12 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Spacing="16">
-                <controls:WidgetWebView Width="300" Height="300" />
-                <TextBox PlaceholderText="Enter your name:" Text="{Binding Name, Mode=TwoWay}" />
                 <Button
-                    AutomationProperties.AutomationId="SecondPageButton"
-                    Command="{Binding GoToSecond}"
-                    Content="Go to Second Page" />
+                    Content="Storage"
+                    Command="{Binding StorageCommand}" />
+                <Button Content="Chat" Command="{Binding ChatCommand}"/>
+                <Button Content="Orderlyze" Command="{Binding OrderlyzeCommand}"/>
+                <Button Content="Logout" Command="{Binding LogoutCommand}"/>
             </StackPanel>
         </Grid>
     </ScrollViewer>

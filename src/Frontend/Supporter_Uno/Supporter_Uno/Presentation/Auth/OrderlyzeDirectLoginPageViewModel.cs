@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
-using Supporter_Uno.Presentation.Chats;
+using Supporter_Uno.Presentation.Conversation;
 using Supporter_Uno.Providers;
 
 namespace Supporter_Uno.Presentation.Auth;

@@ -1,12 +1,13 @@
 ﻿<common:BasePage
-    x:Class="Supporter_Uno.Presentation.Chats.ChatPage"
+    x:Class="Supporter_Uno.Presentation.Conversation.ChatPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:common="using:Supporter_Uno.Common"
     xmlns:controls="using:Supporter_Uno.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="using:Supporter_Uno.Presentation.Chats"
+    xmlns:local="using:Supporter_Uno.Presentation.Conversation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uen="using:Uno.Extensions.Navigation.UI"
     d:DataContext="{d:DesignInstance Type=local:ChatPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
@@ -18,7 +19,10 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Content="Einstellungen" Command="{Binding SettingsCommand}"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Einstellungen" Command="{Binding SettingsCommand}"/>
+                <Button uen:Navigation.Request="-" Content="Back"/>
+            </StackPanel>
             <Button Content="Training" Command="{Binding TrainingCommand}" Grid.Row="1"/>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>

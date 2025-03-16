@@ -11,7 +11,7 @@ using Supporter_Uno.Common;
 using Supporter_Uno.Extensions;
 using Supporter_Uno.Providers;
 
-namespace Supporter_Uno.Presentation.Chats.Training;
+namespace Supporter_Uno.Presentation.Conversation.Training;
 
 internal partial class ChatTrainingPageViewModel : BasePageViewModel
 {

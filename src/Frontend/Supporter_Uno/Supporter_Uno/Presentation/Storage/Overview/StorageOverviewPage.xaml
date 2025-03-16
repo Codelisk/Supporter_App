@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="using:Uno.Toolkit.UI"
     mc:Ignorable="d"
+    xmlns:uen="using:Uno.Extensions.Navigation.UI"
     d:DataContext="{d:DesignInstance Type=local:StorageOverviewPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -15,6 +16,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Button Content="Add" Command="{Binding AddCommand}"/>
         <ItemsRepeater ItemsSource="{Binding StorageTopics}" Grid.Row="1"  utu:CommandExtensions.Command="{Binding StorageCommand}">
@@ -24,5 +27,7 @@
                 </DataTemplate>
             </ItemsRepeater.ItemTemplate>
         </ItemsRepeater>
+        <Button Content="Logout" Grid.Row="2"/>
+        <Button uen:Navigation.Request="-" Content="Back" Grid.Row="3"/>
     </Grid>
 </common:BasePage>

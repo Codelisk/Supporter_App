@@ -7,12 +7,11 @@ using System.Windows.Input;
 using ReactiveUI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
-using Supporter_Uno.Presentation.Folders.Add;
-using Supporter_Uno.Presentation.Topics;
-using Supporter_Uno.Presentation.Topics.Add;
+using Supporter_Uno.Presentation.Conversation.Folders.Add;
+using Supporter_Uno.Presentation.Conversation.Topics;
 using Supporter_Uno.Providers;
 
-namespace Supporter_Uno.Presentation.Folders;
+namespace Supporter_Uno.Presentation.Conversation;
 
 public partial class FolderOverviewPageViewModel : BasePageViewModel
 {

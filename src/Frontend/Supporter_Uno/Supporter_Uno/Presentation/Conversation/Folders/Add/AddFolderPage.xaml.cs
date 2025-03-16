@@ -10,28 +10,20 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using Supporter_Dtos;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Supporter_Uno.Presentation.Topics;
+namespace Supporter_Uno.Presentation.Conversation.Folders.Add;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class TopicOverviewPage
+public sealed partial class AddFolderPage
 {
-    public TopicOverviewPage()
+    public AddFolderPage()
     {
         this.InitializeComponent();
-    }
-
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        (this.DataContext as TopicOverviewPageViewModel).TopicCommand.Execute(
-            (sender as Button).DataContext as AITopicDto
-        );
     }
 }

@@ -8,7 +8,7 @@ using ReactiveUI;
 using Supporer_Shared.Models.AI;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
-using Supporter_Uno.Presentation.Chats.Settings;
+using Supporter_Uno.Presentation.Conversation.Settings;
 using Supporter_Uno.Providers;
 
 namespace Supporter_Uno.Presentation.CodeAnalysis.Chat;

@@ -8,7 +8,7 @@ using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Providers;
 
-namespace Supporter_Uno.Presentation.Chats.Settings;
+namespace Supporter_Uno.Presentation.Conversation.Settings;
 
 internal partial class ChatSettingsPageViewModel : BasePageViewModel
 {

@@ -5,11 +5,8 @@ using Refit;
 using Supporter_Dtos;
 using Supporter_Uno.ApiClient.Helpers;
 using Supporter_Uno.Presentation.Auth;
-using Supporter_Uno.Presentation.Chats;
 using Supporter_Uno.Presentation.CodeAnalysis.Analyze;
-using Supporter_Uno.Presentation.Folders;
 using Supporter_Uno.Presentation.Storage.Overview;
-using Supporter_Uno.Presentation.Topics;
 using Supporter_Uno.Providers;
 using Supporter_Uno.Services.Alert;
 using Supporter_Uno.Services.Settings;
@@ -269,10 +266,7 @@ public partial class App : Application
                 }
                 if (await auth.IsAuthenticated())
                 {
-                    await navigator.NavigateViewAsync<StorageOverviewPage>(
-                        this,
-                        qualifier: Qualifiers.Nested
-                    );
+                    await navigator.NavigateViewAsync<MainPage>(this, qualifier: Qualifiers.Nested);
                 }
                 else
                 {

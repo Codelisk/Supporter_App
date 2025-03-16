@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Supporter_Uno.Presentation.Auth;
-using Supporter_Uno.Presentation.Chats;
-using Supporter_Uno.Presentation.Chats.Settings;
-using Supporter_Uno.Presentation.Chats.Training;
 using Supporter_Uno.Presentation.CodeAnalysis.Add;
 using Supporter_Uno.Presentation.CodeAnalysis.Analyze;
 using Supporter_Uno.Presentation.CodeAnalysis.Chat;
 using Supporter_Uno.Presentation.CodeAnalysis.Overview;
-using Supporter_Uno.Presentation.Folders;
-using Supporter_Uno.Presentation.Folders.Add;
+using Supporter_Uno.Presentation.Conversation;
+using Supporter_Uno.Presentation.Conversation.Folders;
+using Supporter_Uno.Presentation.Conversation.Folders.Add;
+using Supporter_Uno.Presentation.Conversation.Settings;
+using Supporter_Uno.Presentation.Conversation.Topics;
+using Supporter_Uno.Presentation.Conversation.Topics.Add;
+using Supporter_Uno.Presentation.Conversation.Training;
 using Supporter_Uno.Presentation.Storage.Add;
 using Supporter_Uno.Presentation.Storage.Chat;
 using Supporter_Uno.Presentation.Storage.Overview;
 using Supporter_Uno.Presentation.Storage.Settings;
-using Supporter_Uno.Presentation.Topics;
-using Supporter_Uno.Presentation.Topics.Add;
 
 namespace Supporter_Uno;
 
