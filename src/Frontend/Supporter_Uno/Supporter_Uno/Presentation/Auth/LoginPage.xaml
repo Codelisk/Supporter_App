@@ -41,6 +41,10 @@
                 HorizontalAlignment="Stretch"
                 Command="{Binding LoginStorageCommand}"
                 Content="Storage Login" />
+            <Button
+                HorizontalAlignment="Stretch"
+                Command="{Binding OrderlyzeLoginStorageCommand}"
+                Content="Orderlyze Login" />
         </StackPanel>
     </Grid>
 </common:BasePage>

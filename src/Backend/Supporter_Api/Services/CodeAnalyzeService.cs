@@ -106,6 +106,20 @@ namespace Supporter_Api.Services
             {
                 await Task.Delay(TimeSpan.FromSeconds(0.5));
                 threadRun = await _assistantClient.GetRunAsync(threadId, runResponse.Value.Id);
+
+                if (threadRun.Value.Status == RunStatus.RequiresAction)
+                {
+                    List<ToolOutput> toolOutputs = new();
+                    foreach (var toolCall in threadRun.Value.RequiredActions)
+                    {
+                        toolOutputs.Add(await GetResolvedToolOutput(toolCall, indexName, question));
+                    }
+                    runResponse = await _assistantClient.SubmitToolOutputsToRunAsync(
+                        threadId,
+                        threadRun.Value.Id,
+                        toolOutputs
+                    );
+                }
             } while (!threadRun.Value.Status.IsTerminal);
 
             messages = _assistantClient.GetMessagesAsync(

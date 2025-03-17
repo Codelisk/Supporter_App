@@ -34,7 +34,7 @@ public partial class LoginPageViewModel : BasePageViewModel
     {
         var apiKeyLogin = await _authentication.LoginAsync(Dispatcher, provider: "ApiKey");
 
-        await Navigator.NavigateViewAsync<FolderOverviewPage>(
+        await Navigator.NavigateViewAsync<StorageOverviewPage>(
             this,
             qualifier: Qualifiers.ClearBackStack
         );
@@ -92,6 +92,23 @@ public partial class LoginPageViewModel : BasePageViewModel
             {
                 await Navigator.NavigateViewAsync<StorageOverviewPage>(this);
             }
+        }
+        catch (Exception ex)
+        {
+            await Navigator.ShowMessageDialogAsync(
+                this,
+                title: "Fehler",
+                content: "Login abgebrochen"
+            );
+        }
+    }
+
+    [RelayCommand]
+    public async Task OrderlyzeLoginStorage()
+    {
+        try
+        {
+            await Navigator.NavigateViewAsync<OrderlyzeDirectLoginPage>(this);
         }
         catch (Exception ex)
         {

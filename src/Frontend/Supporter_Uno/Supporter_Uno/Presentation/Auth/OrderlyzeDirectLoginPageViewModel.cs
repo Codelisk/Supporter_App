@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Supporter_Dtos;
 using Supporter_Uno.Common;
 using Supporter_Uno.Presentation.Conversation;
+using Supporter_Uno.Presentation.Storage.Chat;
+using Supporter_Uno.Presentation.Storage.Overview;
 using Supporter_Uno.Providers;
 
 namespace Supporter_Uno.Presentation.Auth;
@@ -15,12 +17,14 @@ public partial class OrderlyzeDirectLoginPageViewModel : BasePageViewModel
     private readonly IAuthenticationService _authenticationService;
     private readonly IAzureTopicMappingApi azureTopicMappingApi;
     private readonly IAITopicApi aITopicApi;
+    private readonly IStorageTopicApi storageTopicApi;
 
     public OrderlyzeDirectLoginPageViewModel(
         BaseVmServices baseVmServices,
         IAuthenticationService authenticationService,
         IAzureTopicMappingApi azureTopicMappingApi,
         IAITopicApi aITopicApi,
+        IStorageTopicApi storageTopicApi,
         ILogger<OrderlyzeDirectLoginPageViewModel> logger
     )
         : base(baseVmServices)
@@ -28,6 +32,7 @@ public partial class OrderlyzeDirectLoginPageViewModel : BasePageViewModel
         this._authenticationService = authenticationService;
         this.azureTopicMappingApi = azureTopicMappingApi;
         this.aITopicApi = aITopicApi;
+        this.storageTopicApi = storageTopicApi;
     }
 
     public override async void Initialize(NavigationEventArgs e)
@@ -40,8 +45,8 @@ public partial class OrderlyzeDirectLoginPageViewModel : BasePageViewModel
     {
         var apiKeyLogin = await _authenticationService.LoginAsync(Dispatcher, provider: "ApiKey");
 
-        var lastTopic = (await aITopicApi.GetAll()).Last();
+        var lastTopic = (await storageTopicApi.GetAll()).Last();
 
-        await Navigator.NavigateViewAsync<ChatPage>(this, data: lastTopic);
+        await Navigator.NavigateViewAsync<StorageChatPage>(this, data: lastTopic);
     }
 }
