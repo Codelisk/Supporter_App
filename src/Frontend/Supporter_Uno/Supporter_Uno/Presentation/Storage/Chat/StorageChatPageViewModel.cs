@@ -76,12 +76,20 @@ internal partial class StorageChatPageViewModel : BasePageViewModel
                 }
             );
             LastQuestion = chatQuestion;
-            this.Answer = await aiApi.ChatWithSearch(
-                AzureStorageMappingDto.IndexName,
-                chatQuestion.Value,
-                AzureStorageMappingDto.AssistantId,
-                AzureStorageMappingDto.ThreadId
-            );
+            try
+            {
+                var test = await aiApi.ChatWithSearch(
+                    AzureStorageMappingDto.IndexName,
+                    chatQuestion.Value,
+                    AzureStorageMappingDto.AssistantId,
+                    AzureStorageMappingDto.ThreadId
+                );
+                this.Answer = test;
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Test");
+            }
             await chatAnswerApi.Add(
                 new StorageAnswerDto
                 {

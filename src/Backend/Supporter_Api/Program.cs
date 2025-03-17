@@ -31,8 +31,23 @@ builder.Services.AddAuthorization(options =>
         policy => policy.RequireAuthenticatedUser().AddAuthenticationSchemes("ApiKey")
     );
 });
-
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "AllowSpecificOrigin",
+        policy =>
+        {
+            policy
+                .WithOrigins(
+                    "https://orderlyzesupporterapp-dqfzbhfsewdhcnam.canadacentral-01.azurewebsites.net",
+                    "https://localhost:5001",
+                    "https://localhost:7209/"
+                )
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        }
+    );
+});
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<MyDbContext>(options =>
@@ -57,13 +72,7 @@ if (app.Environment.IsDevelopment() || true)
 
 app.UseHttpsRedirection();
 
-app.UseCors(builder =>
-    builder
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowAnyOrigin()
-        .SetIsOriginAllowedToAllowWildcardSubdomains()
-);
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthentication();
 
