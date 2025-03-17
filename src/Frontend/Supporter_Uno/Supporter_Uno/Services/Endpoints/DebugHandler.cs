@@ -14,7 +14,7 @@ internal class DebugHttpHandler : DelegatingHandler
         ITokenCache tokenCache,
         HttpMessageHandler? innerHandler = null
     )
-        : base(innerHandler ?? new HttpClientHandler())
+        : base(innerHandler ?? new HttpClientHandler() { })
     {
         _logger = logger;
         this.authenticationTokenProvider = tokenCache;

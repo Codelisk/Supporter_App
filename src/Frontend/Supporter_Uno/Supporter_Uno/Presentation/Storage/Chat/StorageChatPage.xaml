@@ -37,9 +37,9 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <ScrollView>
+                    <ScrollViewer>
                         <controls:WidgetWebView Margin="10" Content="{Binding Answer}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="WebView"/>
-                    </ScrollView>
+                    </ScrollViewer>
                     <Button Content="Letzte" Command="{Binding PreviousCommand}" Grid.Row="1"/>
                     <TextBox MinHeight="100" InputScope="Chat" Grid.Row="2" Text="{Binding Question, Mode=TwoWay}" PlaceholderText="Frage" AcceptsReturn="True" />
                     <Button Command="{Binding AskCommand}" Grid.Row="3" Content="Fragen"/>
